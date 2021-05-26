@@ -14,7 +14,7 @@ module.exports = {
         exclude: /(node_modules)/,
         use: {
           loader: "babel-loader",
-          query: {
+          options: {
             presets: ["@babel/env", "@babel/react"],
           },
         },
@@ -22,7 +22,9 @@ module.exports = {
     ],
   },
   node: {
-    fs: 'empty'
+    global: false,
+    __filename: false,
+    __dirname: false,
   },
   devtool: "source-map",
   resolve: {

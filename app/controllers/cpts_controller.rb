@@ -1,2 +1,0 @@
-class CptsController < ApplicationController
-end

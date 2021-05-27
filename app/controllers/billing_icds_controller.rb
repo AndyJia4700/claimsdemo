@@ -1,0 +1,2 @@
+class BillingIcdsController < ApplicationController
+end

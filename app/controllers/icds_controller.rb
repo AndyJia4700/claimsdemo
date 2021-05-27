@@ -1,0 +1,2 @@
+class IcdsController < ApplicationController
+end

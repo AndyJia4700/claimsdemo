@@ -1,0 +1,2 @@
+module BillingIcdsHelper
+end

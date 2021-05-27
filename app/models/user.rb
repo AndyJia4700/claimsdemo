@@ -19,7 +19,11 @@ class User < ApplicationRecord
 
     after_initialize :ensure_session_token
     attr_reader :password
-    
+
+    has_many :patients,
+    foreign_key: :user_id,
+    class_name: "Patient"
+
     def password=(password)
         @password = password
         self.password_digest = BCrypt::Password.create(password)

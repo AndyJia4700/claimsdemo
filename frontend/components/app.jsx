@@ -2,7 +2,7 @@ import { fromPairs } from 'lodash';
 import React from 'react';
 import { AuthRoute, ProtRoute } from '../util/route_utils';
 import { Route } from "react-router-dom";
-
+import LogInForm from '../components/session/login_form';
 import SignUpForm from '../components/session/signup_form';
 
 class App extends React.Component{
@@ -12,6 +12,7 @@ class App extends React.Component{
             <div>
                 <p>This is main page</p>
                 <AuthRoute path="/signup" component={SignUpForm}/>
+                <AuthRoute path="/login" component={LogInForm}/>
             </div>
         )
     }

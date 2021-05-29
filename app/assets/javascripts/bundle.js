@@ -524,7 +524,24 @@ var SignUpForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "",
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "hello"));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "email",
+        placeholder: "Email",
+        value: this.state.email,
+        onChange: this.update("email"),
+        className: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "password",
+        placeholder: "Password",
+        value: this.state.password,
+        onChange: this.update("password"),
+        className: "",
+        minLength: 6
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit",
+        value: this.props.formType,
+        className: ""
+      }));
     }
   }]);
 

@@ -27,7 +27,7 @@ class ProfileDropDown extends React.Component{
     }
 
     render(){
-        const {currentUser} = this.props
+        // const {currentUser} = this.props
         return (
             <div className="">
                 <button className="" onClick={this.handleClick}>logout</button>

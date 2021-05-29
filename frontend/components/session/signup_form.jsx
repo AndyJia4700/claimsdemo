@@ -45,3 +45,5 @@ class SignUpForm extends React.Component{
         )
     }
 }
+
+export default connect(mSTP, mDTP)(SignUpForm)

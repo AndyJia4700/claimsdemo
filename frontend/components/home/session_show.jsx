@@ -1,4 +1,3 @@
-import { fromPairs } from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ const mDTP = dispatch => ({
 
 const sessionShow = ({ currentUser, openModal}) => {
     const sessionLinks = () => (
-        <Link to="login">Log In</Link>
+        <Link to="/login">Please Sign in</Link>
     )
     const greeting = () => (
         <a onClick={() => openModal('profileDropDown')}>

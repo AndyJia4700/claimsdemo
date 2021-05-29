@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :icds
     resources :billing_cpts
     resources :billing_icds
-    resources :session, only:[:create, :destroy]
+    resource :session, only:[:create, :destroy]
   end
   root "static_pages#root"
 end

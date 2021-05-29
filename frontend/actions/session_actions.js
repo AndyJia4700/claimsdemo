@@ -35,7 +35,7 @@ export const login = formUser => dispatch => (
 );
 
 export const logout = () => dispatch => (
-    APIUtil.deletSession()
+    APIUtil.deleteSession()
         .then(
             () => dispatch(logoutCurrentUser())
         )

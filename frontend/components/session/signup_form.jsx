@@ -1,21 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login } from '../../actions/session_actions';
+import { createNewUser } from '../../actions/session_actions';
 
 const mSTP = ({errors}) => ({
     errors: errors,
-    formType: 'Log In',
-    navLink: <Link to="/signup" className="" >Sign Up</Link>
+    formType: 'Create Account',
+    navLink: <Link to="/login" className="" >Log in</Link>
 });
 
 const mDTP = dispatch => {
     return {
-        login: formUser => dispatch(login(formUser))
+        createNewUser: formUser => dispatch(createNewUser(formUser))
     }
 };
 
-class LogInForm extends React.Component{
+class SignUpForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -23,9 +23,7 @@ class LogInForm extends React.Component{
             password: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleClick = this.handleClick.bind(this);
         this.update = this.update.bind(this);
-        this.renderErrors = this.renderErrors.bind(this)
     }
 
     update(field){
@@ -36,26 +34,8 @@ class LogInForm extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.login(Object.assign({}, this.state))
-    }
-
-    handleClick(e){
-        e.preventDefault();
-        this.setState(
-            {
-                email: "test@123.com",
-                password: "123456"
-            },
-            () => this.props.login(Object.assign({}, this.state))
-        );
-    }
-
-    renderErrors(){
-        return(
-            <ul>
-                {Object.values(this.props.errors)}
-            </ul>
-        )
+        this.props.createNewUser(Object.assign({}, this.state))
+            .then(()=>window.location.reload());
     }
 
     render(){
@@ -85,23 +65,15 @@ class LogInForm extends React.Component{
                 />
 
                 <div className="">
-                    {this.renderErrors()}
-                </div>
-
-                <div className="">
-                    <p>New Here?</p>
+                    <p>Have an account?</p>
                     <span className="">
                         {this.props.navLink}
                     </span>
                 </div>
-
-                <button className="" onClick={this.handleClick}>
-                    Provider Demo User
-                </button>
 
             </form>
         )
     }
 }
 
-export default connect(mSTP, mDTP)(LogInForm)
+export default connect(mSTP, mDTP)(SignUpForm)

@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect, Route, withRouter} from 'react-router-dom';
 
 const mSTP = state => ({
     loggedIn: Boolean(state.session.currentUser)

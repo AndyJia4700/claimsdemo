@@ -541,7 +541,11 @@ var SignUpForm = /*#__PURE__*/function (_React$Component) {
         type: "submit",
         value: this.props.formType,
         className: ""
-      }));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Have an account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: ""
+      }, this.props.navLink)));
     }
   }]);
 

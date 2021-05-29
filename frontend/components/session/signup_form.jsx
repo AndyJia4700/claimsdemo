@@ -62,7 +62,14 @@ class SignUpForm extends React.Component{
                     value={this.props.formType}
                     className=""
                 />
-                
+
+                <div className="">
+                    <p>Have an account?</p>
+                    <span className="">
+                        {this.props.navLink}
+                    </span>
+                </div>
+
             </form>
         )
     }

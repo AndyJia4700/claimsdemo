@@ -1,4 +1,3 @@
-import { merge } from "lodash";
 import { LOGOUT_CURRENT_USER, RECEIVE_CURRENT_USER } from "../actions/session_actions";
 
 const _nullSession = {

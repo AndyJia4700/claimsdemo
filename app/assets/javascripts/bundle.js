@@ -371,7 +371,10 @@ var App = /*#__PURE__*/function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "hello world"));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "This is main page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
+        path: "/signup",
+        component: _components_session_signup_form__WEBPACK_IMPORTED_MODULE_3__.default
+      }));
     }
   }]);
 

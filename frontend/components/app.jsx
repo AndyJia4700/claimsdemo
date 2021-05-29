@@ -10,8 +10,8 @@ class App extends React.Component{
         
         return (
             <div>
-                <p>hello world</p>
-                {/* <Route path="/signup" component={SignUpForm}/> */}
+                <p>This is main page</p>
+                <AuthRoute path="/signup" component={SignUpForm}/>
             </div>
         )
     }

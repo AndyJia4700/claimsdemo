@@ -10,4 +10,5 @@ Rails.application.routes.draw do
     resources :billing_icds
     resources :session, only:[:create, :destroy]
   end
+  root "static_pages#root"
 end

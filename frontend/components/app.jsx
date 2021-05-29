@@ -7,9 +7,11 @@ import SignUpForm from '../components/session/signup_form';
 
 class App extends React.Component{
     render(){
+        
         return (
             <div>
-                <AuthRoute path="/signup" component={SignUpForm}/>
+                <p>hello world</p>
+                {/* <Route path="/signup" component={SignUpForm}/> */}
             </div>
         )
     }

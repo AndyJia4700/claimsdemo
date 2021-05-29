@@ -467,31 +467,31 @@ var mSTP = function mSTP(_ref) {
   var errors = _ref.errors;
   return {
     errors: errors,
-    formType: 'Create Account',
+    formType: 'Log In',
     navLink: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-      to: "/login",
+      to: "/signup",
       className: ""
-    }, "Log in")
+    }, "Sign Up")
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
-    createNewUser: function createNewUser(formUser) {
-      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__.createNewUser)(formUser));
+    login: function login(formUser) {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__.login)(formUser));
     }
   };
 };
 
-var SignUpForm = /*#__PURE__*/function (_React$Component) {
-  _inherits(SignUpForm, _React$Component);
+var LogInForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(LogInForm, _React$Component);
 
-  var _super = _createSuper(SignUpForm);
+  var _super = _createSuper(LogInForm);
 
-  function SignUpForm(props) {
+  function LogInForm(props) {
     var _this;
 
-    _classCallCheck(this, SignUpForm);
+    _classCallCheck(this, LogInForm);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -499,11 +499,13 @@ var SignUpForm = /*#__PURE__*/function (_React$Component) {
       password: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.renderErrors = _this.renderErrors.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(SignUpForm, [{
+  _createClass(LogInForm, [{
     key: "update",
     value: function update(field) {
       var _this2 = this;
@@ -516,7 +518,25 @@ var SignUpForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.createNewUser(Object.assign({}, this.state));
+      this.props.login(Object.assign({}, this.state));
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      this.setState({
+        email: "test@123.com",
+        password: "123456"
+      }, function () {
+        return _this3.props.login(Object.assign({}, _this3.state));
+      });
+    }
+  }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, Object.values(this.props.errors));
     }
   }, {
     key: "render",
@@ -543,16 +563,21 @@ var SignUpForm = /*#__PURE__*/function (_React$Component) {
         className: ""
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: ""
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Have an account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      }, this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: ""
-      }, this.props.navLink)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "New Here?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: ""
+      }, this.props.navLink)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "",
+        onClick: this.handleClick
+      }, "Provider Demo User"));
     }
   }]);
 
-  return SignUpForm;
+  return LogInForm;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(SignUpForm));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(LogInForm));
 
 /***/ }),
 

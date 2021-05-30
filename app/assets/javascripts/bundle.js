@@ -408,7 +408,10 @@ var App = /*#__PURE__*/function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "This is main page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      var nav = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("nav", {
+        className: "nav-top"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Claim Demo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_5__.default, null)));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), nav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         exact: true,
         path: "/"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
@@ -469,7 +472,7 @@ var sessionShow = function sessionShow(_ref) {
   var sessionLinks = function sessionLinks() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       to: "/login"
-    }, "Please Sign in");
+    }, "Log In");
   };
 
   var greeting = function greeting() {

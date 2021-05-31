@@ -1,0 +1,15 @@
+.nav-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    
+    padding-right: 5%;
+    padding-left: 5%;
+    border-bottom: 1px solid #dadada;
+}
+
+.nav-top-div{
+    width: 200px;
+    padding: 30px;
+}

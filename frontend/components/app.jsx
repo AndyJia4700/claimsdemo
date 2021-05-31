@@ -10,12 +10,23 @@ import SignUpForm from '../components/session/signup_form';
 
 class App extends React.Component{
     render(){
+        const nav = (
+            <nav className="nav-top">
+                <div>
+                    <p>Claim Demo</p>
+                </div>
+
+                <div>
+                    <SessionShow/>
+                </div>
+            </nav>
+        )
         
         return (
             <div>
-                <p>This is main page</p>
                 <Modal/>
-                <SessionShow/>
+                {nav}
+                
                 <Route exact path="/"/>
                 <AuthRoute path="/signup" component={SignUpForm}/>
                 <AuthRoute path="/login" component={LogInForm}/>

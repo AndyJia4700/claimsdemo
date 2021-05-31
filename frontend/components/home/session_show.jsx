@@ -13,7 +13,7 @@ const mDTP = dispatch => ({
 
 const sessionShow = ({ currentUser, openModal}) => {
     const sessionLinks = () => (
-        <Link to="/login">Please Sign in</Link>
+        <Link to="/login">Log In</Link>
     )
     const greeting = () => (
         <a onClick={() => openModal('profileDropDown')}>

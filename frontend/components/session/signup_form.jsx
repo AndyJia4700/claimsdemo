@@ -40,13 +40,13 @@ class SignUpForm extends React.Component{
 
     render(){
         return (
-            <form className="" onSubmit={this.handleSubmit}>
+            <form className="signup-login-form" onSubmit={this.handleSubmit}>
                 <input 
                     type="email"
                     placeholder="Email"
                     value={this.state.email}
                     onChange={this.update("email")}
-                    className=""
+                    className="signup-login-input"
                 />
 
                 <input 
@@ -54,7 +54,7 @@ class SignUpForm extends React.Component{
                     placeholder="Password"
                     value={this.state.password}
                     onChange={this.update("password")}
-                    className=""
+                    className="signup-login-input"
                     minLength={6}
                 />
                 

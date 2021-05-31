@@ -61,7 +61,7 @@ class LogInForm extends React.Component{
 
     render(){
         return (
-            <form className="" onSubmit={this.handleSubmit}>
+            <form className="signup-login-form" onSubmit={this.handleSubmit}>
                 <input 
                     type="email"
                     placeholder="Email"

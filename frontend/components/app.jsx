@@ -12,21 +12,24 @@ class App extends React.Component{
     render(){
         const nav = (
             <nav className="nav-top">
-                <div>
-                    <p>Claim Demo</p>
+                {/* <div className="nav-top-div">
+                    search bar here
+                </div> */}
+
+                <div className="nav-top-div">
+                    <button><h1>Claims Demo</h1></button>
                 </div>
 
-                <div>
-                    <SessionShow/>
+                <div className="nav-top-div">
+                    <button><SessionShow/></button>
                 </div>
             </nav>
         )
         
         return (
             <div>
-                <Modal/>
                 {nav}
-                
+                <Modal/>
                 <Route exact path="/"/>
                 <AuthRoute path="/signup" component={SignUpForm}/>
                 <AuthRoute path="/login" component={LogInForm}/>

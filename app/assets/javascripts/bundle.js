@@ -215,6 +215,89 @@ var closeModal = function closeModal() {
 
 /***/ }),
 
+/***/ "./frontend/actions/patient_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/patient_actions.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_ALL_PATIENTS": () => (/* binding */ RECEIVE_ALL_PATIENTS),
+/* harmony export */   "RECEIVE_PATIENT": () => (/* binding */ RECEIVE_PATIENT),
+/* harmony export */   "REMOVE_PATIENT": () => (/* binding */ REMOVE_PATIENT),
+/* harmony export */   "fetchPatients": () => (/* binding */ fetchPatients),
+/* harmony export */   "fetchPatient": () => (/* binding */ fetchPatient),
+/* harmony export */   "createPatient": () => (/* binding */ createPatient),
+/* harmony export */   "updatePatient": () => (/* binding */ updatePatient),
+/* harmony export */   "deletePatient": () => (/* binding */ deletePatient)
+/* harmony export */ });
+/* harmony import */ var _util_patient_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/patient_util */ "./frontend/util/patient_util.js");
+
+var RECEIVE_ALL_PATIENTS = 'RECEIVE_ALL_PATIENTS';
+var RECEIVE_PATIENT = 'RECEIVE_PATIENT';
+var REMOVE_PATIENT = 'REMOVE_PATIENT';
+
+var receiveAllPatients = function receiveAllPatients(patients) {
+  return {
+    type: RECEIVE_ALL_PATIENTS,
+    patients: patients
+  };
+};
+
+var receivePatient = function receivePatient(patient) {
+  return {
+    type: RECEIVE_PATIENT,
+    patient: patient
+  };
+};
+
+var removePatient = function removePatient(patientId) {
+  return {
+    type: REMOVE_PATIENT,
+    patientId: patientId
+  };
+};
+
+var fetchPatients = function fetchPatients() {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.fetchPatients().then(function (patients) {
+      return dispatch(receiveAllPatients(patients));
+    });
+  };
+};
+var fetchPatient = function fetchPatient(patientId) {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.fetchPatient(patientId).then(function (patient) {
+      return dispatch(receivePatient(patient));
+    });
+  };
+};
+var createPatient = function createPatient(patient) {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.createPatient(patient).then(function (patient) {
+      return dispatch(receivePatient(patient));
+    });
+  };
+};
+var updatePatient = function updatePatient(patient) {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.updatePatient(patient).then(function (patient) {
+      return dispatch(receivePatient(patient));
+    });
+  };
+};
+var deletePatient = function deletePatient(patientId) {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.deletePatient(patientId).then(function () {
+      return dispatch(removePatient(patientId));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -1060,12 +1143,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _patients_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./patients_reducer */ "./frontend/reducers/patients_reducer.js");
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  user: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  user: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  patient: _patients_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -1127,6 +1213,51 @@ var modalReducer = function modalReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modalReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/patients_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/patients_reducer.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/patient_actions */ "./frontend/actions/patient_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var PatientReducer = function PatientReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+
+  switch (action.type) {
+    case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_PATIENTS:
+      return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, action.patients);
+
+    case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PATIENT:
+      return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, _defineProperty({}, action.patient.id, action.patient));
+
+    case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_PATIENT:
+      var nextState = Object.assign({}, oldState);
+      delete nextState[action.patientId];
+      return nextState;
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PatientReducer);
 
 /***/ }),
 
@@ -1337,6 +1468,60 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/patient_util.js":
+/*!***************************************!*\
+  !*** ./frontend/util/patient_util.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchPatients": () => (/* binding */ fetchPatients),
+/* harmony export */   "fetchPatient": () => (/* binding */ fetchPatient),
+/* harmony export */   "createPatient": () => (/* binding */ createPatient),
+/* harmony export */   "updatePatient": () => (/* binding */ updatePatient),
+/* harmony export */   "deletePatient": () => (/* binding */ deletePatient)
+/* harmony export */ });
+var fetchPatients = function fetchPatients() {
+  return $.ajax({
+    url: "/api/patients"
+  });
+};
+var fetchPatient = function fetchPatient(patientId) {
+  return $.ajax({
+    url: "/api/patients/".concat(patientId)
+  });
+};
+var createPatient = function createPatient(formData) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/patients',
+    data: formData,
+    contentType: false,
+    processData: false,
+    dataType: 'json'
+  });
+};
+var updatePatient = function updatePatient(formData, patientId) {
+  return $.ajax({
+    method: 'PATCH',
+    url: "/api/patients/".concat(patientId),
+    data: formData,
+    contentType: false,
+    processData: false,
+    dataType: 'json'
+  });
+};
+var deletePatient = function deletePatient(patientId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "/api/patients/".concat(patientId)
+  });
+};
 
 /***/ }),
 

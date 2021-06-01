@@ -227,6 +227,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_ALL_PATIENTS": () => (/* binding */ RECEIVE_ALL_PATIENTS),
 /* harmony export */   "RECEIVE_PATIENT": () => (/* binding */ RECEIVE_PATIENT),
 /* harmony export */   "REMOVE_PATIENT": () => (/* binding */ REMOVE_PATIENT),
+/* harmony export */   "RECEIVE_PATIENT_ERRORS": () => (/* binding */ RECEIVE_PATIENT_ERRORS),
 /* harmony export */   "fetchPatients": () => (/* binding */ fetchPatients),
 /* harmony export */   "fetchPatient": () => (/* binding */ fetchPatient),
 /* harmony export */   "createPatient": () => (/* binding */ createPatient),
@@ -238,6 +239,7 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_ALL_PATIENTS = 'RECEIVE_ALL_PATIENTS';
 var RECEIVE_PATIENT = 'RECEIVE_PATIENT';
 var REMOVE_PATIENT = 'REMOVE_PATIENT';
+var RECEIVE_PATIENT_ERRORS = 'RECEIVE_PATIENT_ERRORS';
 
 var receiveAllPatients = function receiveAllPatients(patients) {
   return {
@@ -260,6 +262,13 @@ var removePatient = function removePatient(patientId) {
   };
 };
 
+var receivePatientErrors = function receivePatientErrors(errors) {
+  return {
+    type: RECEIVE_PATIENT_ERRORS,
+    errors: errors
+  };
+};
+
 var fetchPatients = function fetchPatients() {
   return function (dispatch) {
     return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.fetchPatients().then(function (patients) {
@@ -278,6 +287,8 @@ var createPatient = function createPatient(patient) {
   return function (dispatch) {
     return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.createPatient(patient).then(function (patient) {
       return dispatch(receivePatient(patient));
+    }, function (error) {
+      return dispatch(receivePatientErrors(error.responseJSON));
     });
   };
 };
@@ -285,6 +296,8 @@ var updatePatient = function updatePatient(patient) {
   return function (dispatch) {
     return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.updatePatient(patient).then(function (patient) {
       return dispatch(receivePatient(patient));
+    }, function (error) {
+      return dispatch(receivePatientErrors(error.responseJSON));
     });
   };
 };
@@ -1369,10 +1382,10 @@ var ProfileDropDown = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./frontend/reducers/entites_reducer.js":
-/*!**********************************************!*\
-  !*** ./frontend/reducers/entites_reducer.js ***!
-  \**********************************************/
+/***/ "./frontend/reducers/entities_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/entities_reducer.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1405,12 +1418,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _patient_errors_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./patient_errors_reducer */ "./frontend/reducers/patient_errors_reducer.js");
+/* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
 
 
-var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  sessionErrorsReducer: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  sessionErrorsReducer: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
+  patientErrorsReducer: _patient_errors_reducer__WEBPACK_IMPORTED_MODULE_0__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (errorsReducer);
 
@@ -1450,6 +1466,37 @@ var modalReducer = function modalReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modalReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/patient_errors_reducer.js":
+/*!*****************************************************!*\
+  !*** ./frontend/reducers/patient_errors_reducer.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "patientErrorsReducer": () => (/* binding */ patientErrorsReducer),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/patient_actions */ "./frontend/actions/patient_actions.js");
+
+var patientErrorsReducer = function patientErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PATIENT_ERRORS:
+      return action.errors;
+
+    default:
+      return state;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (patientErrorsReducer);
 
 /***/ }),
 
@@ -1510,7 +1557,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _entites_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entites_reducer */ "./frontend/reducers/entites_reducer.js");
+/* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
 /* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
 /* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
 /* harmony import */ var _ui_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui_reducer */ "./frontend/reducers/ui_reducer.js");
@@ -1520,7 +1567,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
-  entities: _entites_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
   ui: _ui_reducer__WEBPACK_IMPORTED_MODULE_3__.default
@@ -1542,8 +1589,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
-
 
 var sessionErrorsReducer = function sessionErrorsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];

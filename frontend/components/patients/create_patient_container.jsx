@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { createPatient } from '../../actions/patient_actions';
 import PatientForm from './patient_form'
 
-const mSTP = state => {
+const mSTP = (state) => {
+    // debugger;
     return {
         patient: {
             lastname: "",
@@ -11,6 +12,7 @@ const mSTP = state => {
             birthdate: "",
             insurance_id: "",
         },
+        errors: state.errors.patientErrorsReducer,
         currentUser: state.session.currentUser,
         formType: "Save"
     }
@@ -29,6 +31,7 @@ class CreatePatientForm extends React.Component{
     render(){
         const {
             action, 
+            errors,
             patient,
             currentUser,
             formType
@@ -37,6 +40,7 @@ class CreatePatientForm extends React.Component{
             <div>
                 <PatientForm
                     action={action}
+                    errors={errors}
                     patient={patient}
                     currentUser={currentUser}
                     formType={formType}

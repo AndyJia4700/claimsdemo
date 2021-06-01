@@ -711,6 +711,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 var mSTP = function mSTP(state) {
+  // debugger;
   return {
     patient: {
       lastname: "",
@@ -718,6 +719,7 @@ var mSTP = function mSTP(state) {
       birthdate: "",
       insurance_id: ""
     },
+    errors: state.errors.patientErrorsReducer,
     currentUser: state.session.currentUser,
     formType: "Save"
   };
@@ -747,11 +749,13 @@ var CreatePatientForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           action = _this$props.action,
+          errors = _this$props.errors,
           patient = _this$props.patient,
           currentUser = _this$props.currentUser,
           formType = _this$props.formType;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_form__WEBPACK_IMPORTED_MODULE_3__.default, {
         action: action,
+        errors: errors,
         patient: patient,
         currentUser: currentUser,
         formType: formType
@@ -817,7 +821,8 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = _this.props.patient;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.update = _this.update.bind(_assertThisInitialized(_this)); // this.renderErrors = this.renderErrors.bind(this);
+
     return _this;
   }
 
@@ -845,6 +850,21 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
       if (confirm("Save Changes?")) {
         this.props.action(formData);
       }
+    }
+  }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      //    const errors = (
+      //         <ul className="">
+      //             {Object.values(this.props.errors).map(id => (
+      //                 <li key={id} className="">
+      //                     {this.props.errors[id]}
+      //                 </li>
+      //             ))}
+      //         </ul>
+      //     )
+      //     return errors
+      return Object.values(this.props.errors);
     }
   }, {
     key: "update",
@@ -888,7 +908,9 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
         onChange: this.update("insurance_id"),
         placeholder: "insurance number",
         className: ""
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "submit"));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, this.renderErrors()));
     }
   }]);
 

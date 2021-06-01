@@ -6,6 +6,7 @@ class PatientForm extends React.Component{
         this.state = this.props.patient;
         this.handleSubmit = this.handleSubmit.bind(this);
         this.update = this.update.bind(this);
+        // this.renderErrors = this.renderErrors.bind(this);
     }
 
     componentDidMount(){
@@ -13,6 +14,8 @@ class PatientForm extends React.Component{
             user_id: this.props.currentUser.id,
         })
     }
+
+    
 
     handleSubmit(e){
         e.preventDefault();
@@ -31,6 +34,21 @@ class PatientForm extends React.Component{
         }
     }
 
+    renderErrors(){
+    //    const errors = (
+    //         <ul className="">
+    //             {Object.values(this.props.errors).map(id => (
+    //                 <li key={id} className="">
+    //                     {this.props.errors[id]}
+    //                 </li>
+    //             ))}
+    //         </ul>
+    //     )
+    //     return errors
+
+        return(Object.values(this.props.errors))
+    }
+
     update(field){
         return e => this.setState({
             [field]: e.currentTarget.value
@@ -38,6 +56,7 @@ class PatientForm extends React.Component{
     }
 
     render(){
+
         return(
             <form onSubmit={this.handleSubmit} className="">
                 <div className="">
@@ -76,6 +95,10 @@ class PatientForm extends React.Component{
                 />
 
                 <button>submit</button>
+
+                <div className="">
+                    {this.renderErrors()}
+                </div>
 
             </form>
         )

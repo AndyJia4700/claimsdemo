@@ -27,7 +27,7 @@ class App extends React.Component{
         )
         
         return (
-            <div>
+            <div className="">
                 {nav}
                 <Modal/>
                 <Route exact path="/"/>

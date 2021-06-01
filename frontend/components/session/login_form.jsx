@@ -6,7 +6,7 @@ import { login } from '../../actions/session_actions';
 const mSTP = ({errors}) => ({
     errors: errors,
     formType: 'Log In',
-    navLink: <Link to="/signup" className="" >Sign Up</Link>
+    navLink: <Link to="/signup" className="" >Create an account</Link>
 });
 
 const mDTP = dispatch => {
@@ -47,7 +47,7 @@ class LogInForm extends React.Component{
                 email: "test@123.com",
                 password: "123456"
             },
-            () => this.props.login(Object.assign({}, this.state))
+            // () => this.props.login(Object.assign({}, this.state))
         );
     }
 
@@ -62,43 +62,55 @@ class LogInForm extends React.Component{
     render(){
         return (
             <form className="signup-login-form" onSubmit={this.handleSubmit}>
-                <input 
-                    type="email"
-                    placeholder="Email"
-                    value={this.state.email}
-                    onChange={this.update("email")}
-                    className=""
-                />
+                <div className="signup-login-div-1">
+                    <h1 className="signup-login-div-1-title">Provider Login</h1>
+                    <div className="signup-login-div-errors">
+                        <h1>{this.renderErrors()}</h1>
+                    </div>
+                    <span className="signup-login-div-1-subtitle">Email address</span>
+                    <input 
+                        type="email"
+                        placeholder="Enter email address"
+                        value={this.state.email}
+                        onChange={this.update("email")}
+                        className="signup-login-input"
+                    />
 
-                <input 
-                    type="password"
-                    placeholder="Password"
-                    value={this.state.password}
-                    onChange={this.update("password")}
-                    className=""
-                    minLength={6}
-                />
-                
-                <input 
-                    type="submit"
-                    value={this.props.formType}
-                    className=""
-                />
+                    <span className="signup-login-div-1-subtitle">Password</span>
+                    <input 
+                        type="password"
+                        placeholder="Enter password"
+                        value={this.state.password}
+                        onChange={this.update("password")}
+                        className="signup-login-input"
+                        minLength={6}
+                    />
 
-                <div className="">
-                    {this.renderErrors()}
+                    <div className="signup-login-empty-div"></div>
+                    
+                    <input 
+                        type="submit"
+                        value={this.props.formType}
+                        className="signup-login-input signup-login-input-span"
+                    />
+
+
+                    <div className="signup-login-empty-div"></div>
+                    
+
+                    <button className="signup-login-input signup-login-input-span" onClick={this.handleClick}>
+                        Provider Demo User
+                    </button>
                 </div>
 
-                <div className="">
-                    <p>New Here?</p>
-                    <span className="">
-                        {this.props.navLink}
-                    </span>
+                <div className="signup-login-div-2">
+                    {/* <div className=""> */}
+                        <p className="signup-login-input-title">New member? Create your account.</p>
+                        <span className="signup-login-input signup-login-input-signupbutton">
+                            {this.props.navLink}
+                        </span>
+                    {/* </div> */}
                 </div>
-
-                <button className="" onClick={this.handleClick}>
-                    Provider Demo User
-                </button>
 
             </form>
         )

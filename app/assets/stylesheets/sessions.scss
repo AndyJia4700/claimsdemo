@@ -1,18 +1,91 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.signup-login-input{
-    width: 250px;
-}
-.signup-login-form{
+.signup-login-div-1{
+    background: white;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border: 3px solid black;
-    border-radius: 25px;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 3%;
-    padding: 50px;
-    box-shadow: 0 10px 10px 0 #dadada;
+    border-radius: 5px;
+    width: 35%;
+    height: 80%;
+    padding: 5%;
 }
+
+.signup-login-div-1-title{
+    font-size: 28px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+.signup-login-div-1-subtitle{
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    margin-top: 16px;
+}
+
+.signup-login-div-2{
+    display: flex;
+    flex-direction: column;
+    padding: 10%;
+    padding-top: 15%;
+    color: white;
+    font-size: 20px;
+}
+
+.signup-login-div-errors{
+    background-color: rgb(211, 115, 115);
+    padding-left: 5%;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.signup-login-empty-div{
+    margin-bottom: 20px;
+}
+
+.signup-login-form{
+    display: flex;
+    flex-direction: row;
+    background-image: url(session.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-family: "Lettera","Open Sans",sans-serif;
+}
+
+.signup-login-input{
+    border: 1px solid #dadada;
+    border-radius: 5px;
+    padding: 5%;
+    font-size: 15px;
+    font-weight: 200;
+}
+
+.signup-login-input:hover{
+    border: 1px solid #4a538f;
+}
+
+.signup-login-input-signupbutton{
+    color: #2b2b38;
+    background-color: white;
+    width: 50%;
+    margin-top: 30px;
+}
+
+.signup-login-input-span{
+    text-align: center;
+    color: white;
+    background-color:#312b62;
+}
+
+
+
+.signup-login-input-span:hover{
+    background-color: #4a538f;
+}
+

@@ -415,7 +415,9 @@ var App = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", null, "Claims Demo"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "nav-top-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_5__.default, null))));
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, nav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: ""
+      }, nav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         exact: true,
         path: "/"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
@@ -650,7 +652,7 @@ var mSTP = function mSTP(_ref) {
     navLink: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       to: "/signup",
       className: ""
-    }, "Sign Up")
+    }, "Create an account")
   };
 };
 
@@ -704,15 +706,12 @@ var LogInForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleClick",
     value: function handleClick(e) {
-      var _this3 = this;
-
       e.preventDefault();
       this.setState({
         email: "test@123.com",
         password: "123456"
-      }, function () {
-        return _this3.props.login(Object.assign({}, _this3.state));
-      });
+      } // () => this.props.login(Object.assign({}, this.state))
+      );
     }
   }, {
     key: "renderErrors",
@@ -725,33 +724,47 @@ var LogInForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "signup-login-form",
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-login-div-1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+        className: "signup-login-div-1-title"
+      }, "Provider Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-login-div-errors"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.renderErrors())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "signup-login-div-1-subtitle"
+      }, "Email address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "email",
-        placeholder: "Email",
+        placeholder: "Enter email address",
         value: this.state.email,
         onChange: this.update("email"),
-        className: ""
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "signup-login-input"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "signup-login-div-1-subtitle"
+      }, "Password"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
-        placeholder: "Password",
+        placeholder: "Enter password",
         value: this.state.password,
         onChange: this.update("password"),
-        className: "",
+        className: "signup-login-input",
         minLength: 6
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-login-empty-div"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: this.props.formType,
-        className: ""
+        className: "signup-login-input signup-login-input-span"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: ""
-      }, this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: ""
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "New Here?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: ""
-      }, this.props.navLink)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "",
+        className: "signup-login-empty-div"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "signup-login-input signup-login-input-span",
         onClick: this.handleClick
-      }, "Provider Demo User"));
+      }, "Provider Demo User")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-login-div-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "signup-login-input-title"
+      }, "New member? Create your account."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "signup-login-input signup-login-input-signupbutton"
+      }, this.props.navLink)));
     }
   }]);
 

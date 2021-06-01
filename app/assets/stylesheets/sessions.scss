@@ -41,6 +41,11 @@
     font-weight: 200;
 }
 
+.signup-login-div-errors-ul{
+    display: flex;
+    flex-direction: column;
+}
+
 .signup-login-empty-div{
     margin-bottom: 20px;
 }
@@ -51,6 +56,7 @@
     background-image: url(session.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    height: 500px;
     padding-left: 8%;
     padding-right: 8%;
     padding-top: 5%;
@@ -73,8 +79,9 @@
 .signup-login-input-signupbutton{
     color: #2b2b38;
     background-color: white;
-    width: 50%;
+    width: 150px;
     margin-top: 30px;
+    font-weight: 200;
 }
 
 .signup-login-input-span{

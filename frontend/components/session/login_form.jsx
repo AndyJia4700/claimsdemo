@@ -6,7 +6,7 @@ import { login } from '../../actions/session_actions';
 const mSTP = ({errors}) => ({
     errors: errors,
     formType: 'Log In',
-    navLink: <Link to="/signup" className="" >Create an account</Link>
+    navLink: 'Create an account'
 });
 
 const mDTP = dispatch => {
@@ -25,7 +25,8 @@ class LogInForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.update = this.update.bind(this);
-        this.renderErrors = this.renderErrors.bind(this)
+        this.renderErrors = this.renderErrors.bind(this);
+        this.redirectLink = this.redirectLink.bind(this);
     }
 
     update(field){
@@ -47,8 +48,14 @@ class LogInForm extends React.Component{
                 email: "test@123.com",
                 password: "123456"
             },
-            // () => this.props.login(Object.assign({}, this.state))
+            () => this.props.login(Object.assign({}, this.state)).then(() => window.location.reload())
         );
+        
+    }
+
+    redirectLink(e){
+        e.preventDefault();
+        window.location.replace("#/signup")
     }
 
     renderErrors(){
@@ -87,13 +94,11 @@ class LogInForm extends React.Component{
                     />
 
                     <div className="signup-login-empty-div"></div>
-                    
                     <input 
                         type="submit"
                         value={this.props.formType}
                         className="signup-login-input signup-login-input-span"
                     />
-
 
                     <div className="signup-login-empty-div"></div>
                     
@@ -104,14 +109,11 @@ class LogInForm extends React.Component{
                 </div>
 
                 <div className="signup-login-div-2">
-                    {/* <div className=""> */}
-                        <p className="signup-login-input-title">New member? Create your account.</p>
-                        <span className="signup-login-input signup-login-input-signupbutton">
-                            {this.props.navLink}
-                        </span>
-                    {/* </div> */}
+                    <p className="signup-login-input-title">New member? Create your account.</p>
+                    <span className="signup-login-input signup-login-input-signupbutton" onClick={this.redirectLink}>
+                        {this.props.navLink}
+                    </span>
                 </div>
-
             </form>
         )
     }

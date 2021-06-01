@@ -11,6 +11,9 @@
 #  updated_at   :datetime         not null
 #
 class Patient < ApplicationRecord
+    validates :name, :birthdate, :insurance_id, presence: true
+    validates :insurance_id, uniqueness: true
+
     belongs_to :user,
     foreign_key: :user_id,
     class_name: "User"

@@ -700,7 +700,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 var mSTP = function mSTP(state) {
   return {
     patient: {
-      name: "",
+      lastname: "",
+      firstname: "",
       birthdate: "",
       insurance_id: ""
     },
@@ -819,10 +820,14 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var formData = new FormData();
+      var last = this.state.lastname.charAt(0).toUpperCase() + this.state.lastname.slice(1).toLowerCase();
+      var first = this.state.firstname.charAt(0).toUpperCase() + this.state.firstname.slice(1).toLowerCase();
+      var fullname = last + ", " + first;
+      var insuranceId = this.state.insurance_id.toUpperCase();
       formData.append("patient[id]", this.state.id);
-      formData.append("patient[name]", this.state.name);
+      formData.append("patient[name]", fullname);
       formData.append("patient[birthdate]", this.state.birthdate);
-      formData.append("patient[insurance_id]", this.state.insurance_id);
+      formData.append("patient[insurance_id]", insuranceId);
 
       if (confirm("Save Changes?")) {
         this.props.action(formData);
@@ -840,7 +845,37 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "This is patient create form");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit,
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+        className: ""
+      }, "Create New Patient")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.lastname,
+        onChange: this.update("lastname"),
+        placeholder: "Lastname",
+        className: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.firstname,
+        onChange: this.update("firstname"),
+        placeholder: "firstname",
+        className: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "date",
+        value: this.state.birthdate,
+        onChange: this.update("birthdate"),
+        className: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.insurance_id,
+        onChange: this.update("insurance_id"),
+        placeholder: "insurance number",
+        className: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "submit"));
     }
   }]);
 

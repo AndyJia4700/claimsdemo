@@ -17,10 +17,15 @@ class PatientForm extends React.Component{
     handleSubmit(e){
         e.preventDefault();
         const formData = new FormData();
+        const last = this.state.lastname.charAt(0).toUpperCase() + this.state.lastname.slice(1).toLowerCase()
+        const first = this.state.firstname.charAt(0).toUpperCase() + this.state.firstname.slice(1).toLowerCase()
+        const fullname = last + ", " + first;
+
+        const insuranceId = this.state.insurance_id.toUpperCase();
         formData.append("patient[id]", this.state.id);
-        formData.append("patient[name]", this.state.name);
+        formData.append("patient[name]", fullname);
         formData.append("patient[birthdate]", this.state.birthdate);
-        formData.append("patient[insurance_id]", this.state.insurance_id);
+        formData.append("patient[insurance_id]", insuranceId);
         if (confirm("Save Changes?")){
             this.props.action(formData);
         }
@@ -34,9 +39,45 @@ class PatientForm extends React.Component{
 
     render(){
         return(
-            <div>
-                This is patient create form
-            </div>
+            <form onSubmit={this.handleSubmit} className="">
+                <div className="">
+                    <h1 className="">Create New Patient</h1>
+                </div>
+                
+                <input 
+                    type="text" 
+                    value={this.state.lastname} 
+                    onChange={this.update("lastname")}
+                    placeholder="Lastname"
+                    className=""
+                />
+
+                <input 
+                    type="text" 
+                    value={this.state.firstname} 
+                    onChange={this.update("firstname")}
+                    placeholder="firstname"
+                    className=""
+                />
+
+                <input 
+                    type="date" 
+                    value={this.state.birthdate} 
+                    onChange={this.update("birthdate")}
+                    className=""
+                />
+
+                <input 
+                    type="text" 
+                    value={this.state.insurance_id} 
+                    onChange={this.update("insurance_id")}
+                    placeholder="insurance number"
+                    className=""
+                />
+
+                <button>submit</button>
+
+            </form>
         )
     }
 }

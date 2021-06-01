@@ -6,9 +6,10 @@ import PatientForm from './patient_form'
 const mSTP = state => {
     return {
         patient: {
-            name: "",
+            lastname: "",
+            firstname:"",
             birthdate: "",
-            insurance_id: ""
+            insurance_id: "",
         },
         currentUser: state.session.currentUser,
         formType: "Save"

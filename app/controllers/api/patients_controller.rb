@@ -22,10 +22,12 @@ class Api::PatientsController < ApplicationController
 
     def create
         @patient = Patient.new(patient_params)
+        @patient.user_id = current_user.id
+        # debugger
         if @patient.save
             render :show
         else
-            render json: @patient.errors.full_messages, status 422
+            render json: @patient.errors.full_messages, status: 422
         end
     end
 
@@ -35,10 +37,10 @@ class Api::PatientsController < ApplicationController
             if @patient.update(patient_params)
                 render :show
             else
-                render json: @patient.errors.full_messages, status 422
+                render json: @patient.errors.full_messages, status: 422
             end
         else
-            render json: @patient.errors.full_messages, status 422
+            render json: @patient.errors.full_messages, status: 422
         end
     end
 

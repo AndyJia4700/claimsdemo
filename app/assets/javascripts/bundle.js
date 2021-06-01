@@ -215,6 +215,102 @@ var closeModal = function closeModal() {
 
 /***/ }),
 
+/***/ "./frontend/actions/patient_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/patient_actions.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_ALL_PATIENTS": () => (/* binding */ RECEIVE_ALL_PATIENTS),
+/* harmony export */   "RECEIVE_PATIENT": () => (/* binding */ RECEIVE_PATIENT),
+/* harmony export */   "REMOVE_PATIENT": () => (/* binding */ REMOVE_PATIENT),
+/* harmony export */   "RECEIVE_PATIENT_ERRORS": () => (/* binding */ RECEIVE_PATIENT_ERRORS),
+/* harmony export */   "fetchPatients": () => (/* binding */ fetchPatients),
+/* harmony export */   "fetchPatient": () => (/* binding */ fetchPatient),
+/* harmony export */   "createPatient": () => (/* binding */ createPatient),
+/* harmony export */   "updatePatient": () => (/* binding */ updatePatient),
+/* harmony export */   "deletePatient": () => (/* binding */ deletePatient)
+/* harmony export */ });
+/* harmony import */ var _util_patient_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/patient_util */ "./frontend/util/patient_util.js");
+
+var RECEIVE_ALL_PATIENTS = 'RECEIVE_ALL_PATIENTS';
+var RECEIVE_PATIENT = 'RECEIVE_PATIENT';
+var REMOVE_PATIENT = 'REMOVE_PATIENT';
+var RECEIVE_PATIENT_ERRORS = 'RECEIVE_PATIENT_ERRORS';
+
+var receiveAllPatients = function receiveAllPatients(patients) {
+  return {
+    type: RECEIVE_ALL_PATIENTS,
+    patients: patients
+  };
+};
+
+var receivePatient = function receivePatient(patient) {
+  return {
+    type: RECEIVE_PATIENT,
+    patient: patient
+  };
+};
+
+var removePatient = function removePatient(patientId) {
+  return {
+    type: REMOVE_PATIENT,
+    patientId: patientId
+  };
+};
+
+var receivePatientErrors = function receivePatientErrors(errors) {
+  return {
+    type: RECEIVE_PATIENT_ERRORS,
+    errors: errors
+  };
+};
+
+var fetchPatients = function fetchPatients() {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.fetchPatients().then(function (patients) {
+      return dispatch(receiveAllPatients(patients));
+    });
+  };
+};
+var fetchPatient = function fetchPatient(patientId) {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.fetchPatient(patientId).then(function (patient) {
+      return dispatch(receivePatient(patient));
+    });
+  };
+};
+var createPatient = function createPatient(patient) {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.createPatient(patient).then(function (patient) {
+      return dispatch(receivePatient(patient));
+    }, function (error) {
+      return dispatch(receivePatientErrors(error.responseJSON));
+    });
+  };
+};
+var updatePatient = function updatePatient(patient) {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.updatePatient(patient).then(function (patient) {
+      return dispatch(receivePatient(patient));
+    }, function (error) {
+      return dispatch(receivePatientErrors(error.responseJSON));
+    });
+  };
+};
+var deletePatient = function deletePatient(patientId) {
+  return function (dispatch) {
+    return _util_patient_util__WEBPACK_IMPORTED_MODULE_0__.deletePatient(patientId).then(function () {
+      return dispatch(removePatient(patientId));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -358,11 +454,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _util_route_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/route_utils */ "./frontend/util/route_utils.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_session_login_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/session/login_form */ "./frontend/components/session/login_form.jsx");
 /* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
-/* harmony import */ var _home_session_show__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/session_show */ "./frontend/components/home/session_show.jsx");
-/* harmony import */ var _components_session_signup_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/session/signup_form */ "./frontend/components/session/signup_form.jsx");
+/* harmony import */ var _patients_create_patient_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./patients/create_patient_container */ "./frontend/components/patients/create_patient_container.jsx");
+/* harmony import */ var _home_session_show__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home/session_show */ "./frontend/components/home/session_show.jsx");
+/* harmony import */ var _components_session_signup_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/session/signup_form */ "./frontend/components/session/signup_form.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -394,6 +491,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -414,15 +512,19 @@ var App = /*#__PURE__*/function (_React$Component) {
         className: "nav-top-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", null, "Claims Demo"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "nav-top-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_5__.default, null))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_6__.default, null))));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: ""
-      }, nav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      }, nav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
         exact: true,
         path: "/"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.ProtRoute, {
+        exact: true,
+        path: "/patients/new",
+        component: _patients_create_patient_container__WEBPACK_IMPORTED_MODULE_5__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
         path: "/signup",
-        component: _components_session_signup_form__WEBPACK_IMPORTED_MODULE_6__.default
+        component: _components_session_signup_form__WEBPACK_IMPORTED_MODULE_7__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
         path: "/login",
         component: _components_session_login_form__WEBPACK_IMPORTED_MODULE_3__.default
@@ -563,6 +665,259 @@ function Modal(_ref) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(Modal));
+
+/***/ }),
+
+/***/ "./frontend/components/patients/create_patient_container.jsx":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/patients/create_patient_container.jsx ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/patient_actions */ "./frontend/actions/patient_actions.js");
+/* harmony import */ var _patient_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./patient_form */ "./frontend/components/patients/patient_form.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var mSTP = function mSTP(state) {
+  // debugger;
+  return {
+    patient: {
+      lastname: "",
+      firstname: "",
+      birthdate: "",
+      insurance_id: ""
+    },
+    errors: state.errors.patientErrorsReducer,
+    currentUser: state.session.currentUser,
+    formType: "Save"
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    action: function action(patient) {
+      return dispatch((0,_actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__.createPatient)(patient));
+    }
+  };
+};
+
+var CreatePatientForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(CreatePatientForm, _React$Component);
+
+  var _super = _createSuper(CreatePatientForm);
+
+  function CreatePatientForm(props) {
+    _classCallCheck(this, CreatePatientForm);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(CreatePatientForm, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          action = _this$props.action,
+          errors = _this$props.errors,
+          patient = _this$props.patient,
+          currentUser = _this$props.currentUser,
+          formType = _this$props.formType;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_form__WEBPACK_IMPORTED_MODULE_3__.default, {
+        action: action,
+        errors: errors,
+        patient: patient,
+        currentUser: currentUser,
+        formType: formType
+      }));
+    }
+  }]);
+
+  return CreatePatientForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(CreatePatientForm));
+
+/***/ }),
+
+/***/ "./frontend/components/patients/patient_form.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/patients/patient_form.jsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var PatientForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(PatientForm, _React$Component);
+
+  var _super = _createSuper(PatientForm);
+
+  function PatientForm(props) {
+    var _this;
+
+    _classCallCheck(this, PatientForm);
+
+    _this = _super.call(this, props);
+    _this.state = _this.props.patient;
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.update = _this.update.bind(_assertThisInitialized(_this)); // this.renderErrors = this.renderErrors.bind(this);
+
+    return _this;
+  }
+
+  _createClass(PatientForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        user_id: this.props.currentUser.id
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var formData = new FormData();
+      var last = this.state.lastname.charAt(0).toUpperCase() + this.state.lastname.slice(1).toLowerCase();
+      var first = this.state.firstname.charAt(0).toUpperCase() + this.state.firstname.slice(1).toLowerCase();
+      var fullname = last + ", " + first;
+      var insuranceId = this.state.insurance_id.toUpperCase();
+      formData.append("patient[id]", this.state.id);
+      formData.append("patient[name]", fullname);
+      formData.append("patient[birthdate]", this.state.birthdate);
+      formData.append("patient[insurance_id]", insuranceId);
+
+      if (confirm("Save Changes?")) {
+        this.props.action(formData);
+      }
+    }
+  }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      //    const errors = (
+      //         <ul className="">
+      //             {Object.values(this.props.errors).map(id => (
+      //                 <li key={id} className="">
+      //                     {this.props.errors[id]}
+      //                 </li>
+      //             ))}
+      //         </ul>
+      //     )
+      //     return errors
+      return Object.values(this.props.errors);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit,
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+        className: ""
+      }, "Create New Patient")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.lastname,
+        onChange: this.update("lastname"),
+        placeholder: "Lastname",
+        className: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.firstname,
+        onChange: this.update("firstname"),
+        placeholder: "firstname",
+        className: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "date",
+        value: this.state.birthdate,
+        onChange: this.update("birthdate"),
+        className: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.insurance_id,
+        onChange: this.update("insurance_id"),
+        placeholder: "insurance number",
+        className: ""
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, this.renderErrors()));
+    }
+  }]);
+
+  return PatientForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PatientForm);
 
 /***/ }),
 
@@ -1049,10 +1404,10 @@ var ProfileDropDown = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./frontend/reducers/entites_reducer.js":
-/*!**********************************************!*\
-  !*** ./frontend/reducers/entites_reducer.js ***!
-  \**********************************************/
+/***/ "./frontend/reducers/entities_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/entities_reducer.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1060,12 +1415,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _patients_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./patients_reducer */ "./frontend/reducers/patients_reducer.js");
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  user: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  user: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  patient: _patients_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -1082,12 +1440,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _patient_errors_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./patient_errors_reducer */ "./frontend/reducers/patient_errors_reducer.js");
+/* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
 
 
-var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  sessionErrorsReducer: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  sessionErrorsReducer: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
+  patientErrorsReducer: _patient_errors_reducer__WEBPACK_IMPORTED_MODULE_0__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (errorsReducer);
 
@@ -1130,6 +1491,82 @@ var modalReducer = function modalReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/patient_errors_reducer.js":
+/*!*****************************************************!*\
+  !*** ./frontend/reducers/patient_errors_reducer.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "patientErrorsReducer": () => (/* binding */ patientErrorsReducer),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/patient_actions */ "./frontend/actions/patient_actions.js");
+
+var patientErrorsReducer = function patientErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PATIENT_ERRORS:
+      return action.errors;
+
+    default:
+      return state;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (patientErrorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/patients_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/patients_reducer.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/patient_actions */ "./frontend/actions/patient_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var PatientReducer = function PatientReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+
+  switch (action.type) {
+    case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_PATIENTS:
+      return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, action.patients);
+
+    case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PATIENT:
+      return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, _defineProperty({}, action.patient.id, action.patient));
+
+    case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_PATIENT:
+      var nextState = Object.assign({}, oldState);
+      delete nextState[action.patientId];
+      return nextState;
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PatientReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/root_reducer.js":
 /*!*******************************************!*\
   !*** ./frontend/reducers/root_reducer.js ***!
@@ -1142,7 +1579,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _entites_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entites_reducer */ "./frontend/reducers/entites_reducer.js");
+/* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
 /* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
 /* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
 /* harmony import */ var _ui_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui_reducer */ "./frontend/reducers/ui_reducer.js");
@@ -1152,7 +1589,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
-  entities: _entites_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
   ui: _ui_reducer__WEBPACK_IMPORTED_MODULE_3__.default
@@ -1174,8 +1611,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
-
 
 var sessionErrorsReducer = function sessionErrorsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -1337,6 +1772,60 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/patient_util.js":
+/*!***************************************!*\
+  !*** ./frontend/util/patient_util.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchPatients": () => (/* binding */ fetchPatients),
+/* harmony export */   "fetchPatient": () => (/* binding */ fetchPatient),
+/* harmony export */   "createPatient": () => (/* binding */ createPatient),
+/* harmony export */   "updatePatient": () => (/* binding */ updatePatient),
+/* harmony export */   "deletePatient": () => (/* binding */ deletePatient)
+/* harmony export */ });
+var fetchPatients = function fetchPatients() {
+  return $.ajax({
+    url: "/api/patients"
+  });
+};
+var fetchPatient = function fetchPatient(patientId) {
+  return $.ajax({
+    url: "/api/patients/".concat(patientId)
+  });
+};
+var createPatient = function createPatient(formData) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/patients',
+    data: formData,
+    contentType: false,
+    processData: false,
+    dataType: 'json'
+  });
+};
+var updatePatient = function updatePatient(formData, patientId) {
+  return $.ajax({
+    method: 'PATCH',
+    url: "/api/patients/".concat(patientId),
+    data: formData,
+    contentType: false,
+    processData: false,
+    dataType: 'json'
+  });
+};
+var deletePatient = function deletePatient(patientId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "/api/patients/".concat(patientId)
+  });
+};
 
 /***/ }),
 

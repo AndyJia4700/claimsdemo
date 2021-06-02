@@ -454,12 +454,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _util_route_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/route_utils */ "./frontend/util/route_utils.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_session_login_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/session/login_form */ "./frontend/components/session/login_form.jsx");
 /* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
 /* harmony import */ var _patients_create_patient_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./patients/create_patient_container */ "./frontend/components/patients/create_patient_container.jsx");
-/* harmony import */ var _home_session_show__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home/session_show */ "./frontend/components/home/session_show.jsx");
-/* harmony import */ var _components_session_signup_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/session/signup_form */ "./frontend/components/session/signup_form.jsx");
+/* harmony import */ var _patients_patient_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./patients/patient_index */ "./frontend/components/patients/patient_index.jsx");
+/* harmony import */ var _home_session_show__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home/session_show */ "./frontend/components/home/session_show.jsx");
+/* harmony import */ var _components_session_signup_form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/session/signup_form */ "./frontend/components/session/signup_form.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -492,6 +493,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -512,19 +514,23 @@ var App = /*#__PURE__*/function (_React$Component) {
         className: "nav-top-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", null, "Claims Demo"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "nav-top-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_6__.default, null))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_7__.default, null))));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: ""
-      }, nav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+      }, nav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
         exact: true,
         path: "/"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.ProtRoute, {
         exact: true,
         path: "/patients/new",
         component: _patients_create_patient_container__WEBPACK_IMPORTED_MODULE_5__.default
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.ProtRoute, {
+        exact: true,
+        path: "/patients",
+        component: _patients_patient_index__WEBPACK_IMPORTED_MODULE_6__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
         path: "/signup",
-        component: _components_session_signup_form__WEBPACK_IMPORTED_MODULE_7__.default
+        component: _components_session_signup_form__WEBPACK_IMPORTED_MODULE_8__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
         path: "/login",
         component: _components_session_login_form__WEBPACK_IMPORTED_MODULE_3__.default
@@ -821,8 +827,8 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = _this.props.patient;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.update = _this.update.bind(_assertThisInitialized(_this)); // this.renderErrors = this.renderErrors.bind(this);
-
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.renderErrors = _this.renderErrors.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -840,31 +846,33 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
       var formData = new FormData();
       var last = this.state.lastname.charAt(0).toUpperCase() + this.state.lastname.slice(1).toLowerCase();
       var first = this.state.firstname.charAt(0).toUpperCase() + this.state.firstname.slice(1).toLowerCase();
-      var fullname = last + ", " + first;
+      var fullname = last == "" || first == "" ? null : last + ", " + first;
+      if (fullname) formData.append("patient[name]", fullname);
       var insuranceId = this.state.insurance_id.toUpperCase();
       formData.append("patient[id]", this.state.id);
-      formData.append("patient[name]", fullname);
       formData.append("patient[birthdate]", this.state.birthdate);
       formData.append("patient[insurance_id]", insuranceId);
 
       if (confirm("Save Changes?")) {
         this.props.action(formData);
+
+        if (window.alert("information saved")) {
+          window.location.replace('#/patients');
+        } else {}
       }
     }
   }, {
     key: "renderErrors",
     value: function renderErrors() {
-      //    const errors = (
-      //         <ul className="">
-      //             {Object.values(this.props.errors).map(id => (
-      //                 <li key={id} className="">
-      //                     {this.props.errors[id]}
-      //                 </li>
-      //             ))}
-      //         </ul>
-      //     )
-      //     return errors
-      return Object.values(this.props.errors);
+      // debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: ""
+      }, Object.values(this.props.errors).map(function (id) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: id,
+          className: ""
+        }, id);
+      }));
     }
   }, {
     key: "update",
@@ -880,37 +888,57 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit,
-        className: ""
+        className: "patient-create-edit-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: ""
+        className: "patient-create-edit-form-div-1"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "patient-create-edit-form-div-2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: ""
-      }, "Create New Patient")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "Patient Information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "patient-create-edit-form-ul"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "patient-create-edit-form-li"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "patient-create-edit-form-li-span"
+      }, "Last Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         value: this.state.lastname,
         onChange: this.update("lastname"),
         placeholder: "Lastname",
-        className: ""
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "patient-create-edit-form-input"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "patient-create-edit-form-li"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "patient-create-edit-form-li-span"
+      }, "First Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         value: this.state.firstname,
         onChange: this.update("firstname"),
         placeholder: "firstname",
-        className: ""
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "patient-create-edit-form-input"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "patient-create-edit-form-li"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "patient-create-edit-form-li-span"
+      }, "DOB:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "date",
         value: this.state.birthdate,
         onChange: this.update("birthdate"),
-        className: ""
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "patient-create-edit-form-input"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "patient-create-edit-form-li"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "patient-create-edit-form-li-span"
+      }, "Insurance Id:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         value: this.state.insurance_id,
         onChange: this.update("insurance_id"),
         placeholder: "insurance number",
+        className: "patient-create-edit-form-input"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: ""
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: ""
-      }, this.renderErrors()));
+      }, this.renderErrors())));
     }
   }]);
 
@@ -918,6 +946,135 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PatientForm);
+
+/***/ }),
+
+/***/ "./frontend/components/patients/patient_index.jsx":
+/*!********************************************************!*\
+  !*** ./frontend/components/patients/patient_index.jsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/patient_actions */ "./frontend/actions/patient_actions.js");
+/* harmony import */ var _patient_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./patient_form */ "./frontend/components/patients/patient_form.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var mSTP = function mSTP(state) {
+  // debugger;
+  return {
+    patients: state.entities.patient
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    fetchPatients: function fetchPatients() {
+      return dispatch((0,_actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPatients)());
+    }
+  };
+};
+
+var PatientIndex = /*#__PURE__*/function (_React$Component) {
+  _inherits(PatientIndex, _React$Component);
+
+  var _super = _createSuper(PatientIndex);
+
+  function PatientIndex(props) {
+    var _this;
+
+    _classCallCheck(this, PatientIndex);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      search: ""
+    };
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.updateHistory = _this.updateHistory.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(PatientIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchPatients();
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "updateHistory",
+    value: function updateHistory() {
+      var changes = document.getElementById("main-search") ? document.getElementById("main-search") : "";
+      this.props.history.push({
+        search: "?".concat(changes)
+      }); // window.location.reload();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      // debugger;
+      // if (!Object.values(this.props.patients)[0])return null;
+      var mainSearch = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        id: "main-search",
+        placeholder: "Lastname, Firstname"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        onClick: this.updateHistory,
+        className: ""
+      }, "search icon"));
+      var patients = this.props.patients;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, mainSearch);
+    }
+  }]);
+
+  return PatientIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(PatientIndex));
 
 /***/ }),
 
@@ -1512,7 +1669,11 @@ var patientErrorsReducer = function patientErrorsReducer() {
 
   switch (action.type) {
     case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PATIENT_ERRORS:
-      return action.errors;
+      if (action.errors == undefined) {
+        return [];
+      } else {
+        return action.errors;
+      }
 
     default:
       return state;

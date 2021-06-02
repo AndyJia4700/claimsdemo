@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-dom';
 import { fetchPatient, deletePatient} from '../../actions/patient_actions';
+import PatientForm from './patient_form';
 
 const mSTP = (state, ownProps) => {
     const patientId = ownProps.match.params.patientId;
@@ -37,3 +38,5 @@ class PatientShow extends React.Component{
         )
     }
 }
+
+export default connect(mSTP, mDTP)(PatientShow)

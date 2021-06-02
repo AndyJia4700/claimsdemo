@@ -41,7 +41,6 @@ class PatientForm extends React.Component{
     }
 
     renderErrors(){
-        // debugger;
         return(
             <ul className="">
                 {

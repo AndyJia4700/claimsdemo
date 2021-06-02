@@ -864,7 +864,6 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderErrors",
     value: function renderErrors() {
-      // debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: ""
       }, Object.values(this.props.errors).map(function (id) {
@@ -968,11 +967,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -988,25 +987,59 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
 
 
 var mSTP = function mSTP(state) {
-  // debugger;
   return {
     patients: state.entities.patient
   };
 };
 
 var mDTP = function mDTP(dispatch) {
+  // debugger;
   return {
     fetchPatients: function fetchPatients() {
       return dispatch((0,_actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPatients)());
     }
   };
 };
+
+var Trie = /*#__PURE__*/function () {
+  function Trie() {
+    _classCallCheck(this, Trie);
+
+    this.root = {};
+    this.endSymbol = '*';
+  }
+
+  _createClass(Trie, [{
+    key: "insert",
+    value: function insert(string) {
+      var current = this.root;
+
+      for (var i = 0; i < string.length; i++) {
+        if (!(string[i] in current)) {
+          current[string[i]] = {};
+        }
+
+        current = current[string[i]];
+      }
+
+      current[this.endSymbol] = string;
+    }
+  }]);
+
+  return Trie;
+}();
 
 var PatientIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(PatientIndex, _React$Component);
@@ -1024,6 +1057,7 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.updateHistory = _this.updateHistory.bind(_assertThisInitialized(_this));
+    _this.searchMultiPatient = _this.searchMultiPatient.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1031,6 +1065,44 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchPatients();
+    }
+  }, {
+    key: "searchMultiPatient",
+    value: function searchMultiPatient(searchKey, patientsList) {
+      var AutoComplete = __webpack_require__(/*! trie-autocomplete */ "./node_modules/trie-autocomplete/index.js");
+
+      var trie = new AutoComplete();
+
+      var _iterator = _createForOfIteratorHelper(patientsList),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var patient = _step.value;
+          trie.add(patient.name);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var possiblePatients = {};
+      var results = trie.suggest(searchKey);
+
+      for (var i = 0; i < results.length; i++) {
+        possiblePatients[results[i]] = true;
+      }
+
+      return patientsList.map(function (patient) {
+        return possiblePatients[patient.name] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: patient.id,
+          className: "",
+          onClick: function onClick() {
+            return console.log("\"selected\"+".concat(patient.id));
+          }
+        }, patient.name) : null;
+      });
     }
   }, {
     key: "update",
@@ -1047,27 +1119,25 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
       var changes = document.getElementById("main-search") ? document.getElementById("main-search") : "";
       this.props.history.push({
         search: "?".concat(changes)
-      }); // window.location.reload();
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      // debugger;
-      // if (!Object.values(this.props.patients)[0])return null;
-      var mainSearch = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      var patientSearch = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        id: "main-search",
-        placeholder: "Lastname, Firstname"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        onClick: this.updateHistory,
-        className: ""
-      }, "search icon"));
-      var patients = this.props.patients;
+        placeholder: "Lastname, Firstname",
+        onChange: this.update("search")
+      }));
+      var searchKey = this.state.search;
+      var containedPatients = this.searchMultiPatient(searchKey, Object.values(this.props.patients));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: ""
-      }, mainSearch);
+      }, patientSearch, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: ""
+      }, containedPatients));
     }
   }]);
 
@@ -1236,7 +1306,14 @@ var LogInForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderErrors",
     value: function renderErrors() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, Object.values(this.props.errors));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "signup-login-div-errors-ul"
+      }, Object.values(this.props.errors)[0].map(function (id) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: id,
+          className: ""
+        }, id);
+      }));
     }
   }, {
     key: "render",
@@ -1248,9 +1325,7 @@ var LogInForm = /*#__PURE__*/function (_React$Component) {
         className: "signup-login-div-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: "signup-login-div-1-title"
-      }, "Provider Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "signup-login-div-errors"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.renderErrors())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      }, "Provider Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "signup-login-div-1-subtitle"
       }, "Email address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "email",
@@ -1285,7 +1360,11 @@ var LogInForm = /*#__PURE__*/function (_React$Component) {
       }, "New member? Create your account."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "signup-login-input signup-login-input-signupbutton",
         onClick: this.redirectLink
-      }, this.props.navLink)));
+      }, this.props.navLink), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-login-empty-div"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-login-div-errors"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.renderErrors()))));
     }
   }]);
 
@@ -1406,7 +1485,12 @@ var SignUpForm = /*#__PURE__*/function (_React$Component) {
     value: function renderErrors() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "signup-login-div-errors-ul"
-      }, Object.values(this.props.errors));
+      }, Object.values(this.props.errors)[0].map(function (id) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: id,
+          className: ""
+        }, id);
+      }));
     }
   }, {
     key: "render",
@@ -1418,9 +1502,7 @@ var SignUpForm = /*#__PURE__*/function (_React$Component) {
         className: "signup-login-div-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: "signup-login-div-1-title"
-      }, "Create Your Account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "signup-login-div-errors"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.renderErrors())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      }, "Create Your Account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "signup-login-div-1-subtitle"
       }, "Email address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "email",
@@ -1450,7 +1532,11 @@ var SignUpForm = /*#__PURE__*/function (_React$Component) {
       }, "Have an account? Click below to login."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "signup-login-input signup-login-input-signupbutton",
         onClick: this.redirectLink
-      }, this.props.navLink)));
+      }, this.props.navLink), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-login-empty-div"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-login-div-errors"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.renderErrors()))));
     }
   }]);
 
@@ -55613,6 +55699,198 @@ function warning(condition, message) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (warning);
+
+
+/***/ }),
+
+/***/ "./node_modules/trie-autocomplete/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/trie-autocomplete/index.js ***!
+  \*************************************************/
+/***/ ((module) => {
+
+class TrieNode {
+  constructor(char) {
+    this.char = char;
+    this.validWord = false;
+    this.parent = null;
+    this.children = [];
+  }
+}
+
+class AutoComplete {
+  constructor() {
+    this.root = new TrieNode('');
+  }
+
+  add(word) {
+    let current = this.root;
+
+    for (let i = 0; i < word.length; i += 1) {
+      const ch = word[i];
+      let found = false;
+
+      // Search all children for the character we're looking for
+      for (let j = 0; j < current.children.length; j += 1) {
+        const child = current.children[j];
+        // If we find it, change current node to that child
+        if (child.char === ch) {
+          found = true;
+          current = child;
+          break;
+        }
+      }
+
+      // If we don't find the char, create a new node
+      if (!found) {
+        current.children.push(new TrieNode(ch));
+
+        const newNode = current.children[current.children.length - 1];
+
+        newNode.parent = current;
+
+        // On next iteration, start at node we just created
+        current = newNode;
+      }
+    }
+
+    // Set last created node to be a valid keyword endpoint
+    current.validWord = true;
+  }
+
+  contains(word) {
+    let current = this.root;
+
+    // For each char in the word
+    for (let i = 0; i < word.length; i += 1) {
+      const ch = word[i];
+      let found = false;
+
+      // Search each child of the current node
+      for (let j = 0; j < current.children.length; j += 1) {
+        const child = current.children[j];
+
+        if (child.char === ch) {
+          found = true;
+          current = child;
+          break;
+        }
+      }
+
+      if (!found) {
+        return false;
+      }
+    }
+
+    return current.validWord;
+  }
+
+  delete(word) {
+    let current = this.root;
+
+    for (let i = 0; i < word.length; i += 1) {
+      const ch = word[i];
+      let found = false;
+
+      for (let j = 0; j < current.children.length; j += 1) {
+        const child = current.children[j];
+
+        if (child.char === ch) {
+          found = true;
+          current = child;
+          break;
+        }
+      }
+
+      if (!found) {
+        return;
+      }
+    }
+
+    current.validWord = false;
+
+    // Clean up uneeded nodes
+    let stop = false;
+    while (!stop) {
+      // If the current node has no children and is not a valid word endpoint
+      if (
+        current.children.length === 0
+        && !current.validWord
+        && current.parent
+      ) {
+        const { parent } = current;
+        const childIndex = parent.children.indexOf(current);
+        const end = parent.children.length - 1;
+
+        // On the parent, swap the position of this node and the end of the array
+        [parent.children[childIndex], parent.children[end]] = [
+          parent.children[end],
+          parent.children[childIndex],
+        ];
+
+        // Pop this node off the array
+        parent.children.pop();
+
+        // Repeat the test on the parent
+        current = parent;
+      } else {
+        // Stop if current node has children or it's a word endpoint
+        stop = true;
+      }
+    }
+  }
+
+  suggest(snip) {
+    const chars = snip.split('');
+    let current = this.root;
+
+    // Find the node corresponding to the end of the snippet, if it exists
+    for (let i = 0; i < chars.length; i += 1) {
+      const ch = chars[i];
+      let found = false;
+
+      for (let j = 0; j < current.children.length; j += 1) {
+        const child = current.children[j];
+
+        if (child.char === ch) {
+          found = true;
+          current = child;
+          break;
+        }
+      }
+
+      if (!found) {
+        return [];
+      }
+    }
+
+    const suggestions = [];
+    const tracker = []; // Helps track where we are in the tree traversal
+
+    // Depth first search
+    function recurse(node) {
+      tracker.push(node.char);
+
+      if (node.validWord) {
+        // Put letters in tracker on end of input snippet, and push into suggestions
+        const temp = chars.slice(0, snip.length - 1);
+        temp.push(...tracker);
+        suggestions.push(temp.join(''));
+      }
+
+      node.children.forEach(child => setTimeout(recurse(child), 0));
+
+      // Pop last letter off tracker when we're about to move up a level
+      tracker.pop();
+    }
+
+    recurse(current);
+
+    return suggestions;
+  }
+}
+
+module.exports = AutoComplete;
 
 
 /***/ }),

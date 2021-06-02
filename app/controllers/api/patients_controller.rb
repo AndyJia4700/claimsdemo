@@ -3,7 +3,7 @@ class Api::PatientsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        @patients = Patient.all.includes(:user)
+        @patients = Patient.all
         render :index
     end
 

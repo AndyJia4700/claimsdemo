@@ -48,7 +48,11 @@ class SignUpForm extends React.Component{
     renderErrors(){
         return(
             <ul className="signup-login-div-errors-ul">
-                {Object.values(this.props.errors)}
+                {
+                    Object.values(this.props.errors)[0].map((id) =>
+                        <li key={id} className="">{id}</li>
+                    )
+                }
             </ul>
         )
     }
@@ -58,9 +62,7 @@ class SignUpForm extends React.Component{
             <form className="signup-login-form" onSubmit={this.handleSubmit}>
                 <div className="signup-login-div-1">
                     <h1 className="signup-login-div-1-title">Create Your Account</h1>
-                    <div className="signup-login-div-errors">
-                        <h1>{this.renderErrors()}</h1>
-                    </div>
+                    
                     <span className="signup-login-div-1-subtitle">Email address</span>
                     <input 
                         type="email"
@@ -94,6 +96,10 @@ class SignUpForm extends React.Component{
                     <span className="signup-login-input signup-login-input-signupbutton" onClick={this.redirectLink}>
                         {this.props.navLink}
                     </span>
+                    <div className="signup-login-empty-div"></div>
+                    <div className="signup-login-div-errors">
+                        <h1>{this.renderErrors()}</h1>
+                    </div>
                 </div>
             </form>
         )

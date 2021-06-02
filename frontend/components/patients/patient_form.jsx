@@ -6,7 +6,7 @@ class PatientForm extends React.Component{
         this.state = this.props.patient;
         this.handleSubmit = this.handleSubmit.bind(this);
         this.update = this.update.bind(this);
-        // this.renderErrors = this.renderErrors.bind(this);
+        this.renderErrors = this.renderErrors.bind(this);
     }
 
     componentDidMount(){
@@ -15,38 +15,42 @@ class PatientForm extends React.Component{
         })
     }
 
-    
-
     handleSubmit(e){
         e.preventDefault();
         const formData = new FormData();
+        
         const last = this.state.lastname.charAt(0).toUpperCase() + this.state.lastname.slice(1).toLowerCase()
         const first = this.state.firstname.charAt(0).toUpperCase() + this.state.firstname.slice(1).toLowerCase()
-        const fullname = last + ", " + first;
-
+        const fullname = (last == "" || first == "") ? null : last + ", " + first;
+        if (fullname) formData.append("patient[name]", fullname);
+        
         const insuranceId = this.state.insurance_id.toUpperCase();
+        
         formData.append("patient[id]", this.state.id);
-        formData.append("patient[name]", fullname);
         formData.append("patient[birthdate]", this.state.birthdate);
         formData.append("patient[insurance_id]", insuranceId);
         if (confirm("Save Changes?")){
             this.props.action(formData);
+
+            if (window.alert("information saved")){
+                window.location.replace('#/patients');
+            }else{
+                
+            }
         }
     }
 
     renderErrors(){
-    //    const errors = (
-    //         <ul className="">
-    //             {Object.values(this.props.errors).map(id => (
-    //                 <li key={id} className="">
-    //                     {this.props.errors[id]}
-    //                 </li>
-    //             ))}
-    //         </ul>
-    //     )
-    //     return errors
-
-        return(Object.values(this.props.errors))
+        // debugger;
+        return(
+            <ul className="">
+                {
+                    Object.values(this.props.errors).map((id) =>
+                        <li key={id} className="">{id}</li>
+                    )
+                }
+            </ul>
+        )
     }
 
     update(field){
@@ -58,46 +62,67 @@ class PatientForm extends React.Component{
     render(){
 
         return(
-            <form onSubmit={this.handleSubmit} className="">
-                <div className="">
-                    <h1 className="">Create New Patient</h1>
-                </div>
+            <form onSubmit={this.handleSubmit} className="patient-create-edit-form">
                 
-                <input 
-                    type="text" 
-                    value={this.state.lastname} 
-                    onChange={this.update("lastname")}
-                    placeholder="Lastname"
-                    className=""
-                />
+                <div className="patient-create-edit-form-div-1">
 
-                <input 
-                    type="text" 
-                    value={this.state.firstname} 
-                    onChange={this.update("firstname")}
-                    placeholder="firstname"
-                    className=""
-                />
+                </div>
 
-                <input 
-                    type="date" 
-                    value={this.state.birthdate} 
-                    onChange={this.update("birthdate")}
-                    className=""
-                />
+                <div className="patient-create-edit-form-div-2">
+                    <h1 className="">Patient Information</h1>
+                
+                    <ul className="patient-create-edit-form-ul">
+                        <li className="patient-create-edit-form-li">
+                            <span className="patient-create-edit-form-li-span">Last Name:</span>
+                            <input 
+                                type="text" 
+                                value={this.state.lastname} 
+                                onChange={this.update("lastname")}
+                                placeholder="Lastname"
+                                className="patient-create-edit-form-input"
+                            />
+                        </li>
 
-                <input 
-                    type="text" 
-                    value={this.state.insurance_id} 
-                    onChange={this.update("insurance_id")}
-                    placeholder="insurance number"
-                    className=""
-                />
+                        <li className="patient-create-edit-form-li">
+                            <span className="patient-create-edit-form-li-span">First Name:</span>
+                            <input 
+                                type="text" 
+                                value={this.state.firstname} 
+                                onChange={this.update("firstname")}
+                                placeholder="firstname"
+                                className="patient-create-edit-form-input"
+                            />
+                        </li>
 
-                <button>submit</button>
+                        <li className="patient-create-edit-form-li">
+                            <span className="patient-create-edit-form-li-span">DOB:</span>
+                            <input 
+                                type="date" 
+                                value={this.state.birthdate} 
+                                onChange={this.update("birthdate")}
+                                className="patient-create-edit-form-input"
+                            />
+                        </li>
 
-                <div className="">
-                    {this.renderErrors()}
+                        <li className="patient-create-edit-form-li">
+                            <span className="patient-create-edit-form-li-span">Insurance Id:</span>
+                            <input 
+                                type="text" 
+                                value={this.state.insurance_id} 
+                                onChange={this.update("insurance_id")}
+                                placeholder="insurance number"
+                                className="patient-create-edit-form-input"
+                            />
+                        </li>
+
+                    </ul>
+                
+
+                    <button>submit</button>
+
+                    <div className="">
+                        {this.renderErrors()}
+                    </div>
                 </div>
 
             </form>

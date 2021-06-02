@@ -1,12 +1,16 @@
-import { RECEIVE_PATIENT_ERRORS} from '../actions/patient_actions';
+import { RECEIVE_PATIENT_ERRORS } from '../actions/patient_actions';
 
 export const patientErrorsReducer = (state = [], action) => {
     Object.freeze(state);
     switch(action.type){
         case RECEIVE_PATIENT_ERRORS:
-            return action.errors;
+            if (action.errors == undefined) {
+                return [];
+            } else {
+                return action.errors;
+            }
         default:
-            return state
+            return state;
     }
 };
 

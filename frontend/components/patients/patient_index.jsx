@@ -17,24 +17,6 @@ const mDTP = dispatch => {
     }
 }
 
-class Trie {
-    constructor(){
-        this.root = {};
-        this.endSymbol = '*';
-    }
-
-    insert(string){
-        let current = this.root;
-        for (let i = 0; i < string.length; i++){
-            if (!(string[i] in current)){
-                current[string[i]] = {};
-            }
-            current = current[string[i]]
-        }
-        current[this.endSymbol] = string;
-    }
-}
-
 class PatientIndex extends React.Component{
     constructor(props){
         super(props)
@@ -51,19 +33,30 @@ class PatientIndex extends React.Component{
     }
 
     searchMultiPatient(searchKey, patientsList){
+
         const AutoComplete = require('trie-autocomplete');
         const trie = new AutoComplete(); 
         for (const patient of patientsList){
             trie.add(patient.name);
         }
+
+        const search = searchKey.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")
         const possiblePatients = {};
-        const results = trie.suggest(searchKey);
+        const results = trie.suggest(search);
         for (let i = 0; i< results.length; i++){
             possiblePatients[results[i]] = true
         }
         return patientsList.map(patient => 
             (possiblePatients[patient.name]) ?
-            <li key={patient.id} className="" onClick={() => console.log(`"selected"+${patient.id}`)}>{patient.name}</li> : null 
+            <li key={patient.id} className="" onClick={() => console.log(`"selected"+${patient.id}`)}>
+                <span className="">
+                    {patient.name}
+                </span>
+                
+                <span className="">
+                    {patient.birthdate}
+                </span>
+            </li> : null 
         )
     }
 

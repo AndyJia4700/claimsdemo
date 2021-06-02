@@ -973,6 +973,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -986,12 +992,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
@@ -1012,34 +1012,6 @@ var mDTP = function mDTP(dispatch) {
     }
   };
 };
-
-var Trie = /*#__PURE__*/function () {
-  function Trie() {
-    _classCallCheck(this, Trie);
-
-    this.root = {};
-    this.endSymbol = '*';
-  }
-
-  _createClass(Trie, [{
-    key: "insert",
-    value: function insert(string) {
-      var current = this.root;
-
-      for (var i = 0; i < string.length; i++) {
-        if (!(string[i] in current)) {
-          current[string[i]] = {};
-        }
-
-        current = current[string[i]];
-      }
-
-      current[this.endSymbol] = string;
-    }
-  }]);
-
-  return Trie;
-}();
 
 var PatientIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(PatientIndex, _React$Component);
@@ -1087,8 +1059,11 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
         _iterator.f();
       }
 
+      var search = searchKey.split(' ').map(function (word) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      }).join(" ");
       var possiblePatients = {};
-      var results = trie.suggest(searchKey);
+      var results = trie.suggest(search);
 
       for (var i = 0; i < results.length; i++) {
         possiblePatients[results[i]] = true;
@@ -1101,7 +1076,11 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             return console.log("\"selected\"+".concat(patient.id));
           }
-        }, patient.name) : null;
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          className: ""
+        }, patient.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          className: ""
+        }, patient.birthdate)) : null;
       });
     }
   }, {

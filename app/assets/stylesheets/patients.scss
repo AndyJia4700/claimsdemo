@@ -42,3 +42,18 @@
     flex-direction: column;
 }
 
+.patient-index-div{
+    background-color: plum;
+    padding: 5%;
+}
+
+.patient-main-div{
+    display: flex;
+    flex-direction: row;
+    margin: 2%;
+    padding: 5%;
+    border: 1px solid #dadada;
+    background-color: #dadada;
+    border-radius: 20px;
+}
+

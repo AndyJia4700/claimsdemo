@@ -5,7 +5,7 @@ import { fetchPatients } from '../../actions/patient_actions';
 
 const mSTP = state => {
     return {
-        patients: state.entities.patient
+        patients: state.entities.patient,
     }
 }
 
@@ -22,16 +22,25 @@ class PatientIndex extends React.Component{
             search: ""
         }
         this.update = this.update.bind(this);
-        this.updateHistory = this.updateHistory.bind(this);
+        this.getLocalStorage = this.getLocalStorage.bind(this);
         this.searchMultiPatient = this.searchMultiPatient.bind(this);
     }
 
     componentDidMount(){
         this.props.fetchPatients();
+        this.getLocalStorage();
+    }
+
+    getLocalStorage(){
+        const localData = localStorage.getItem("search")
+        return localData ?
+            this.setState({
+                search: localData
+            }) :
+        ""
     }
 
     searchMultiPatient(searchKey, patientsList){
-
         const AutoComplete = require('trie-autocomplete');
         const trie = new AutoComplete(); 
         for (const patient of patientsList){
@@ -58,17 +67,15 @@ class PatientIndex extends React.Component{
         )
     }
 
-    update(field){
-        return e => this.setState({
-            [field]: e.currentTarget.value
-        })
-    }
-
-    updateHistory(){
-        let changes = document.getElementById("main-search") ? document.getElementById("main-search") : "";
-        this.props.history.push({
-            search: `?${changes}`
-        });
+    update(){
+        return e => {
+            this.setState({
+                search: e.currentTarget.value
+            }),
+            localStorage.setItem(
+                "search", e.currentTarget.value
+            )
+        }
     }
     
     render(){   
@@ -77,20 +84,23 @@ class PatientIndex extends React.Component{
                 <input 
                     type="text"
                     placeholder="Lastname, Firstname"
-                    onChange={this.update("search")}
+                    onChange={this.update()}
+                    value={this.state.search}
                 />
             </div>
         )
 
         let searchKey = this.state.search
         const containedPatients = this.searchMultiPatient(searchKey, Object.values(this.props.patients))
+
         return(
-            <div className="">
+            <div className="patient-index-div">
+                <h1 className="patient-index-title">Patient Lists</h1>
                 {patientSearch}
                 <ul className="">
                     {containedPatients}
                 </ul>
-            </div>   
+            </div>  
         )
     }
 }

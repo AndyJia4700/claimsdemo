@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchPatient, deletePatient, fetchPatients} from '../../actions/patient_actions';
+import { fetchPatient, deletePatient } from '../../actions/patient_actions';
 import PatientIndex from './patient_index';
 
 const mSTP = (state, ownProps) => {
@@ -9,13 +9,11 @@ const mSTP = (state, ownProps) => {
     return {
         patient,
         currentUser: state.session.currentUser,
-        patients: state.entities.patient
     }
 }
 
 const mDTP = dispatch => {
     return {
-        fetchPatients: () => dispatch(fetchPatients()),
         fetchPatient: (patientId) => dispatch(fetchPatient(patientId)),
         deletePatient: (patientId) => dispatch(deletePatient(patientId))
     }
@@ -27,15 +25,18 @@ class PatientShow extends React.Component{
     }
 
     componentDidMount(){
-        this.props.fetchPatients();
+        // this.props.fetchPatients();
         const patientId = this.props.match.params.patientId;
         this.props.fetchPatient(patientId)
     }
     
     render(){
-        // debugger;
         if (!this.props.patient) return null;
-        const {patient} = this.props;
+
+        const {
+            patient
+        } = this.props;
+
         return(
             <div className="">
                 <PatientIndex/>
@@ -46,6 +47,7 @@ class PatientShow extends React.Component{
                     {patient.name}
                     {patient.birthdate}
                     {patient.insuranceId}
+                    <span className="" onClick={()=>window.location.replace(`#/patients/${patient.id}/edit`)}>Edit</span>
                 </div>
                 
             </div>

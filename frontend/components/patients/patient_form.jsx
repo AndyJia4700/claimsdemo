@@ -1,5 +1,4 @@
 import React from 'react';
-
 class PatientForm extends React.Component{
     constructor(props){
         super(props);
@@ -7,6 +6,7 @@ class PatientForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         this.update = this.update.bind(this);
         this.renderErrors = this.renderErrors.bind(this);
+        this.redirect = this.redirect.bind(this);
     }
 
     componentDidMount(){
@@ -18,7 +18,7 @@ class PatientForm extends React.Component{
     handleSubmit(e){
         e.preventDefault();
         const formData = new FormData();
-        
+
         const last = this.state.lastname.charAt(0).toUpperCase() + this.state.lastname.slice(1).toLowerCase()
         const first = this.state.firstname.charAt(0).toUpperCase() + this.state.firstname.slice(1).toLowerCase()
         const fullname = (last == "" || first == "") ? null : last + ", " + first;
@@ -30,13 +30,23 @@ class PatientForm extends React.Component{
         formData.append("patient[birthdate]", this.state.birthdate);
         formData.append("patient[insurance_id]", insuranceId);
         if (confirm("Save Changes?")){
-            this.props.action(formData);
-
-            if (window.alert("information saved")){
-                window.location.replace('#/patients');
-            }else{
-                
+            if (!this.state.id){
+                this.props.action(formData);
+                if (window.alert("information saved")){
+                    window.location.replace('#/patients');
+                }
+            } else {
+                this.props.action(formData, this.state.id)
             }
+            
+        }
+    }
+
+    redirect(){
+        if (this.state) {
+            window.location.replace(`#/patients/${this.state.id}`);
+        } else {
+            window.location.replace(`#/patients`);
         }
     }
 
@@ -59,14 +69,8 @@ class PatientForm extends React.Component{
     }
 
     render(){
-
         return(
             <form onSubmit={this.handleSubmit} className="patient-create-edit-form">
-                
-                <div className="patient-create-edit-form-div-1">
-
-                </div>
-
                 <div className="patient-create-edit-form-div-2">
                     <h1 className="">Patient Information</h1>
                 
@@ -79,7 +83,7 @@ class PatientForm extends React.Component{
                                 onChange={this.update("lastname")}
                                 placeholder="Lastname"
                                 className="patient-create-edit-form-input"
-                            />
+                            /> 
                         </li>
 
                         <li className="patient-create-edit-form-li">
@@ -117,7 +121,7 @@ class PatientForm extends React.Component{
                     </ul>
                 
 
-                    <button>submit</button>
+                    <button onClick={this.redirect}>submit</button>
 
                     <div className="">
                         {this.renderErrors()}

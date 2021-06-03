@@ -3,12 +3,14 @@ class Api::PatientsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        @patients = Patient.all.includes(:user)
+        @patients = Patient.all.select do |patient| 
+            patient.user_id == current_user.id
+        end
         render :index
     end
 
     def show
-        @patient = Patient.find(params[:id])
+        @patient = Patient.find(params[:id]).user_id == current_user.id ? Patient.find(params[:id]) : nil
         render :show
     end
 

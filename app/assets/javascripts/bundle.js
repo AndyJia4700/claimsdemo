@@ -454,14 +454,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _util_route_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/route_utils */ "./frontend/util/route_utils.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_session_login_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/session/login_form */ "./frontend/components/session/login_form.jsx");
 /* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
 /* harmony import */ var _patients_create_patient_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./patients/create_patient_container */ "./frontend/components/patients/create_patient_container.jsx");
-/* harmony import */ var _patients_patient_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./patients/patient_index */ "./frontend/components/patients/patient_index.jsx");
-/* harmony import */ var _patients_patient_show__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./patients/patient_show */ "./frontend/components/patients/patient_show.jsx");
-/* harmony import */ var _home_session_show__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./home/session_show */ "./frontend/components/home/session_show.jsx");
-/* harmony import */ var _components_session_signup_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/session/signup_form */ "./frontend/components/session/signup_form.jsx");
+/* harmony import */ var _patients_edit_patient_containter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./patients/edit_patient_containter */ "./frontend/components/patients/edit_patient_containter.jsx");
+/* harmony import */ var _patients_patient_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./patients/patient_index */ "./frontend/components/patients/patient_index.jsx");
+/* harmony import */ var _patients_patient_show__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./patients/patient_show */ "./frontend/components/patients/patient_show.jsx");
+/* harmony import */ var _home_session_show__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./home/session_show */ "./frontend/components/home/session_show.jsx");
+/* harmony import */ var _components_session_signup_form__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/session/signup_form */ "./frontend/components/session/signup_form.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -496,6 +497,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -516,10 +518,16 @@ var App = /*#__PURE__*/function (_React$Component) {
         className: "nav-top-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", null, "Claims Demo"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "nav-top-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_8__.default, null))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_9__.default, null))));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: ""
-      }, nav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      }, nav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
+        path: "/signup",
+        component: _components_session_signup_form__WEBPACK_IMPORTED_MODULE_10__.default
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
+        path: "/login",
+        component: _components_session_login_form__WEBPACK_IMPORTED_MODULE_3__.default
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
         exact: true,
         path: "/"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.ProtRoute, {
@@ -529,17 +537,15 @@ var App = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.ProtRoute, {
         exact: true,
         path: "/patients/:patientId",
-        component: _patients_patient_show__WEBPACK_IMPORTED_MODULE_7__.default
+        component: _patients_patient_show__WEBPACK_IMPORTED_MODULE_8__.default
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.ProtRoute, {
+        exact: true,
+        path: "/patients/:patientId/edit",
+        component: _patients_edit_patient_containter__WEBPACK_IMPORTED_MODULE_6__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.ProtRoute, {
         exact: true,
         path: "/patients",
-        component: _patients_patient_index__WEBPACK_IMPORTED_MODULE_6__.default
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
-        path: "/signup",
-        component: _components_session_signup_form__WEBPACK_IMPORTED_MODULE_9__.default
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_2__.AuthRoute, {
-        path: "/login",
-        component: _components_session_login_form__WEBPACK_IMPORTED_MODULE_3__.default
+        component: _patients_patient_index__WEBPACK_IMPORTED_MODULE_7__.default
       }));
     }
   }]);
@@ -695,6 +701,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/patient_actions */ "./frontend/actions/patient_actions.js");
 /* harmony import */ var _patient_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./patient_form */ "./frontend/components/patients/patient_form.jsx");
+/* harmony import */ var _patient_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./patient_index */ "./frontend/components/patients/patient_index.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -716,6 +723,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -765,7 +773,7 @@ var CreatePatientForm = /*#__PURE__*/function (_React$Component) {
           patient = _this$props.patient,
           currentUser = _this$props.currentUser,
           formType = _this$props.formType;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_form__WEBPACK_IMPORTED_MODULE_3__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_index__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "================================="), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_form__WEBPACK_IMPORTED_MODULE_3__.default, {
         action: action,
         errors: errors,
         patient: patient,
@@ -779,6 +787,132 @@ var CreatePatientForm = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(CreatePatientForm));
+
+/***/ }),
+
+/***/ "./frontend/components/patients/edit_patient_containter.jsx":
+/*!******************************************************************!*\
+  !*** ./frontend/components/patients/edit_patient_containter.jsx ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/patient_actions */ "./frontend/actions/patient_actions.js");
+/* harmony import */ var _patient_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./patient_form */ "./frontend/components/patients/patient_form.jsx");
+/* harmony import */ var _patient_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./patient_index */ "./frontend/components/patients/patient_index.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+var mSTP = function mSTP(state, ownProps) {
+  var patientId = ownProps.match.params.patientId;
+  var patient = state.entities.patient[patientId];
+
+  if (patient) {
+    var name = patient.name.split(', ');
+    return {
+      patient: {
+        id: patient.id,
+        lastname: name[0],
+        firstname: name[1],
+        birthdate: patient.birthdate,
+        insurance_id: patient.insurance_id
+      },
+      currentUser: state.session.currentUser,
+      errors: state.errors.patientErrorsReducer,
+      formType: "Save"
+    };
+  } else {
+    return {
+      patient: patient
+    };
+  }
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    fetchPatient: function fetchPatient(patientId) {
+      return dispatch((0,_actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPatient)(patientId));
+    },
+    action: function action(formData, patientId) {
+      return dispatch((0,_actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__.updatePatient)(formData, patientId));
+    }
+  };
+};
+
+var EditPatientForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(EditPatientForm, _React$Component);
+
+  var _super = _createSuper(EditPatientForm);
+
+  function EditPatientForm(props) {
+    _classCallCheck(this, EditPatientForm);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(EditPatientForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var patientId = this.props.match.params.patientId;
+      this.props.fetchPatient(patientId);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (!this.props.patient) return null;
+      var _this$props = this.props,
+          action = _this$props.action,
+          errors = _this$props.errors,
+          patient = _this$props.patient,
+          currentUser = _this$props.currentUser,
+          formType = _this$props.formType;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "main-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_index__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "================================="), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_form__WEBPACK_IMPORTED_MODULE_3__.default, {
+        action: action,
+        errors: errors,
+        patient: patient,
+        currentUser: currentUser,
+        formType: formType
+      }));
+    }
+  }]);
+
+  return EditPatientForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(EditPatientForm));
 
 /***/ }),
 
@@ -835,6 +969,7 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.renderErrors = _this.renderErrors.bind(_assertThisInitialized(_this));
+    _this.redirect = _this.redirect.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -860,11 +995,24 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
       formData.append("patient[insurance_id]", insuranceId);
 
       if (confirm("Save Changes?")) {
-        this.props.action(formData);
+        if (!this.state.id) {
+          this.props.action(formData);
 
-        if (window.alert("information saved")) {
-          window.location.replace('#/patients');
-        } else {}
+          if (window.alert("information saved")) {
+            window.location.replace('#/patients');
+          }
+        } else {
+          this.props.action(formData, this.state.id);
+        }
+      }
+    }
+  }, {
+    key: "redirect",
+    value: function redirect() {
+      if (this.state) {
+        window.location.replace("#/patients/".concat(this.state.id));
+      } else {
+        window.location.replace("#/patients");
       }
     }
   }, {
@@ -895,8 +1043,6 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
         onSubmit: this.handleSubmit,
         className: "patient-create-edit-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "patient-create-edit-form-div-1"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "patient-create-edit-form-div-2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: ""
@@ -941,7 +1087,9 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
         onChange: this.update("insurance_id"),
         placeholder: "insurance number",
         className: "patient-create-edit-form-input"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.redirect
+      }, "submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: ""
       }, this.renderErrors())));
     }
@@ -969,8 +1117,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/patient_actions */ "./frontend/actions/patient_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
@@ -1031,7 +1177,7 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
       search: ""
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
-    _this.updateHistory = _this.updateHistory.bind(_assertThisInitialized(_this));
+    _this.getLocalStorage = _this.getLocalStorage.bind(_assertThisInitialized(_this));
     _this.searchMultiPatient = _this.searchMultiPatient.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -1040,6 +1186,15 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchPatients();
+      this.getLocalStorage();
+    }
+  }, {
+    key: "getLocalStorage",
+    value: function getLocalStorage() {
+      var localData = localStorage.getItem("search");
+      return localData ? this.setState({
+        search: localData
+      }) : "";
     }
   }, {
     key: "searchMultiPatient",
@@ -1088,20 +1243,14 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "update",
-    value: function update(field) {
+    value: function update() {
       var _this2 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        _this2.setState({
+          search: e.currentTarget.value
+        }), localStorage.setItem("search", e.currentTarget.value);
       };
-    }
-  }, {
-    key: "updateHistory",
-    value: function updateHistory() {
-      var changes = document.getElementById("main-search") ? document.getElementById("main-search") : "";
-      this.props.history.push({
-        search: "?".concat(changes)
-      });
     }
   }, {
     key: "render",
@@ -1111,13 +1260,16 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         placeholder: "Lastname, Firstname",
-        onChange: this.update("search")
+        onChange: this.update(),
+        value: this.state.search
       }));
       var searchKey = this.state.search;
       var containedPatients = this.searchMultiPatient(searchKey, Object.values(this.props.patients));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: ""
-      }, patientSearch, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "patient-index-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+        className: "patient-index-title"
+      }, "Patient Lists"), patientSearch, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: ""
       }, containedPatients));
     }
@@ -1177,16 +1329,12 @@ var mSTP = function mSTP(state, ownProps) {
   var patient = state.entities.patient[patientId];
   return {
     patient: patient,
-    currentUser: state.session.currentUser,
-    patients: state.entities.patient
+    currentUser: state.session.currentUser
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
-    fetchPatients: function fetchPatients() {
-      return dispatch((0,_actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPatients)());
-    },
     fetchPatient: function fetchPatient(patientId) {
       return dispatch((0,_actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPatient)(patientId));
     },
@@ -1210,19 +1358,23 @@ var PatientShow = /*#__PURE__*/function (_React$Component) {
   _createClass(PatientShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchPatients();
+      // this.props.fetchPatients();
       var patientId = this.props.match.params.patientId;
       this.props.fetchPatient(patientId);
     }
   }, {
     key: "render",
     value: function render() {
-      // debugger;
       if (!this.props.patient) return null;
       var patient = this.props.patient;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: ""
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_index__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "====================================="), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "this is patient show"), patient.name, patient.birthdate, patient.insuranceId));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_index__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "====================================="), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "this is patient show"), patient.name, patient.birthdate, patient.insuranceId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "",
+        onClick: function onClick() {
+          return window.location.replace("#/patients/".concat(patient.id, "/edit"));
+        }
+      }, "Edit")));
     }
   }]);
 
@@ -1883,7 +2035,9 @@ var PatientReducer = function PatientReducer() {
       return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, action.patients);
 
     case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PATIENT:
-      return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, _defineProperty({}, action.patient.id, action.patient));
+      if (action.patient) {
+        return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, _defineProperty({}, action.patient.id, action.patient));
+      }
 
     case _actions_patient_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_PATIENT:
       var nextState = Object.assign({}, oldState);

@@ -3,9 +3,7 @@ class Api::PatientsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        @patients = Patient.all.select do |patient| 
-            patient.user_id == current_user.id
-        end
+        @patients = Patient.all.select {|patient| patient.user_id == current_user.id}
         render :index
     end
 
@@ -19,13 +17,12 @@ class Api::PatientsController < ApplicationController
     end
 
     def edit
-        @patient = Patient.find(params[:id])
+        @patient = Patient.find(params[:id]).user_id == current_user.id ? Patient.find(params[:id]) : nil
     end
 
     def create
         @patient = Patient.new(patient_params)
         @patient.user_id = current_user.id
-        # debugger
         if @patient.save
             render :show
         else

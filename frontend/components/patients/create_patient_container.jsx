@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createPatient } from '../../actions/patient_actions';
 import PatientForm from './patient_form'
+import PatientIndex from './patient_index';
+
 
 const mSTP = (state) => {
     // debugger;
@@ -27,7 +29,6 @@ class CreatePatientForm extends React.Component{
         super(props)
     }
     
-
     render(){
         const {
             action, 
@@ -36,8 +37,11 @@ class CreatePatientForm extends React.Component{
             currentUser,
             formType
         } = this.props;
+
         return(
             <div>
+                <PatientIndex/>
+                <h1>=================================</h1>
                 <PatientForm
                     action={action}
                     errors={errors}

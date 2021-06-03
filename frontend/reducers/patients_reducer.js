@@ -11,9 +11,11 @@ const PatientReducer = (oldState = {}, action) => {
         case RECEIVE_ALL_PATIENTS:
             return merge({}, oldState, action.patients);
         case RECEIVE_PATIENT:
-            return merge({}, oldState, {
-                [action.patient.id]: action.patient
-            })
+            if (action.patient){
+                return merge({}, oldState, {
+                    [action.patient.id]: action.patient
+                })
+            }
         case REMOVE_PATIENT:
             let nextState = Object.assign({}, oldState);
             delete nextState[action.patientId];

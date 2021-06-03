@@ -7,6 +7,7 @@ import LogInForm from '../components/session/login_form';
 import Modal from './modal/modal';
 import PatientCreateContainer from './patients/create_patient_container';
 import PatientIndex from './patients/patient_index';
+import PatientShow from './patients/patient_show';
 import SessionShow from './home/session_show';
 import SignUpForm from '../components/session/signup_form';
 
@@ -33,7 +34,9 @@ class App extends React.Component{
                 {nav}
                 <Modal/>
                 <Route exact path="/"/>
+
                 <ProtRoute exact path="/patients/new" component={PatientCreateContainer}/>
+                <ProtRoute exact path="/patients/:patientId" component={PatientShow}/>
                 <ProtRoute exact path="/patients" component={PatientIndex}/>
                 <AuthRoute path="/signup" component={SignUpForm}/>
                 <AuthRoute path="/login" component={LogInForm}/>

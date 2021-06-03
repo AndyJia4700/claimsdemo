@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatients } from '../../actions/patient_actions';
-import PatientForm from './patient_form';
 
 
 const mSTP = state => {
@@ -11,7 +10,6 @@ const mSTP = state => {
 }
 
 const mDTP = dispatch => {
-    // debugger;
     return {
         fetchPatients: () => dispatch(fetchPatients())
     }
@@ -48,11 +46,11 @@ class PatientIndex extends React.Component{
         }
         return patientsList.map(patient => 
             (possiblePatients[patient.name]) ?
-            <li key={patient.id} className="" onClick={() => console.log(`"selected"+${patient.id}`)}>
+            <li key={patient.id} className="" onClick={() => window.location.replace(`#/patients/${patient.id}`)}>
                 <span className="">
                     {patient.name}
                 </span>
-                
+
                 <span className="">
                     {patient.birthdate}
                 </span>
@@ -74,7 +72,6 @@ class PatientIndex extends React.Component{
     }
     
     render(){   
-
         const patientSearch = (
             <div className="">
                 <input 

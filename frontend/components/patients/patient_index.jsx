@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatients } from '../../actions/patient_actions';
-
+// import leftSideBar from '../components/home/left_side_bar';
 
 const mSTP = state => {
     return {
@@ -100,7 +100,7 @@ class PatientIndex extends React.Component{
                 <ul className="">
                     {containedPatients}
                 </ul>
-            </div>  
+            </div>
         )
     }
 }

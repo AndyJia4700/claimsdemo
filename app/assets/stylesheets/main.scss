@@ -46,6 +46,9 @@ input[type="submit"] {
 
 
 .main-div{
-  background-image: url(main-background.jpg);
   padding: 2%;
+  display: flex;
+  flex-direction: row;
+
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
 }

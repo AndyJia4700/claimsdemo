@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .signup-login-div-1{
-    background: white;
+    background: #f9f9f9;
     display: flex;
     flex-direction: column;
     border-radius: 5px;
@@ -53,7 +53,8 @@
 .signup-login-form{
     display: flex;
     flex-direction: row;
-    background-image: url(session.jpg);
+    // background-image: url(session.jpg);
+    background-image: linear-gradient(45deg, #ff9a9e 0%, #1b1818 99%, #fad0c4 100%);
     background-repeat: no-repeat;
     background-size: cover;
     height: 500px;
@@ -62,6 +63,9 @@
     padding-top: 5%;
     padding-bottom: 5%;
     font-family: "Lettera","Open Sans",sans-serif;
+    width: 80%;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .signup-login-input{
@@ -88,7 +92,7 @@
 .signup-login-input-span{
     text-align: center;
     color: white;
-    background-color:#312b62;
+    background-color:#5c6572;
 }
 
 

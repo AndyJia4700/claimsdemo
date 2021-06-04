@@ -46,10 +46,13 @@ input[type="submit"] {
 }
 
 
+
 .main-div{
-  padding: 2%;
+  padding: 3% 5%;
+
   display: flex;
   flex-direction: row;
-
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
 }

@@ -36,7 +36,6 @@ class App extends React.Component{
                 <AuthRoute path="/signup" component={SignUpForm}/>
                 <AuthRoute path="/login" component={LogInForm}/>                
                 
-                {/* <ProtRoute exact path="/" component={LeftSideBar}/> */}
                 <ProtRoute exact path="/patients/new" component={PatientCreateContainer}/>
                 <ProtRoute exact path="/patients/:patientId" component={PatientShow}/>
                 <ProtRoute exact path="/patients/:patientId/edit" component={PatientEditContainer}/>

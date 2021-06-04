@@ -25,15 +25,18 @@ class leftSideBar extends React.Component{
         // const { currentUser } = this.props;
         return(
             <nav className="left-side-bar-nav">
-                <div className="">
-                    <h1>Dr. doctor</h1>
+                <div className="left-side-bar-nav-provider-div">
+                    <div className="left-side-bar-nav-provider-div-img">
+
+                    </div>
+                    <span className="left-side-bar-nav-provider-title">Dr.doctor</span>
                 </div>
 
                 <ul className="left-side-bar-ul">
-                    <li><Link to="/patients">Patient</Link></li>
-                    <li><Link to="">Claim</Link></li>
-                    <li><Link to="">CPT Code</Link></li>
-                    <li><Link to="">ICD Code</Link></li>
+                    <li className="left-side-bar-ul-li"><Link to="/patients">Patient</Link></li>
+                    <li className="left-side-bar-ul-li"><Link to="">Claim</Link></li>
+                    <li className="left-side-bar-ul-li"><Link to="">CPT Code</Link></li>
+                    <li className="left-side-bar-ul-li"><Link to="">ICD Code</Link></li>
                 </ul>
 
                 <div className="">

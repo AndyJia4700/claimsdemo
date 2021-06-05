@@ -1,4 +1,5 @@
 import React from 'react';
+import PatientIndex from './patient_index';
 class PatientForm extends React.Component{
     constructor(props){
         super(props);
@@ -29,14 +30,17 @@ class PatientForm extends React.Component{
         formData.append("patient[id]", this.state.id);
         formData.append("patient[birthdate]", this.state.birthdate);
         formData.append("patient[insurance_id]", insuranceId);
-        if (confirm("Save Changes?")){
+        if (confirm("Save?")){
             if (!this.state.id){
                 this.props.action(formData);
-                if (window.alert("information saved")){
-                    window.location.replace('#/patients');
+                if (confirm("Information has been saved!")){
+                    setInterval(window.location.replace('#/patients'), 3000);
                 }
             } else {
                 this.props.action(formData, this.state.id)
+                if (confirm("Changes has been saved!")){
+                    setInterval(window.location.replace('#/patients'), 3000);
+                }
             }
             
         }
@@ -70,65 +74,68 @@ class PatientForm extends React.Component{
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit} className="patient-create-edit-form">
-                <div className="patient-create-edit-form-div-2">
-                    <h1 className="">Patient Information</h1>
-                
-                    <ul className="patient-create-edit-form-ul">
-                        <li className="patient-create-edit-form-li">
-                            <span className="patient-create-edit-form-li-span">Last Name:</span>
-                            <input 
-                                type="text" 
-                                value={this.state.lastname} 
-                                onChange={this.update("lastname")}
-                                placeholder="Lastname"
-                                className="patient-create-edit-form-input"
-                            /> 
-                        </li>
+            <div className="patients-main-div">
+                <PatientIndex/>
+                <form onSubmit={this.handleSubmit} className="patient-create-edit-form">
+                    <div className="patient-create-edit-form-div">
+                        <h1 className="">Patient Information</h1>
+                    
+                        <ul className="patient-create-edit-form-ul">
+                            <li className="patient-create-edit-form-li">
+                                <span className="patient-create-edit-form-li-span">Last Name:</span>
+                                <input 
+                                    type="text" 
+                                    value={this.state.lastname} 
+                                    onChange={this.update("lastname")}
+                                    placeholder="Lastname"
+                                    className="patient-create-edit-form-input"
+                                /> 
+                            </li>
 
-                        <li className="patient-create-edit-form-li">
-                            <span className="patient-create-edit-form-li-span">First Name:</span>
-                            <input 
-                                type="text" 
-                                value={this.state.firstname} 
-                                onChange={this.update("firstname")}
-                                placeholder="firstname"
-                                className="patient-create-edit-form-input"
-                            />
-                        </li>
+                            <li className="patient-create-edit-form-li">
+                                <span className="patient-create-edit-form-li-span">First Name:</span>
+                                <input 
+                                    type="text" 
+                                    value={this.state.firstname} 
+                                    onChange={this.update("firstname")}
+                                    placeholder="firstname"
+                                    className="patient-create-edit-form-input"
+                                />
+                            </li>
 
-                        <li className="patient-create-edit-form-li">
-                            <span className="patient-create-edit-form-li-span">DOB:</span>
-                            <input 
-                                type="date" 
-                                value={this.state.birthdate} 
-                                onChange={this.update("birthdate")}
-                                className="patient-create-edit-form-input"
-                            />
-                        </li>
+                            <li className="patient-create-edit-form-li">
+                                <span className="patient-create-edit-form-li-span">DOB:</span>
+                                <input 
+                                    type="date" 
+                                    value={this.state.birthdate} 
+                                    onChange={this.update("birthdate")}
+                                    className="patient-create-edit-form-input"
+                                />
+                            </li>
 
-                        <li className="patient-create-edit-form-li">
-                            <span className="patient-create-edit-form-li-span">Insurance Id:</span>
-                            <input 
-                                type="text" 
-                                value={this.state.insurance_id} 
-                                onChange={this.update("insurance_id")}
-                                placeholder="insurance number"
-                                className="patient-create-edit-form-input"
-                            />
-                        </li>
+                            <li className="patient-create-edit-form-li">
+                                <span className="patient-create-edit-form-li-span">Insurance Id:</span>
+                                <input 
+                                    type="text" 
+                                    value={this.state.insurance_id} 
+                                    onChange={this.update("insurance_id")}
+                                    placeholder="insurance number"
+                                    className="patient-create-edit-form-input"
+                                />
+                            </li>
 
-                    </ul>
-                
+                        </ul>
+                    
 
-                    <button onClick={this.redirect}>submit</button>
+                        <button onClick={this.redirect}>submit</button>
 
-                    <div className="">
-                        {this.renderErrors()}
+                        <div className="">
+                            {this.renderErrors()}
+                        </div>
                     </div>
-                </div>
 
-            </form>
+                </form>
+            </div>
         )
     }
 }

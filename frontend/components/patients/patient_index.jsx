@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatients } from '../../actions/patient_actions';
-// import leftSideBar from '../components/home/left_side_bar';
-
+import { FaSearch, FaPlus } from 'react-icons/fa';
 const mSTP = state => {
     return {
         patients: state.entities.patient,
@@ -53,15 +52,18 @@ class PatientIndex extends React.Component{
         for (let i = 0; i< results.length; i++){
             possiblePatients[results[i]] = true
         }
+
+        const dateFormat = require("dateformat");
+
+        
         return patientsList.map(patient => 
             (possiblePatients[patient.name]) ?
-            <li key={patient.id} className="" onClick={() => window.location.replace(`#/patients/${patient.id}`)}>
-                <span className="">
+            <li key={patient.id} className="patient-index-ul-li" onClick={() => window.location.replace(`#/patients/${patient.id}`)}>
+                <span className="patient-index-ul-li-span-1">
                     {patient.name}
                 </span>
-
-                <span className="">
-                    {patient.birthdate}
+                <span className="patient-index-ul-li-span-2">
+                    {dateFormat(patient.birthdate, 'mm/dd/yy')}
                 </span>
             </li> : null 
         )
@@ -80,14 +82,13 @@ class PatientIndex extends React.Component{
     
     render(){   
         const patientSearch = (
-            <div className="">
-                <input 
-                    type="text"
-                    placeholder="Lastname, Firstname"
-                    onChange={this.update()}
-                    value={this.state.search}
-                />
-            </div>
+            <input 
+                className="patient-index-search-input"
+                type="text"
+                placeholder="Lastname, Firstname"
+                onChange={this.update()}
+                value={this.state.search}
+            />
         )
 
         let searchKey = this.state.search
@@ -95,9 +96,17 @@ class PatientIndex extends React.Component{
 
         return(
             <div className="patient-index-div">
-                <h1 className="patient-index-title">Patient Lists</h1>
-                {patientSearch}
-                <ul className="">
+                <div className="patient-index-title">
+                    <h1 className="">Patient Lists</h1>
+                    <FaPlus onClick={()=>window.location.replace('#/patients/new')}/>
+                </div>
+
+                <div className="patient-index-div-search">
+                    <FaSearch/>
+                    {patientSearch}
+                </div>
+
+                <ul className="patient-index-ul">
                     {containedPatients}
                 </ul>
             </div>

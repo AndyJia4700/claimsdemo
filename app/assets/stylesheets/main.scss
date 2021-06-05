@@ -56,3 +56,19 @@ input[type="submit"] {
   top: 0; right: 0; bottom: 0; left: 0;
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(164, 164, 164);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(123, 122, 122);
+}

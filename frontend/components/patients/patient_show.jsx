@@ -38,11 +38,10 @@ class PatientShow extends React.Component{
         } = this.props;
 
         return(
-            <div className="">
+            <div className="patients-main-div">
                 <PatientIndex/>
 
-                <h1>=====================================</h1>
-                <div>
+                <div className="">
                     <p>this is patient show</p>
                     {patient.name}
                     {patient.birthdate}

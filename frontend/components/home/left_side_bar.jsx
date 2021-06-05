@@ -2,10 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../../actions/session_actions';
-import { FaUserFriends } from 'react-icons/fa'
-import { FaBriefcaseMedical } from 'react-icons/fa'
-import { FaStethoscope } from 'react-icons/fa'
-import { FaFileMedical } from 'react-icons/fa'
+import { FaStethoscope, FaFileMedical, FaBriefcaseMedical, FaUserFriends } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
 import { MdExpandMore } from 'react-icons/md'
 

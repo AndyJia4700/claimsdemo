@@ -33,6 +33,7 @@ class App extends React.Component{
                 {/* {nav} */}
                 <Modal/>
                 <LeftSideBar/>
+                
                 <AuthRoute path="/signup" component={SignUpForm}/>
                 <AuthRoute path="/login" component={LogInForm}/>                
                 

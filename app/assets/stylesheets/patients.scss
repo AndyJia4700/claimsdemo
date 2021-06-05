@@ -2,27 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.patient-create-edit-form{
-    display: flex;
-    height: 500px;
-    padding-left: 5%;
-}
-
-.patient-create-edit-form-div-1{
-    width: 40%;
-    background-color: rgb(190, 153, 49);
-}
-
-.patient-create-edit-form-div-2{
-    display: flex;
-    flex-direction: column;
-    background-color: yellowgreen;
-    padding: 5%;
-}
-
 .patient-create-edit-form-input{
     background-color: white;
-
 }
 
 .patient-create-edit-form-li{
@@ -34,6 +15,7 @@
 .patient-create-edit-form-li-span{
     display: block;
     width: 100px;
+    text-align: center;
 }
 
 .patient-create-edit-form-ul{
@@ -42,17 +24,65 @@
 }
 
 .patient-index-div{
-    background-color: plum;
-    padding: 5%;
+    background-color: white;
+    width: 250px;
+    padding: 50px;
 }
 
-.patient-main-div{
+.patient-index-div-search{
     display: flex;
     flex-direction: row;
-    margin: 2%;
-    padding: 5%;
+    width: 100%;
+    background: yellow;
     border: 1px solid #dadada;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.patient-index-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 22px;
+    margin-bottom: 20px
+}
+
+.patient-index-ul{
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 200;
+    color: #8e909b;
+    margin-top: 20px;
+    padding-left: 20px;
+    overflow-y: auto;
+    height: 400px;
+}
+
+
+.patient-index-ul-li{
+    display: inline-block;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+}
+
+.patient-index-ul-li:hover{
+    color: black;
+    transform: scale(1.05);
+}
+
+.patient-index-ul-li-span-1{
+    display: inline-block;
+    width: 65%
+}
+
+.patients-main-div{
+    display: flex;
+    flex-direction: row;
     background-color: #dadada;
-    border-radius: 20px;
+    height: 100%;
 }
 

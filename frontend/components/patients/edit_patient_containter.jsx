@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updatePatient, fetchPatient } from '../../actions/patient_actions';
 import PatientForm from './patient_form';
-import PatientIndex from './patient_index';
+ 
 
 const mSTP = (state, ownProps) => {
     const patientId = ownProps.match.params.patientId;
@@ -56,9 +56,7 @@ class EditPatientForm extends React.Component{
         } = this.props;
 
         return(
-            <div className="main-div">
-                <PatientIndex/>
-                <h1>=================================</h1>
+            <div className="">
                 <PatientForm
                     action={action}
                     errors={errors}

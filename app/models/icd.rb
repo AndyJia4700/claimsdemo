@@ -9,5 +9,6 @@
 #  updated_at      :datetime         not null
 #
 class Icd < ApplicationRecord
-    
+    validates :icd_code, :icd_description, presence: true
+    validates :icd_code, uniqueness: true
 end

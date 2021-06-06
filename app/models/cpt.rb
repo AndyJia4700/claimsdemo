@@ -10,5 +10,6 @@
 #  updated_at      :datetime         not null
 #
 class Cpt < ApplicationRecord
-    
+    validates :cpt_code, :cpt_description, :billed_amount, presence: true
+    validates :cpt_code, uniqueness: true
 end

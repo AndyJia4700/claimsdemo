@@ -887,7 +887,8 @@ var mSTP = function mSTP(state) {
     },
     errors: state.errors.patientErrorsReducer,
     currentUser: state.session.currentUser,
-    formType: "Save"
+    formType: "Save",
+    title: "Create New Patient"
   };
 };
 
@@ -918,13 +919,15 @@ var CreatePatientForm = /*#__PURE__*/function (_React$Component) {
           errors = _this$props.errors,
           patient = _this$props.patient,
           currentUser = _this$props.currentUser,
-          formType = _this$props.formType;
+          formType = _this$props.formType,
+          title = _this$props.title;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_form__WEBPACK_IMPORTED_MODULE_3__.default, {
         action: action,
         errors: errors,
         patient: patient,
         currentUser: currentUser,
-        formType: formType
+        formType: formType,
+        title: title
       }));
     }
   }]);
@@ -994,7 +997,8 @@ var mSTP = function mSTP(state, ownProps) {
       },
       currentUser: state.session.currentUser,
       errors: state.errors.patientErrorsReducer,
-      formType: "Save"
+      formType: "Save",
+      title: "Patient Information"
     };
   } else {
     return {
@@ -1040,7 +1044,8 @@ var EditPatientForm = /*#__PURE__*/function (_React$Component) {
           errors = _this$props.errors,
           patient = _this$props.patient,
           currentUser = _this$props.currentUser,
-          formType = _this$props.formType;
+          formType = _this$props.formType,
+          title = _this$props.title;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_form__WEBPACK_IMPORTED_MODULE_3__.default, {
@@ -1048,7 +1053,8 @@ var EditPatientForm = /*#__PURE__*/function (_React$Component) {
         errors: errors,
         patient: patient,
         currentUser: currentUser,
-        formType: formType
+        formType: formType,
+        title: title
       }));
     }
   }]);
@@ -1198,7 +1204,7 @@ var PatientForm = /*#__PURE__*/function (_React$Component) {
         className: "patient-create-edit-form-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: ""
-      }, "Patient Information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      }, this.props.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "patient-create-edit-form-ul"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "patient-create-edit-form-li"
@@ -1427,6 +1433,7 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: ""
       }, "Patient Lists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_3__.FaPlus, {
+        className: "patient-index-create-icon",
         onClick: function onClick() {
           return window.location.replace('#/patients/new');
         }
@@ -1533,7 +1540,7 @@ var PatientShow = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "patients-main-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_index__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: ""
+        className: "patient-show-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "this is patient show"), patient.name, patient.birthdate, patient.insuranceId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "",
         onClick: function onClick() {

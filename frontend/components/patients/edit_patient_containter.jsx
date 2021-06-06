@@ -20,6 +20,7 @@ const mSTP = (state, ownProps) => {
             currentUser: state.session.currentUser,
             errors: state.errors.patientErrorsReducer,
             formType: "Save",
+            title: "Patient Information",
         }
     } else {
         return {
@@ -52,7 +53,8 @@ class EditPatientForm extends React.Component{
             errors,
             patient,
             currentUser,
-            formType
+            formType,
+            title
         } = this.props;
 
         return(
@@ -63,6 +65,7 @@ class EditPatientForm extends React.Component{
                     patient={patient}
                     currentUser={currentUser}
                     formType={formType}
+                    title={title}
                 />
             </div>
         )

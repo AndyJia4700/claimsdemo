@@ -11,6 +11,9 @@
 #  updated_at            :datetime         not null
 #
 class Claim < ApplicationRecord
+    validates :claim_number, :claim_date_of_service, presence: true
+    validates :claim_number, uniqueness: true
+    
     belongs_to :patient,
     foreign_key: :patient_id,
     class_name: "Patient"
@@ -18,4 +21,6 @@ class Claim < ApplicationRecord
     has_many :billing_cpts,
     foreign_key: :claim_id,
     class_name: "BillingCpt"
+
+
 end

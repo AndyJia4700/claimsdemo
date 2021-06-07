@@ -1,8 +1,8 @@
-export const fetchClaims = () => (
-    $.ajax({
-        url: "/api/claims"
+export const fetchClaims = (patientId) => {
+    return $.ajax({
+        url: `/api/claims?patient=${patientId}`
     })
-)
+}
 
 export const fetchClaim = claimId => {    
     return $.ajax({

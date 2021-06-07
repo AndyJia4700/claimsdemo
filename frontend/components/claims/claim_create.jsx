@@ -30,7 +30,7 @@ class CreateClaim extends React.Component{
     }
 
     componentDidMount(){
-        this.props.fetchClaims();
+        // this.props.fetchClaims();
         this.setState({
             patient_id: this.props.match.params.patientId
         });

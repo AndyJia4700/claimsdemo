@@ -20,8 +20,8 @@ const receiveClaimErrors = errors => ({
     errors
 })
 
-export const fetchClaims = () => dispatch => (
-    ClaimUtil.fetchClaims()
+export const fetchClaims = (patientId) => dispatch => (
+    ClaimUtil.fetchClaims(patientId)
         .then(claims => dispatch(receiveAllClaims(claims)))
 );
 

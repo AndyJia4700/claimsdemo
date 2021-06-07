@@ -1,44 +1,48 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchClaims } from '../../actions/claim_actions';
+// All codes are mergered to patient_show.jsx
 
-const mSTP = state => {
-    return {
-        claims: state.entities.claim
-    }
-}
+// import React from 'react';
+// import { connect } from 'react-redux';
+// import { fetchClaims } from '../../actions/claim_actions';
 
-const mDTP = dispatch => {
-    return {
-        fetchClaims: () => dispatch(fetchClaims())
-    }
-}
+// const mSTP = (state) => {
+//     return {
+//         claims: state.entities.claim,
+//     }
+// }
 
-class ClaimIndex extends React.Component{
-    constructor(props){
-        super(props);
-    }
+// const mDTP = dispatch => {
+//     return {
+//         fetchClaims: (patientId) => dispatch(fetchClaims(patientId))
+//     }
+// }
 
-    componentDidMount(){
-        this.props.fetchClaims();
-    }
+// class ClaimIndex extends React.Component{
+//     constructor(props){
+//         super(props);
+//     }
 
-    render(){
-        const claimList = Object.values(this.props.claims).map( claim =>
-            <li key={claim.id} className="">
-                {claim.patient_id}
-                {claim.claim_date_of_service}
-                {claim.claim_number}
-                {claim.message}
-            </li>
-        )
+//     componentDidMount(){
+//         debugger
+//         // const patientId = this.ownProps.match.params.patientId;
+//         this.props.fetchClaims(6);
+//     }
 
-        return(
-            <ul className="">
-                {claimList}
-            </ul>
-        )
-    }
-} 
+//     render(){
+//         const claimList = Object.values(this.props.claims).map( claim =>
+//             <li key={claim.id} className="">
+//                 {claim.patient_id}
+//                 {claim.claim_date_of_service}
+//                 {claim.claim_number}
+//                 {claim.message}
+//             </li>
+//         )
 
-export default connect(mSTP, mDTP)(ClaimIndex)
+//         return(
+//             <ul className="">
+//                 {claimList}
+//             </ul>
+//         )
+//     }
+// } 
+
+// export default connect(mSTP, mDTP)(ClaimIndex)

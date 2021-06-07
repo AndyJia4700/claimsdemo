@@ -2,10 +2,9 @@ class Api::ClaimsController < ApplicationController
     before_action :ensure_logged_in, only:[:create]
     skip_before_action :verify_authenticity_token
 
+
     def index
-        # @patient = Patient.find(params[:id])
-        # @claims = Claim.all.select {|claim| claim.patient_id == @patient.id}
-        @claims = Claim.all
+        @claims = Claim.all.select {|claim| claim.patient_id == params[:patient].to_i }
         render :index
     end
 

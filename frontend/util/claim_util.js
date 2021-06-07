@@ -10,11 +10,13 @@ export const fetchClaim = claimId => {
     })
 }
 
-export const createClaim = claim => (
-    $.ajax({
+export const createClaim = claim => {
+    return $.ajax({
         method: 'POST',
         url: '/api/claims',
-        data: claim,
+        data: {
+            claim
+        },
     })
-)
+}
 

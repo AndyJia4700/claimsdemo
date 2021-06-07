@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient, deletePatient } from '../../actions/patient_actions';
 import PatientIndex from './patient_index';
+import ClaimIndex from '../claims/claim_index';
 
 const mSTP = (state, ownProps) => {
     const patientId = ownProps.match.params.patientId;
@@ -48,6 +49,8 @@ class PatientShow extends React.Component{
                     {patient.insuranceId}
                     <span className="" onClick={()=>window.location.replace(`#/patients/${patient.id}/edit`)}>Edit</span>
                 </div>
+
+                <ClaimIndex/>
                 
             </div>
         )

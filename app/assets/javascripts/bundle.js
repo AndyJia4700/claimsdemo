@@ -185,6 +185,77 @@ function _setPrototypeOf(o, p) {
 
 /***/ }),
 
+/***/ "./frontend/actions/claim_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/claim_actions.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_ALL_CLAIMS": () => (/* binding */ RECEIVE_ALL_CLAIMS),
+/* harmony export */   "RECEIVE_CLAIM": () => (/* binding */ RECEIVE_CLAIM),
+/* harmony export */   "REMOVE_CLAIM": () => (/* binding */ REMOVE_CLAIM),
+/* harmony export */   "RECEIVE_CLAIM_ERRORS": () => (/* binding */ RECEIVE_CLAIM_ERRORS),
+/* harmony export */   "fetchClaims": () => (/* binding */ fetchClaims),
+/* harmony export */   "fetchClaim": () => (/* binding */ fetchClaim),
+/* harmony export */   "createClaim": () => (/* binding */ createClaim)
+/* harmony export */ });
+/* harmony import */ var _util_claim_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/claim_util */ "./frontend/util/claim_util.js");
+
+var RECEIVE_ALL_CLAIMS = 'RECEIVE_ALL_CLAIMS';
+var RECEIVE_CLAIM = 'RECEIVE_CLAIM';
+var REMOVE_CLAIM = 'REMOVE_CLAIM';
+var RECEIVE_CLAIM_ERRORS = 'RECEIVE_CLAIM_ERRORS';
+
+var receiveAllClaims = function receiveAllClaims(claims) {
+  return {
+    type: RECEIVE_ALL_CLAIMS,
+    claims: claims
+  };
+};
+
+var receiveClaim = function receiveClaim(claim) {
+  return {
+    type: RECEIVE_CLAIM,
+    claim: claim
+  };
+};
+
+var receiveClaimErrors = function receiveClaimErrors(errors) {
+  return {
+    type: RECEIVE_CLAIM_ERRORS,
+    errors: errors
+  };
+};
+
+var fetchClaims = function fetchClaims(patientId) {
+  return function (dispatch) {
+    return _util_claim_util__WEBPACK_IMPORTED_MODULE_0__.fetchClaims(patientId).then(function (claims) {
+      return dispatch(receiveAllClaims(claims));
+    });
+  };
+};
+var fetchClaim = function fetchClaim(claimId) {
+  return function (dispatch) {
+    return _util_claim_util__WEBPACK_IMPORTED_MODULE_0__.fetchClaim(claimId).then(function (claim) {
+      return dispatch(receiveClaim(claim));
+    });
+  };
+};
+var createClaim = function createClaim(claim) {
+  return function (dispatch) {
+    return _util_claim_util__WEBPACK_IMPORTED_MODULE_0__.createClaim(claim).then(function (claim) {
+      return dispatch(receiveClaim(claim));
+    }, function (error) {
+      return dispatch(receiveClaimErrors(error.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/modal_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
@@ -457,10 +528,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _patients_edit_patient_containter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./patients/edit_patient_containter */ "./frontend/components/patients/edit_patient_containter.jsx");
 /* harmony import */ var _patients_patient_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./patients/patient_index */ "./frontend/components/patients/patient_index.jsx");
 /* harmony import */ var _patients_patient_show__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./patients/patient_show */ "./frontend/components/patients/patient_show.jsx");
-/* harmony import */ var _components_session_login_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/session/login_form */ "./frontend/components/session/login_form.jsx");
-/* harmony import */ var _components_session_signup_form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/session/signup_form */ "./frontend/components/session/signup_form.jsx");
-/* harmony import */ var _home_session_show__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./home/session_show */ "./frontend/components/home/session_show.jsx");
-/* harmony import */ var _home_left_side_bar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./home/left_side_bar */ "./frontend/components/home/left_side_bar.jsx");
+/* harmony import */ var _home_left_side_bar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home/left_side_bar */ "./frontend/components/home/left_side_bar.jsx");
+/* harmony import */ var _components_session_login_form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/session/login_form */ "./frontend/components/session/login_form.jsx");
+/* harmony import */ var _components_session_signup_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/session/signup_form */ "./frontend/components/session/signup_form.jsx");
+/* harmony import */ var _home_session_show__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./home/session_show */ "./frontend/components/home/session_show.jsx");
+/* harmony import */ var _claims_claim_create__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./claims/claim_create */ "./frontend/components/claims/claim_create.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -496,6 +568,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -516,15 +589,15 @@ var App = /*#__PURE__*/function (_React$Component) {
         className: "nav-top-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Claims Demo"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "nav-top-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_9__.default, null))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_home_session_show__WEBPACK_IMPORTED_MODULE_10__.default, null))));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "main-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_home_left_side_bar__WEBPACK_IMPORTED_MODULE_10__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_1__.AuthRoute, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_home_left_side_bar__WEBPACK_IMPORTED_MODULE_7__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_1__.AuthRoute, {
         path: "/signup",
-        component: _components_session_signup_form__WEBPACK_IMPORTED_MODULE_8__.default
+        component: _components_session_signup_form__WEBPACK_IMPORTED_MODULE_9__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_1__.AuthRoute, {
         path: "/login",
-        component: _components_session_login_form__WEBPACK_IMPORTED_MODULE_7__.default
+        component: _components_session_login_form__WEBPACK_IMPORTED_MODULE_8__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_1__.ProtRoute, {
         exact: true,
         path: "/patients/new",
@@ -541,6 +614,10 @@ var App = /*#__PURE__*/function (_React$Component) {
         exact: true,
         path: "/patients",
         component: _patients_patient_index__WEBPACK_IMPORTED_MODULE_5__.default
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_1__.ProtRoute, {
+        exact: true,
+        path: "/patients/:patientId/claims/new",
+        component: _claims_claim_create__WEBPACK_IMPORTED_MODULE_11__.default
       }));
     }
   }]);
@@ -549,6 +626,155 @@ var App = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./frontend/components/claims/claim_create.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/claims/claim_create.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_claim_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/claim_actions */ "./frontend/actions/claim_actions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var mSTP = function mSTP(state, ownProps) {
+  var patientId = ownProps.match.params.patientId;
+  var patient = state.entities.patient[patientId];
+  return {
+    claim: {
+      patient_id: "",
+      claim_date_of_service: "",
+      claim_number: "",
+      message: ""
+    },
+    patient: patient
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    // fetchClaims: () => dispatch(fetchClaims()),
+    createClaim: function createClaim(claim) {
+      return dispatch((0,_actions_claim_actions__WEBPACK_IMPORTED_MODULE_2__.createClaim)(claim));
+    }
+  };
+};
+
+var CreateClaim = /*#__PURE__*/function (_React$Component) {
+  _inherits(CreateClaim, _React$Component);
+
+  var _super = _createSuper(CreateClaim);
+
+  function CreateClaim(props) {
+    var _this;
+
+    _classCallCheck(this, CreateClaim);
+
+    _this = _super.call(this, props);
+    _this.state = _this.props.claim;
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(CreateClaim, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // this.props.fetchClaims();
+      this.setState({
+        patient_id: this.props.match.params.patientId
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.createClaim(this.state);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit,
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: ""
+      }, "Date of Service: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "date",
+        value: this.state.claim_date_of_service,
+        onChange: this.update("claim_date_of_service"),
+        className: ""
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: ""
+      }, "Claim Number: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.claim_number,
+        onChange: this.update("claim_number"),
+        className: ""
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: ""
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: ""
+      }, "Status: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.message,
+        onChange: this.update("message"),
+        className: ""
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Submit"));
+    }
+  }]);
+
+  return CreateClaim;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(CreateClaim));
 
 /***/ }),
 
@@ -1394,7 +1620,8 @@ var PatientIndex = /*#__PURE__*/function (_React$Component) {
           key: patient.id,
           className: "patient-index-ul-li",
           onClick: function onClick() {
-            return window.location.replace("#/patients/".concat(patient.id));
+            window.location.replace("#/patients/".concat(patient.id)); // ,
+            // window.location.reload()
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
           className: "patient-index-ul-li-span-1"
@@ -1466,7 +1693,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/patient_actions */ "./frontend/actions/patient_actions.js");
-/* harmony import */ var _patient_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./patient_index */ "./frontend/components/patients/patient_index.jsx");
+/* harmony import */ var _actions_claim_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/claim_actions */ "./frontend/actions/claim_actions.js");
+/* harmony import */ var _patient_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./patient_index */ "./frontend/components/patients/patient_index.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1494,17 +1722,22 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var mSTP = function mSTP(state, ownProps) {
   var patientId = ownProps.match.params.patientId;
   var patient = state.entities.patient[patientId];
   return {
     patient: patient,
+    claims: state.entities.claim,
     currentUser: state.session.currentUser
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
+    fetchClaims: function fetchClaims(patientId) {
+      return dispatch((0,_actions_claim_actions__WEBPACK_IMPORTED_MODULE_3__.fetchClaims)(patientId));
+    },
     fetchPatient: function fetchPatient(patientId) {
       return dispatch((0,_actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPatient)(patientId));
     },
@@ -1528,25 +1761,42 @@ var PatientShow = /*#__PURE__*/function (_React$Component) {
   _createClass(PatientShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // this.props.fetchPatients();
       var patientId = this.props.match.params.patientId;
       this.props.fetchPatient(patientId);
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.patient !== this.props.patient) {
+        var updatePatientId = this.props.patient.id;
+        this.props.fetchClaims(updatePatientId);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       if (!this.props.patient) return null;
       var patient = this.props.patient;
+      var claimList = Object.values(this.props.claims).map(function (claim) {
+        return claim.patient_id == _this.props.patient.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: claim.id,
+          className: ""
+        }, claim.patient_id, claim.claim_date_of_service, claim.claim_number, claim.message) : null;
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "patients-main-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_index__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_index__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "patient-show-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "this is patient show"), patient.name, patient.birthdate, patient.insuranceId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "",
         onClick: function onClick() {
           return window.location.replace("#/patients/".concat(patient.id, "/edit"));
         }
-      }, "Edit")));
+      }, "Edit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: ""
+      }, claimList));
     }
   }]);
 
@@ -2056,6 +2306,48 @@ var ProfileDropDown = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/reducers/claims_reducer.js":
+/*!*********************************************!*\
+  !*** ./frontend/reducers/claims_reducer.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_claim_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/claim_actions */ "./frontend/actions/claim_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var ClaimReducer = function ClaimReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+
+  switch (action.type) {
+    case _actions_claim_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_CLAIMS:
+      return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, action.claims);
+
+    case _actions_claim_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CLAIM:
+      if (action.claim) {
+        return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, _defineProperty({}, action.claim.id, action.claim));
+      }
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ClaimReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -2067,15 +2359,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _patients_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./patients_reducer */ "./frontend/reducers/patients_reducer.js");
+/* harmony import */ var _claims_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./claims_reducer */ "./frontend/reducers/claims_reducer.js");
 
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   user: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  patient: _patients_reducer__WEBPACK_IMPORTED_MODULE_1__.default
+  patient: _patients_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
+  claim: _claims_reducer__WEBPACK_IMPORTED_MODULE_2__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -2430,6 +2725,41 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/claim_util.js":
+/*!*************************************!*\
+  !*** ./frontend/util/claim_util.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchClaims": () => (/* binding */ fetchClaims),
+/* harmony export */   "fetchClaim": () => (/* binding */ fetchClaim),
+/* harmony export */   "createClaim": () => (/* binding */ createClaim)
+/* harmony export */ });
+var fetchClaims = function fetchClaims(patientId) {
+  return $.ajax({
+    url: "/api/claims?patient=".concat(patientId)
+  });
+};
+var fetchClaim = function fetchClaim(claimId) {
+  return $.ajax({
+    url: "/api/claims/".concat(claimId)
+  });
+};
+var createClaim = function createClaim(claim) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/claims',
+    data: {
+      claim: claim
+    }
+  });
+};
 
 /***/ }),
 

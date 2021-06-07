@@ -2,9 +2,9 @@ class Api::ClaimsController < ApplicationController
     before_action :ensure_logged_in, only:[:create]
     skip_before_action :verify_authenticity_token
 
+
     def index
-        @patient = Patient.find(params[:id])
-        @claims = Claim.all.select {|claim| claim.patient_id == @patient.id}
+        @claims = Claim.all.select {|claim| claim.patient_id == params[:patient].to_i }
         render :index
     end
 
@@ -17,14 +17,10 @@ class Api::ClaimsController < ApplicationController
         @claim = Claim.new
     end
 
-    def edit
-        @claim = Claim.find(params[:id])
-    end
-
     def create
         @claim = Claim.new(claim_params)
-        @patient = Patient.find(params[:id])
-        @claim.patient_id = @patient.id
+        # @patient = Patient.find(params[:id])
+        # @claim.patient_id = @patient.id
         if @claim.save
             render :show
         else
@@ -32,12 +28,14 @@ class Api::ClaimsController < ApplicationController
         end
     end
 
+    private
+
     def claim_params
         params.require(:claim).permit(
-            :claim_number,
-            :claim_date_of_service,
-            :message,
             :patient_id,
+            :claim_date_of_service,
+            :claim_number,
+            :message,
         )
     end
 end

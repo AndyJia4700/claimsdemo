@@ -9,11 +9,12 @@ import PatientEditContainer from './patients/edit_patient_containter';
 import PatientIndex from './patients/patient_index';
 import PatientShow from './patients/patient_show';
 
+import LeftSideBar from './home/left_side_bar';
 import LogInForm from '../components/session/login_form';
 import SignUpForm from '../components/session/signup_form';
 import SessionShow from './home/session_show';
-import LeftSideBar from './home/left_side_bar';
 
+import CreateClaim from './claims/claim_create';
 class App extends React.Component{
     render(){
         const nav = (
@@ -41,6 +42,9 @@ class App extends React.Component{
                 <ProtRoute exact path="/patients/:patientId" component={PatientShow}/>
                 <ProtRoute exact path="/patients/:patientId/edit" component={PatientEditContainer}/>
                 <ProtRoute exact path="/patients" component={PatientIndex}/>
+
+                <ProtRoute exact path="/patients/:patientId/claims/new" component={CreateClaim}/>
+
             </div>
         )
     }

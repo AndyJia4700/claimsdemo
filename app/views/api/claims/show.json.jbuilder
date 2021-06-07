@@ -1,0 +1,1 @@
+json.partial! "api/claims/claim", claim: @claim

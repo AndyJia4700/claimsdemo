@@ -3,7 +3,7 @@ class Api::BillingIcdsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        @billing_icds = BillingCpt.all.select{|billing_icd| billing_icd.claim_id == }
+        @billing_icds = BillingCpt.all
         render :index
     end
 
@@ -47,9 +47,8 @@ class Api::BillingIcdsController < ApplicationController
 
     def billing_icd_params
         params.require(:billing_icd).permit(
-            :billing_icd_code,
-            :billing_icd_description,
-            :billed_amount
+            :icd_id,
+            :billing_cpt_id,
         )
     end
 end

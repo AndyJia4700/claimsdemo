@@ -185,6 +185,77 @@ function _setPrototypeOf(o, p) {
 
 /***/ }),
 
+/***/ "./frontend/actions/claim_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/claim_actions.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_ALL_CLAIMS": () => (/* binding */ RECEIVE_ALL_CLAIMS),
+/* harmony export */   "RECEIVE_CLAIM": () => (/* binding */ RECEIVE_CLAIM),
+/* harmony export */   "REMOVE_CLAIM": () => (/* binding */ REMOVE_CLAIM),
+/* harmony export */   "RECEIVE_CLAIM_ERRORS": () => (/* binding */ RECEIVE_CLAIM_ERRORS),
+/* harmony export */   "fetchClaims": () => (/* binding */ fetchClaims),
+/* harmony export */   "fetchClaim": () => (/* binding */ fetchClaim),
+/* harmony export */   "createClaim": () => (/* binding */ createClaim)
+/* harmony export */ });
+/* harmony import */ var _util_claim_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/claim_util */ "./frontend/util/claim_util.js");
+
+var RECEIVE_ALL_CLAIMS = 'RECEIVE_ALL_CLAIMS';
+var RECEIVE_CLAIM = 'RECEIVE_CLAIM';
+var REMOVE_CLAIM = 'REMOVE_CLAIM';
+var RECEIVE_CLAIM_ERRORS = 'RECEIVE_CLAIM_ERRORS';
+
+var receiveAllClaims = function receiveAllClaims(claims) {
+  return {
+    type: RECEIVE_ALL_CLAIMS,
+    claims: claims
+  };
+};
+
+var receiveClaim = function receiveClaim(claim) {
+  return {
+    type: RECEIVE_CLAIM,
+    claim: claim
+  };
+};
+
+var receiveClaimErrors = function receiveClaimErrors(errors) {
+  return {
+    type: RECEIVE_CLAIM_ERRORS,
+    errors: errors
+  };
+};
+
+var fetchClaims = function fetchClaims() {
+  return function (dispatch) {
+    return _util_claim_util__WEBPACK_IMPORTED_MODULE_0__.fetchClaims().then(function (claims) {
+      return dispatch(receiveAllClaims(claims));
+    });
+  };
+};
+var fetchClaim = function fetchClaim(claimId) {
+  return function (dispatch) {
+    return _util_claim_util__WEBPACK_IMPORTED_MODULE_0__.fetchClaim(claimId).then(function (claim) {
+      return dispatch(receiveClaim(claim));
+    });
+  };
+};
+var createClaim = function createClaim(claim) {
+  return function (dispatch) {
+    return _util_claim_util__WEBPACK_IMPORTED_MODULE_0__.createClaim(claim).then(function (claim) {
+      return dispatch(receiveClaim(claim));
+    }, function (error) {
+      return dispatch(receiveClaimErrors(error.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/modal_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
@@ -2056,6 +2127,48 @@ var ProfileDropDown = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/reducers/claims_reducer.js":
+/*!*********************************************!*\
+  !*** ./frontend/reducers/claims_reducer.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_claim_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/claim_actions */ "./frontend/actions/claim_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var ClaimReducer = function ClaimReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+
+  switch (action.type) {
+    case _actions_claim_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_CLAIMS:
+      return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, action.claims);
+
+    case _actions_claim_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CLAIM:
+      if (action.claim) {
+        return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.merge)({}, oldState, _defineProperty({}, action.claim.id, action.claim));
+      }
+
+    default:
+      return oldState;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ClaimReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -2067,15 +2180,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _patients_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./patients_reducer */ "./frontend/reducers/patients_reducer.js");
+/* harmony import */ var _claims_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./claims_reducer */ "./frontend/reducers/claims_reducer.js");
 
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   user: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  patient: _patients_reducer__WEBPACK_IMPORTED_MODULE_1__.default
+  patient: _patients_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
+  claim: _claims_reducer__WEBPACK_IMPORTED_MODULE_2__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -2430,6 +2546,39 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/claim_util.js":
+/*!*************************************!*\
+  !*** ./frontend/util/claim_util.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchClaims": () => (/* binding */ fetchClaims),
+/* harmony export */   "fetchClaim": () => (/* binding */ fetchClaim),
+/* harmony export */   "createClaim": () => (/* binding */ createClaim)
+/* harmony export */ });
+var fetchClaims = function fetchClaims() {
+  return $.ajax({
+    url: "/api/claims"
+  });
+};
+var fetchClaim = function fetchClaim(claimId) {
+  return $.ajax({
+    url: "/api/claims/".concat(claimId)
+  });
+};
+var createClaim = function createClaim(claim) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/claims',
+    data: claim
+  });
+};
 
 /***/ }),
 

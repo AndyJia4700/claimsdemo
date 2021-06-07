@@ -78,7 +78,7 @@ class PatientForm extends React.Component{
                 <PatientIndex/>
                 <form onSubmit={this.handleSubmit} className="patient-create-edit-form">
                     <div className="patient-create-edit-form-div">
-                        <h1 className="">Patient Information</h1>
+                        <h1 className="">{this.props.title}</h1>
                     
                         <ul className="patient-create-edit-form-ul">
                             <li className="patient-create-edit-form-li">

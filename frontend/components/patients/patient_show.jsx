@@ -41,7 +41,7 @@ class PatientShow extends React.Component{
             <div className="patients-main-div">
                 <PatientIndex/>
 
-                <div className="">
+                <div className="patient-show-div">
                     <p>this is patient show</p>
                     {patient.name}
                     {patient.birthdate}

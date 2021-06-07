@@ -98,7 +98,7 @@ class PatientIndex extends React.Component{
             <div className="patient-index-div">
                 <div className="patient-index-title">
                     <h1 className="">Patient Lists</h1>
-                    <FaPlus onClick={()=>window.location.replace('#/patients/new')}/>
+                    <FaPlus className="patient-index-create-icon" onClick={()=>window.location.replace('#/patients/new')}/>
                 </div>
 
                 <div className="patient-index-div-search">

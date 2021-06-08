@@ -32,6 +32,7 @@
     background-color: white;
     width: 250px;
     padding: 50px;
+    border-right: 3px solid #dadada;
 }
 
 .patient-index-div-search{
@@ -102,14 +103,28 @@
     width: 65%
 }
 
+.patient-info-div{
+    display: flex;
+    flex-direction: column;
+    background: #f4f7f9;
+    width: 400px;
+    padding: 30px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+
+}
+
 .patients-main-div{
     display: flex;
     flex-direction: row;
     background-color: #dadada;
     height: 100%;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .patient-show-div{
-    background: saddlebrown;
-    width: 500px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
 }

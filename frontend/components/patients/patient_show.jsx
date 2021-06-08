@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient, deletePatient } from '../../actions/patient_actions';
 import { fetchClaims } from '../../actions/claim_actions';
-
+import {FaEdit} from 'react-icons/fa';
 import PatientIndex from './patient_index';
 
 const mSTP = (state, ownProps) => {
@@ -35,6 +35,7 @@ class PatientShow extends React.Component{
 
     componentDidUpdate(prevProps){
         if (prevProps.patient !== this.props.patient){
+            if (!this.props.patient) return null;
             const updatePatientId = this.props.patient.id;
             this.props.fetchClaims(updatePatientId);
         }
@@ -50,7 +51,6 @@ class PatientShow extends React.Component{
         const claimList = Object.values(this.props.claims).map( claim => 
             claim.patient_id == this.props.patient.id ?
             <li key={claim.id} className="">
-                {claim.patient_id}
                 {claim.claim_date_of_service}
                 {claim.claim_number}
                 {claim.message}
@@ -61,17 +61,31 @@ class PatientShow extends React.Component{
             <div className="patients-main-div">
                 <PatientIndex/>
 
-                <div className="patient-show-div">
-                    <p>this is patient show</p>
-                    {patient.name}
-                    {patient.birthdate}
-                    {patient.insuranceId}
-                    <span className="" onClick={()=>window.location.replace(`#/patients/${patient.id}/edit`)}>Edit</span>
-                </div>
+                <div className="patient-info-div">
+                    <div className="patient-show-div">
+                        <label className="patient-show-element-title">Member: </label>
+                        <p className="patient-show-element">
+                            {patient.name}
+                        </p>
 
-                <ul className="">
-                    {claimList}
-                </ul>
+                        <label className="patient-show-element-title">DOB: </label>
+                        <p className="patient-show-element">
+                            {patient.birthdate} 
+                        </p>
+
+
+                        <label className="patient-show-element-title">Insurance ID: </label>
+                        <p className="patient-show-element">
+                            {patient.insurance_id} 
+                        </p>
+
+                        <span className="patient-show-element-edit" onClick={()=>window.location.replace(`#/patients/${patient.id}/edit`)}><FaEdit/></span>
+                    </div>
+
+                    <ul className="patient-claim-index-div">
+                        {claimList}
+                    </ul>
+                </div>
                 
             </div>
         )

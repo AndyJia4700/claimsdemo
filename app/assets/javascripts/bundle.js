@@ -716,7 +716,9 @@ var CreateClaim = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       // this.props.fetchClaims();
       this.setState({
-        patient_id: this.props.match.params.patientId
+        claim_number: Date.now,
+        patient_id: this.props.match.params.patientId,
+        message: "pending"
       });
     }
   }, {
@@ -748,24 +750,6 @@ var CreateClaim = /*#__PURE__*/function (_React$Component) {
         type: "date",
         value: this.state.claim_date_of_service,
         onChange: this.update("claim_date_of_service"),
-        className: ""
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: ""
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        className: ""
-      }, "Claim Number: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "text",
-        value: this.state.claim_number,
-        onChange: this.update("claim_number"),
-        className: ""
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: ""
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        className: ""
-      }, "Status: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "text",
-        value: this.state.message,
-        onChange: this.update("message"),
         className: ""
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Submit"));
     }
@@ -1694,6 +1678,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_patient_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/patient_actions */ "./frontend/actions/patient_actions.js");
 /* harmony import */ var _actions_claim_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/claim_actions */ "./frontend/actions/claim_actions.js");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
 /* harmony import */ var _patient_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./patient_index */ "./frontend/components/patients/patient_index.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1716,6 +1701,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -1768,6 +1754,7 @@ var PatientShow = /*#__PURE__*/function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.patient !== this.props.patient) {
+        if (!this.props.patient) return null;
         var updatePatientId = this.props.patient.id;
         this.props.fetchClaims(updatePatientId);
       }
@@ -1783,20 +1770,34 @@ var PatientShow = /*#__PURE__*/function (_React$Component) {
         return claim.patient_id == _this.props.patient.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: claim.id,
           className: ""
-        }, claim.patient_id, claim.claim_date_of_service, claim.claim_number, claim.message) : null;
+        }, claim.claim_date_of_service, claim.claim_number, claim.message) : null;
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "patients-main-div"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_patient_index__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "patient-info-div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "patient-show-div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "this is patient show"), patient.name, patient.birthdate, patient.insuranceId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "",
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "patient-show-element-title"
+      }, "Member: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "patient-show-element"
+      }, patient.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "patient-show-element-title"
+      }, "DOB: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "patient-show-element"
+      }, patient.birthdate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "patient-show-element-title"
+      }, "Insurance ID: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "patient-show-element"
+      }, patient.insurance_id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "patient-show-element-edit",
         onClick: function onClick() {
           return window.location.replace("#/patients/".concat(patient.id, "/edit"));
         }
-      }, "Edit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: ""
-      }, claimList));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__.FaEdit, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "patient-claim-index-div"
+      }, claimList)));
     }
   }]);
 

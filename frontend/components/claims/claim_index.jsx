@@ -1,5 +1,3 @@
-// All codes are mergered to patient_show.jsx
-
 // import React from 'react';
 // import { connect } from 'react-redux';
 // import { fetchClaims } from '../../actions/claim_actions';

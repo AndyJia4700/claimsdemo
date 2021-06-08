@@ -58,13 +58,7 @@ class PatientIndex extends React.Component{
         
         return patientsList.map(patient => 
             (possiblePatients[patient.name]) ?
-            <li key={patient.id} className="patient-index-ul-li" onClick={
-                () => {
-                    window.location.replace(`#/patients/${patient.id}`)
-                    // ,
-                    // window.location.reload()
-                }}
-            >
+            <li key={patient.id} className="patient-index-ul-li" onClick={() => {window.location.replace(`#/patients/${patient.id}`)}}>
                 <span className="patient-index-ul-li-span-1">
                     {patient.name}
                 </span>

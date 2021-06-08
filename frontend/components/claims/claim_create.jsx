@@ -32,7 +32,9 @@ class CreateClaim extends React.Component{
     componentDidMount(){
         // this.props.fetchClaims();
         this.setState({
-            patient_id: this.props.match.params.patientId
+            claim_number: Date.now,
+            patient_id: this.props.match.params.patientId,
+            message: "pending",
         });
     }
 
@@ -56,26 +58,6 @@ class CreateClaim extends React.Component{
                         type="date"
                         value={this.state.claim_date_of_service}
                         onChange={this.update("claim_date_of_service")}
-                        className=""
-                    />
-                </div>
-                
-                <div className="">
-                    <label className="">Claim Number: </label>
-                    <input 
-                        type="text"
-                        value={this.state.claim_number}
-                        onChange={this.update("claim_number")}
-                        className=""
-                    />
-                </div>
-                
-                <div className="">
-                    <label className="">Status: </label>
-                    <input 
-                        type="text"
-                        value={this.state.message}
-                        onChange={this.update("message")}
                         className=""
                     />
                 </div>

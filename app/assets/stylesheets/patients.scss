@@ -28,10 +28,48 @@
     flex-direction: column;
 }
 
+.patient-claim-index-div{
+    background: #dadada;
+    height: 100%;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.patient-claim-index-ul{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.patient-claim-index-ul-li{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.patient-claim-index-ul-li-span1{
+    width: 30%;
+}
+.patient-claim-index-ul-li-span2{
+    width: 50%;
+}
+.patient-claim-index-ul-li-span3{
+    width: 20%;
+    text-align: center;
+}
+
+.patient-claim-index-ul-category{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 20px;
+}
+
 .patient-index-div{
     background-color: white;
     width: 250px;
     padding: 50px;
+    border-right: 3px solid #dadada;
 }
 
 .patient-index-div-search{
@@ -102,14 +140,47 @@
     width: 65%
 }
 
+.patient-info-div{
+    display: flex;
+    flex-direction: column;
+    background: #2397e4;
+    width: 400px;
+    padding: 30px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
 .patients-main-div{
     display: flex;
     flex-direction: row;
     background-color: #dadada;
     height: 100%;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .patient-show-div{
-    background: saddlebrown;
-    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #dadada;
+    font-size: 18px;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.patient-show-div-wrap{
+    display: flex;
+    flex-direction: column;
+}
+
+.patient-show-div-sub{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 5px;
+}
+
+.patient-show-element-title{
+    width: 100px;
 }

@@ -19,6 +19,9 @@ import CreateClaim from './claims/claim_create';
 import CreateCptForm from './cpts/cpt_create_form';
 import CptIndex from './cpts/cpt_index';
 
+import CreateIcdForm from './icds/icd_create_form';
+import IcdIndex from './icds/icd_index';
+
 // import ClaimIndex from './claims/claim_index';
 class App extends React.Component{
     render(){
@@ -53,6 +56,9 @@ class App extends React.Component{
                 
                 <ProtRoute exact path="/cpts" component={CptIndex}/>
                 <ProtRoute exact path="/cpts/new" component={CreateCptForm}/>
+
+                <ProtRoute exact path="/icds" component={IcdIndex}/>
+                <ProtRoute exact path="/icds/new" component={CreateIcdForm}/>
 
             </div>
         )

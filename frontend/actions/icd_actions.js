@@ -21,7 +21,7 @@ const receiveIcdErrors = errors => ({
 
 export const fetchIcds = () => dispatch => (
     IcdUtil.fetchIcds()
-        .then(() => dispatch(receiveAllIcds()))
+        .then(icds => dispatch(receiveAllIcds(icds)))
 );
 
 export const fetchIcd = icdId => dispatch => (

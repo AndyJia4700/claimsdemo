@@ -1,6 +1,6 @@
 export const fetchCpts = () => {
     return $.ajax({
-        url: `/api/cpts`
+        url: "/api/cpts",
     })
 }
 

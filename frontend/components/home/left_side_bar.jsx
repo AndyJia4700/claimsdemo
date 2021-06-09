@@ -24,7 +24,6 @@ class leftSideBar extends React.Component{
         this.props.logout().then(
             ()=> window.location.replace('#/login')
         )
-
     }
 
     render(){        
@@ -40,9 +39,9 @@ class leftSideBar extends React.Component{
 
                 <ul className="left-side-bar-ul">
                     <Link to="/patients" className=""><li className="left-side-bar-ul-li"><FaUserFriends className="left-side-bar-ul-li-icon"/>Patient</li></Link>
-                    <Link to="" className=""><li className="left-side-bar-ul-li"><FaFileMedical className="left-side-bar-ul-li-icon"/>Claim</li></Link>
-                    <Link to="" className=""><li className="left-side-bar-ul-li"><FaBriefcaseMedical className="left-side-bar-ul-li-icon"/>CPT Code</li></Link>
-                    <Link to="" className=""><li className="left-side-bar-ul-li"><FaStethoscope className="left-side-bar-ul-li-icon"/>ICD Code</li></Link>
+                    <Link to="/claims" className=""><li className="left-side-bar-ul-li"><FaFileMedical className="left-side-bar-ul-li-icon"/>Claim</li></Link>
+                    <Link to="/cpts" className=""><li className="left-side-bar-ul-li"><FaBriefcaseMedical className="left-side-bar-ul-li-icon"/>CPT Code</li></Link>
+                    <Link to="/icds" className=""><li className="left-side-bar-ul-li"><FaStethoscope className="left-side-bar-ul-li-icon"/>ICD Code</li></Link>
                 </ul>
 
                 <div className="">

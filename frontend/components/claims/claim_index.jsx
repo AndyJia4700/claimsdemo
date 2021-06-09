@@ -20,7 +20,6 @@
 //     }
 
 //     componentDidMount(){
-//         debugger
 //         // const patientId = this.ownProps.match.params.patientId;
 //         this.props.fetchClaims(6);
 //     }

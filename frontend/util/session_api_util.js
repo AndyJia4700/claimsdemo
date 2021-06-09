@@ -9,7 +9,6 @@ export const postSession = user => (
 )
 
 export const deleteSession = () => {
-    // debugger;
     return $.ajax({
         method: 'DELETE',
         url: '/api/session'

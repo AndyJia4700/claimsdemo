@@ -19,10 +19,10 @@ const receiveCptErrors = errors => ({
     errors
 })
 
-export const fetchCpts = () => dispatch => (
-    CptUtil.fetchCpts()
-        .then(() => dispatch(receiveAllCpts()))
-);
+export const fetchCpts = () => dispatch => {
+    return CptUtil.fetchCpts()
+        .then(cpts => dispatch(receiveAllCpts(cpts)))
+};
 
 export const fetchCpt = cptId => dispatch => (
     CptUtil.fetchCpt(cptId)

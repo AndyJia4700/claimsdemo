@@ -19,8 +19,6 @@ class Api::ClaimsController < ApplicationController
 
     def create
         @claim = Claim.new(claim_params)
-        # @patient = Patient.find(params[:id])
-        # @claim.patient_id = @patient.id
         if @claim.save
             render :show
         else

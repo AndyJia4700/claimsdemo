@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createClaim, fetchClaims } from '../../actions/claim_actions';
+import { createClaim } from '../../actions/claim_actions';
 
 const mSTP = (state, ownProps) => {
     const patientId = ownProps.match.params.patientId;
@@ -17,7 +17,6 @@ const mSTP = (state, ownProps) => {
 }
 
 const mDTP = dispatch => ({
-    // fetchClaims: () => dispatch(fetchClaims()),
     createClaim: claim => dispatch(createClaim(claim))
 })
 

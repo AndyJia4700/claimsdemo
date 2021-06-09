@@ -15,6 +15,7 @@ import SignUpForm from '../components/session/signup_form';
 import SessionShow from './home/session_show';
 
 import CreateClaim from './claims/claim_create';
+import ClaimIndex from './claims/claim_index';
 
 import CreateCptForm from './cpts/cpt_create_form';
 import CptIndex from './cpts/cpt_index';
@@ -52,7 +53,7 @@ class App extends React.Component{
                 <ProtRoute exact path="/patients/:patientId/edit" component={PatientEditContainer}/>
                 <ProtRoute exact path="/patients/:patientId/claims/new" component={CreateClaim}/>
 
-                {/* <ProtRoute exact path="/claims" component={ClaimIndex}/> */}
+                <ProtRoute exact path="/claims" component={ClaimIndex}/>
                 
                 <ProtRoute exact path="/cpts" component={CptIndex}/>
                 <ProtRoute exact path="/cpts/new" component={CreateCptForm}/>

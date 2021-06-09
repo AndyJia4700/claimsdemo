@@ -5,6 +5,8 @@ class Api::ClaimsController < ApplicationController
 
     def index
         @claims = Claim.all.select {|claim| claim.patient_id == params[:patient].to_i }
+        #@patient = Patient.all.select {|patient| patient.user_id == current_user.id}
+        #@claims = Claim.all.select {|claim| @patient.(claim.patient_id) && claim.message == "pending"}
         render :index
     end
 

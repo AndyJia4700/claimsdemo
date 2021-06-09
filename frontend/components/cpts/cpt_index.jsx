@@ -27,12 +27,9 @@ class CptIndex extends React.Component{
     }
 
     render(){
-            console.log(this.props.cpts);
-        
-        // const cptListByOrder = Object.values(this.props.cpts).sort((a,b)=>a.cpt_code - b.cpt_code);
-        // const cptList = cptListByOrder.map(cpt =>
-
-        const cptList = Object.values(this.props.cpts).map(cpt =>
+                
+        const cptListByOrder = Object.values(this.props.cpts).sort((a,b)=>a.cpt_code - b.cpt_code);
+        const cptList = cptListByOrder.map(cpt =>
             <li key={cpt.id} className="">
                 {cpt.cpt_code}
                 {cpt.cpt_description}

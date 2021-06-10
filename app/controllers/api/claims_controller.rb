@@ -5,6 +5,8 @@ class Api::ClaimsController < ApplicationController
 
     def index
         @claims = Claim.all.select {|claim| claim.patient_id == params[:patient].to_i }
+        #@patient = Patient.all.select {|patient| patient.user_id == current_user.id}
+        #@claims = Claim.all.select {|claim| @patient.(claim.patient_id) && claim.message == "pending"}
         render :index
     end
 
@@ -19,8 +21,6 @@ class Api::ClaimsController < ApplicationController
 
     def create
         @claim = Claim.new(claim_params)
-        # @patient = Patient.find(params[:id])
-        # @claim.patient_id = @patient.id
         if @claim.save
             render :show
         else

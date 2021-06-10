@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatients } from '../../actions/patient_actions';
 import { FaSearch, FaPlus } from 'react-icons/fa';
+
 const mSTP = state => {
     return {
         patients: state.entities.patient,

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { closeModal } from '../../actions/modal_actions';
-import { logout } from '../../actions/session_actions';
-import ProfileDropDown from '../users/profile_dropdown';
+import PatientShow from '../patients/patient_show';
+import { createClaim } from '../../actions/claim_actions';
 
 const mSTP = state => {
     return {
@@ -13,15 +13,15 @@ const mSTP = state => {
 const mDTP = dispatch => {
     return {
         closeModal: () => dispatch(closeModal()),
-        logout: () => dispatch(logout())
+        createClaim: claim => dispatch(createClaim(claim))
     }
 };
 
 function Modal({modal, closeModal}){
     let component;
     switch(modal){
-        case 'profileDropDown':
-            component = <ProfileDropDown closeModal={closeModal}/>
+        case 'createClaim':
+            component = <PatientShow closeModal={closeModal}/>
             break;
         default:
             return null;

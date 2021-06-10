@@ -1,5 +1,5 @@
 class Api::CptsController < ApplicationController
-    before_action :ensure_logged_in
+    before_action :ensure_logged_in, only:[:create]
     skip_before_action :verify_authenticity_token
 
     def index
@@ -16,10 +16,6 @@ class Api::CptsController < ApplicationController
         @cpt = Cpt.new
     end
 
-    def edit
-        @cpt = Cpt.find(params[:id])
-    end
-
     def create
         @cpt = Cpt.new(cpt_params)
         if @cpt.save
@@ -29,21 +25,7 @@ class Api::CptsController < ApplicationController
         end
     end
 
-    def update
-        @cpt = Cpt.find(params[:cpt][:id])
-        if @cpt.update(cpt_params)
-            render :show
-        else
-            render json: @cpt.errors.full_messages, status: 422
-        end
-    end
-
-    def destroy
-        @cpt = cpt.find(params[:id])
-        if @cpt
-            @cpt.destroy
-        end
-    end
+    private
 
     def cpt_params
         params.require(:cpt).permit(

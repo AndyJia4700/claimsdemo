@@ -1,46 +1,44 @@
-// import React from 'react';
-// import { connect } from 'react-redux';
-// import { fetchClaims } from '../../actions/claim_actions';
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchClaims } from '../../actions/claim_actions';
 
-// const mSTP = (state) => {
-//     return {
-//         claims: state.entities.claim,
-//     }
-// }
+const mSTP = (state) => {
+    return {
+        claims: state.entities.claim,
+    }
+}
 
-// const mDTP = dispatch => {
-//     return {
-//         fetchClaims: (patientId) => dispatch(fetchClaims(patientId))
-//     }
-// }
+const mDTP = dispatch => {
+    return {
+        fetchClaims: () => dispatch(fetchClaims())
+    }
+}
 
-// class ClaimIndex extends React.Component{
-//     constructor(props){
-//         super(props);
-//     }
+class ClaimIndex extends React.Component{
+    constructor(props){
+        super(props);
+    }
 
-//     componentDidMount(){
-//         debugger
-//         // const patientId = this.ownProps.match.params.patientId;
-//         this.props.fetchClaims(6);
-//     }
+    componentDidMount(){
+        this.props.fetchClaims();
+    }
 
-//     render(){
-//         const claimList = Object.values(this.props.claims).map( claim =>
-//             <li key={claim.id} className="">
-//                 {claim.patient_id}
-//                 {claim.claim_date_of_service}
-//                 {claim.claim_number}
-//                 {claim.message}
-//             </li>
-//         )
+    render(){
+        const claimList = Object.values(this.props.claims).map( claim =>
+            <li key={claim.id} className="">
+                {claim.patient_id}
+                {claim.claim_date_of_service}
+                {claim.claim_number}
+                {claim.message}
+            </li>
+        )
 
-//         return(
-//             <ul className="">
-//                 {claimList}
-//             </ul>
-//         )
-//     }
-// } 
+        return(
+            <ul className="">
+                {claimList}
+            </ul>
+        )
+    }
+} 
 
-// export default connect(mSTP, mDTP)(ClaimIndex)
+export default connect(mSTP, mDTP)(ClaimIndex)

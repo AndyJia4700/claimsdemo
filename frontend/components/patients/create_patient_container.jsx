@@ -5,7 +5,6 @@ import PatientForm from './patient_form'
 
 
 const mSTP = (state) => {
-    // debugger;
     return {
         patient: {
             lastname: "",

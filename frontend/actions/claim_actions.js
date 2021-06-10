@@ -2,7 +2,6 @@ import * as ClaimUtil from '../util/claim_util'
 
 export const RECEIVE_ALL_CLAIMS = 'RECEIVE_ALL_CLAIMS';
 export const RECEIVE_CLAIM = 'RECEIVE_CLAIM';
-export const REMOVE_CLAIM = 'REMOVE_CLAIM';
 export const RECEIVE_CLAIM_ERRORS = 'RECEIVE_CLAIM_ERRORS'
 
 const receiveAllClaims = claims => ({

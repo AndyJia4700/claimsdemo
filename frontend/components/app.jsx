@@ -15,6 +15,15 @@ import SignUpForm from '../components/session/signup_form';
 import SessionShow from './home/session_show';
 
 import CreateClaim from './claims/claim_create';
+import ClaimIndex from './claims/claim_index';
+
+import CreateCptForm from './cpts/cpt_create_form';
+import CptIndex from './cpts/cpt_index';
+
+import CreateIcdForm from './icds/icd_create_form';
+import IcdIndex from './icds/icd_index';
+
+// import ClaimIndex from './claims/claim_index';
 class App extends React.Component{
     render(){
         const nav = (
@@ -38,12 +47,19 @@ class App extends React.Component{
                 <AuthRoute path="/signup" component={SignUpForm}/>
                 <AuthRoute path="/login" component={LogInForm}/>                
                 
+                <ProtRoute exact path="/patients" component={PatientIndex}/>
                 <ProtRoute exact path="/patients/new" component={PatientCreateContainer}/>
                 <ProtRoute exact path="/patients/:patientId" component={PatientShow}/>
                 <ProtRoute exact path="/patients/:patientId/edit" component={PatientEditContainer}/>
-                <ProtRoute exact path="/patients" component={PatientIndex}/>
-
                 <ProtRoute exact path="/patients/:patientId/claims/new" component={CreateClaim}/>
+
+                <ProtRoute exact path="/claims" component={ClaimIndex}/>
+                
+                <ProtRoute exact path="/cpts" component={CptIndex}/>
+                <ProtRoute exact path="/cpts/new" component={CreateCptForm}/>
+
+                <ProtRoute exact path="/icds" component={IcdIndex}/>
+                <ProtRoute exact path="/icds/new" component={CreateIcdForm}/>
 
             </div>
         )

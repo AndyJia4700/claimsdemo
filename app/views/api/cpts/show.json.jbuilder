@@ -1,0 +1,1 @@
+json.partial! "api/cpts/cpt", cpt: @cpt

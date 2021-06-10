@@ -48,6 +48,9 @@ class Api::BillingCptsController < ApplicationController
     def billing_cpt_params
         params.require(:billing_cpt).permit(
             :cpt_id,
+            :modifier1,
+            :modifier2,
+            :units,
             :denied_reason,
             :denied,
             :approved,

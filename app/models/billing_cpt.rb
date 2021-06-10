@@ -10,6 +10,9 @@
 #  claim_id      :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  modifier1     :string
+#  modifier2     :string
+#  units         :integer
 #
 class BillingCpt < ApplicationRecord
     belongs_to :claim,

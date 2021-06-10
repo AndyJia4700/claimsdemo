@@ -5,6 +5,7 @@ import { fetchClaims } from '../../actions/claim_actions';
 import {FaEdit, FaPlus} from 'react-icons/fa';
 import {FcProcess, FcApproval} from 'react-icons/fc';
 import PatientIndex from './patient_index';
+import { openModal } from '../../actions/modal_actions';
 
 const mSTP = (state, ownProps) => {
     const patientId = ownProps.match.params.patientId;
@@ -18,6 +19,7 @@ const mSTP = (state, ownProps) => {
 
 const mDTP = dispatch => {
     return {
+        openModal: modal => dispatch(openModal(modal)),
         fetchClaims: (patientId) => dispatch(fetchClaims(patientId)),
         fetchPatient: (patientId) => dispatch(fetchPatient(patientId)),
         deletePatient: (patientId) => dispatch(deletePatient(patientId))
@@ -52,7 +54,7 @@ class PatientShow extends React.Component{
 
         const claimList = Object.values(this.props.claims).map( claim => 
             claim.patient_id == this.props.patient.id ?
-            <li key={claim.id} className="patient-claim-index-ul-li">
+            <li key={claim.id} className="patient-claim-index-ul-li" onClick={()=>openModal('createClaim')}>
                 <span className="patient-claim-index-ul-li-span1">
                     {dateFormat(claim.claim_date_of_service, "mm/dd/yyyy")}
                 </span>

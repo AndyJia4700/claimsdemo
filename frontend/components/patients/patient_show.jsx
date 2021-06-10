@@ -5,7 +5,7 @@ import { fetchClaims } from '../../actions/claim_actions';
 import {FaEdit, FaPlus} from 'react-icons/fa';
 import {FcProcess, FcApproval} from 'react-icons/fc';
 import PatientIndex from './patient_index';
-import { openModal } from '../../actions/modal_actions';
+import { openModal, closeModal } from '../../actions/modal_actions';
 
 const mSTP = (state, ownProps) => {
     const patientId = ownProps.match.params.patientId;
@@ -20,6 +20,7 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => {
     return {
         openModal: modal => dispatch(openModal(modal)),
+        closeModal: () => dispatch(closeModal()),
         fetchClaims: (patientId) => dispatch(fetchClaims(patientId)),
         fetchPatient: (patientId) => dispatch(fetchPatient(patientId)),
         deletePatient: (patientId) => dispatch(deletePatient(patientId))
@@ -29,6 +30,7 @@ const mDTP = dispatch => {
 class PatientShow extends React.Component{
     constructor(props){
         super(props);
+        this.changeDateFormat = this.changeDateFormat.bind(this);
     }
 
     componentDidMount(){
@@ -43,10 +45,15 @@ class PatientShow extends React.Component{
             this.props.fetchClaims(updatePatientId);
         }
     }
+
+    changeDateFormat(date){
+        const formatDate = date.split("-");
+        return formatDate[1]+ "/" + formatDate[2] + "/" + formatDate[0]
+    }
     
     render(){
         if (!this.props.patient) return null;
-        const dateFormat = require("dateformat");
+        // const dateFormat = require("dateformat");
 
         const {
             patient
@@ -54,9 +61,11 @@ class PatientShow extends React.Component{
 
         const claimList = Object.values(this.props.claims).map( claim => 
             claim.patient_id == this.props.patient.id ?
-            <li key={claim.id} className="patient-claim-index-ul-li" onClick={()=>openModal('createClaim')}>
+            <li key={claim.id} className="patient-claim-index-ul-li" onClick={()=>{console.log('open claim details')}}>
                 <span className="patient-claim-index-ul-li-span1">
-                    {dateFormat(claim.claim_date_of_service, "mm/dd/yyyy")}
+                    {/* {dateFormat(claim.claim_date_of_service, `mm/dd/yy`)} */}
+                    {this.changeDateFormat(claim.claim_date_of_service)}
+                   
                 </span>
 
                 <span className="patient-claim-index-ul-li-span2">
@@ -87,7 +96,8 @@ class PatientShow extends React.Component{
                             <div className="patient-show-div-sub">
                                 <label className="patient-show-element-title">DOB: </label>
                                 <p className="patient-show-element">
-                                    {dateFormat(patient.birthdate, 'mm/dd/yyyy')} 
+                                    {/* {dateFormat(patient.birthdate, 'mm/dd/yyyy')}  */}
+                                    {this.changeDateFormat(patient.birthdate)} 
                                 </p>
                             </div>
 
@@ -108,7 +118,8 @@ class PatientShow extends React.Component{
                         
                         <div className="">
                             Claim List
-                            <FaPlus className="" onClick={()=>window.location.replace(`#/patients/${patient.id}/claims/new`)}/>
+                            {/* <FaPlus className="" onClick={()=>window.location.replace(`#/patients/${patient.id}/claims/new`)}/> */}
+                            <FaPlus className="" onClick={()=> {this.props.openModal("createNewClaim"), console.log("open modal create claim")}}/>
                         </div>
 
                         <ul className="patient-claim-index-ul-category">

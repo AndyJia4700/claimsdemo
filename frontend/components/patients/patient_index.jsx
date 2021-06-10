@@ -24,8 +24,14 @@ class PatientIndex extends React.Component{
         this.update = this.update.bind(this);
         this.getLocalStorage = this.getLocalStorage.bind(this);
         this.searchMultiPatient = this.searchMultiPatient.bind(this);
+        this.changeDateFormat = this.changeDateFormat.bind(this);
     }
-
+    
+    changeDateFormat(date){
+        const formatDate = date.split("-");
+        return formatDate[1]+ "/" + formatDate[2] + "/" + formatDate[0].slice(2)
+    }
+    
     componentDidMount(){
         this.props.fetchPatients();
         this.getLocalStorage();
@@ -54,9 +60,7 @@ class PatientIndex extends React.Component{
             possiblePatients[results[i]] = true
         }
 
-        const dateFormat = require("dateformat");
-
-        
+        // const dateFormat = require("dateformat");        
         return patientsList.map(patient => 
             (possiblePatients[patient.name]) ?
             <li key={patient.id} className="patient-index-ul-li" onClick={() => {window.location.replace(`#/patients/${patient.id}`)}}>
@@ -64,7 +68,8 @@ class PatientIndex extends React.Component{
                     {patient.name}
                 </span>
                 <span className="patient-index-ul-li-span-2">
-                    {dateFormat(patient.birthdate, 'mm/dd/yy')}
+                    {/* {dateFormat(patient.birthdate, 'mm/dd/yy')} */}
+                    {this.changeDateFormat(patient.birthdate)}
                 </span>
             </li> : null 
         )
@@ -80,6 +85,7 @@ class PatientIndex extends React.Component{
             )
         }
     }
+
     
     render(){   
         const patientSearch = (

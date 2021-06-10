@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { createClaim } from '../../actions/claim_actions';
 
 const mSTP = (state, ownProps) => {
-    const patientId = ownProps.match.params.patientId;
+
+    const patientId = ownProps.patientId;
     const patient = state.entities.patient[patientId];
     return {
         claim: {
@@ -29,10 +30,9 @@ class CreateClaim extends React.Component{
     }
 
     componentDidMount(){
-        // this.props.fetchClaims();
         this.setState({
             claim_number: Date.now,
-            patient_id: this.props.match.params.patientId,
+            patient_id: this.props.patientId,
             message: "pending",
         });
     }
@@ -49,9 +49,15 @@ class CreateClaim extends React.Component{
     }
 
     render(){
+
         return(
             <form onSubmit={this.handleSubmit} className="">
                 <div className="">
+                    <div className="">
+                        <h1>
+                            {this.props.patient.name}
+                        </h1>
+                    </div>
                     <label className="">Date of Service: </label>
                     <input 
                         type="date"

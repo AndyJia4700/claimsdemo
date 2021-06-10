@@ -1,27 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { closeModal } from '../../actions/modal_actions';
-import PatientShow from '../patients/patient_show';
-import { createClaim } from '../../actions/claim_actions';
+import ClaimCreate from '../claims/claim_create';
 
-const mSTP = state => {
+const mSTP = (state) => {
     return {
-        modal: state.ui.modal
+        modal: state.ui.modal,
+        patients: state.entities.patient,
     }
 };
 
 const mDTP = dispatch => {
     return {
         closeModal: () => dispatch(closeModal()),
-        createClaim: claim => dispatch(createClaim(claim))
     }
 };
 
-function Modal({modal, closeModal}){
+function Modal({modal, closeModal, patients}){
+    const currentId = window.location.href.split("/").slice(-1).pop();
+    const patientId = patients[currentId] ? currentId : null;
+
     let component;
     switch(modal){
-        case 'createClaim':
-            component = <PatientShow closeModal={closeModal}/>
+        case 'createNewClaim':
+            component = <ClaimCreate patientId={patientId} closeModal={closeModal}/>
             break;
         default:
             return null;
@@ -35,5 +37,30 @@ function Modal({modal, closeModal}){
         </div>
     )
 }
+
+// class Modal extends React.Component{
+//     constructor(props){
+//         super(props)
+//     }
+
+//     render(){
+//         let component;
+//         switch(this.props.modal){
+//             case 'createNewClaim':
+//                 component = <ClaimCreate/>
+//                 break;
+//             default:
+//                 return null;
+//         }
+
+//         return(
+//             <div className="" onClick={this.props.closeModal()}>
+//                 <div className="" onClick={e => e.stopPropagation()}>
+//                     {component}
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
 
 export default connect(mSTP, mDTP)(Modal)

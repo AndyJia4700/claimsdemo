@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { fetchCpts } from '../../actions/cpt_actions';
 
 const mSTP = (state) => {
-
     return {
         cpts: state.entities.cpt,
     }
 }
 
 const mDTP = dispatch => { 
-
     return {
         fetchCpts: () => dispatch(fetchCpts())
     }

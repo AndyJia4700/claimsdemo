@@ -6,9 +6,11 @@ import { FaStethoscope, FaFileMedical, FaBriefcaseMedical, FaUserFriends } from 
 import { FiLogOut } from 'react-icons/fi'
 import { MdExpandMore } from 'react-icons/md'
 
-const mSTP = state =>({
-    currentUser: state.session.currentUser
-})
+const mSTP = (state) =>{
+    return {
+        currentUser: state.session.currentUser
+    }
+}
 
 const mDTP = dispatch => ({
     logout: () => dispatch(logout())

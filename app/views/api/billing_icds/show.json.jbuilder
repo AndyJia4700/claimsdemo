@@ -1,0 +1,1 @@
+json.partial! "api/billing_icds/billing_icd", billing_icd: @billing_icd

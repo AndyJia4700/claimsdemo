@@ -9,7 +9,7 @@
 #  updated_at     :datetime         not null
 #
 class BillingIcd < ApplicationRecord
-    belongs_to :billing_cpt,
-    foreign_key: :billing_cpt_id,
-    class_name: "BillingCpt"
+    # belongs_to :billing_cpt,
+    # foreign_key: :billing_cpt_id,
+    # class_name: "BillingCpt"
 end

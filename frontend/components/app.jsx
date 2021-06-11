@@ -12,7 +12,7 @@ import LeftSideBar from './home/left_side_bar';
 import LogInForm from '../components/session/login_form';
 import SignUpForm from '../components/session/signup_form';
 
-import CreateClaim from './claims/claim_create';
+// import CreateClaim from './claims/claim_create';
 import ClaimIndex from './claims/claim_index';
 
 import CreateCptForm from './cpts/cpt_create_form';
@@ -20,6 +20,8 @@ import CptIndex from './cpts/cpt_index';
 
 import CreateIcdForm from './icds/icd_create_form';
 import IcdIndex from './icds/icd_index';
+
+import CreateBillingForm from './billingCpts/create_billing_cpts_form';
 
 class App extends React.Component{
     render(){
@@ -35,7 +37,7 @@ class App extends React.Component{
                 <ProtRoute exact path="/patients/new" component={PatientCreateContainer}/>
                 <ProtRoute exact path="/patients/:patientId" component={PatientShow}/>
                 <ProtRoute exact path="/patients/:patientId/edit" component={PatientEditContainer}/>
-                <ProtRoute exact path="/patients/:patientId/claims/new" component={CreateClaim}/>
+                {/* <ProtRoute exact path="/patients/:patientId/claims/new" component={CreateClaim}/> */}
 
                 <ProtRoute exact path="/claims" component={ClaimIndex}/>
                 
@@ -44,6 +46,8 @@ class App extends React.Component{
 
                 <ProtRoute exact path="/icds" component={IcdIndex}/>
                 <ProtRoute exact path="/icds/new" component={CreateIcdForm}/>
+
+                <ProtRoute exact path="/billings/new" component={CreateBillingForm}/>
 
             </div>
         )

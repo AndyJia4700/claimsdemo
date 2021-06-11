@@ -1,1 +1,16 @@
-json.extract! billing_cpt, :id, :claim_id, :cpt_id, :modifier1, :modifier2, :units, :denied, :approved, :denied_reason
+json.extract! billing_cpt, 
+    :id, 
+    :claim_id, 
+    :date_of_service,
+    :cpt_id, 
+    :modifier1, 
+    :modifier2, 
+    :units, 
+    :icd_id1,
+    :icd_id2,
+    :icd_id3,
+    :icd_id4,
+    :amount,
+    :approved, 
+    :denied, 
+    :denied_reason

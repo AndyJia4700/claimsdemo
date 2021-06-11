@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_221958) do
+ActiveRecord::Schema.define(version: 2021_06_11_063211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 2021_06_10_221958) do
     t.string "modifier1"
     t.string "modifier2"
     t.integer "units"
+    t.integer "icd_id1"
+    t.integer "icd_id2"
+    t.integer "icd_id3"
+    t.integer "icd_id4"
+    t.date "date_of_service"
+    t.integer "amount"
     t.index ["claim_id"], name: "index_billing_cpts_on_claim_id"
   end
 

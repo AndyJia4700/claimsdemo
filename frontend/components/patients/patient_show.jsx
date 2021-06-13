@@ -53,7 +53,6 @@ class PatientShow extends React.Component{
     
     render(){
         if (!this.props.patient) return null;
-        // const dateFormat = require("dateformat");
 
         const {
             patient
@@ -61,11 +60,9 @@ class PatientShow extends React.Component{
 
         const claimList = Object.values(this.props.claims).map( claim => 
             claim.patient_id == this.props.patient.id ?
-            <li key={claim.id} className="patient-claim-index-ul-li" onClick={()=>{console.log('open claim details')}}>
+            <li key={claim.id} className="patient-claim-index-ul-li" onClick={() => {window.location.replace(`#/claims/${claim.id}`)}}>
                 <span className="patient-claim-index-ul-li-span1">
-                    {/* {dateFormat(claim.claim_date_of_service, `mm/dd/yy`)} */}
                     {this.changeDateFormat(claim.claim_date_of_service)}
-                   
                 </span>
 
                 <span className="patient-claim-index-ul-li-span2">
@@ -96,7 +93,6 @@ class PatientShow extends React.Component{
                             <div className="patient-show-div-sub">
                                 <label className="patient-show-element-title">DOB: </label>
                                 <p className="patient-show-element">
-                                    {/* {dateFormat(patient.birthdate, 'mm/dd/yyyy')}  */}
                                     {this.changeDateFormat(patient.birthdate)} 
                                 </p>
                             </div>

@@ -4,7 +4,7 @@ import { createBillingCpt } from '../../actions/billing_cpt_actions';
 import { fetchCpts } from '../../actions/cpt_actions';
 import { fetchIcds } from '../../actions/icd_actions';
 
-const mSTP = (state) => {
+const mSTP = (state, ownProps) => {
     return {
         cpts: state.entities.cpt,
         icds: state.entities.icd,
@@ -27,7 +27,7 @@ class BillingCptCreateForm extends React.Component{
                 cpt_id: "",
                 modifier1: "",
                 modifier2: "",
-                units: "",
+                units: 1,
                 icd_id1: null,
                 icd_id2: null,
                 icd_id3: null,
@@ -53,6 +53,11 @@ class BillingCptCreateForm extends React.Component{
     }
 
     componentDidMount(){
+        this.setState({
+            billingCpt: {
+                claim_id: this.props.match.params.claimId
+            }
+        });
         this.props.fetchCpts();
         this.props.fetchIcds();
     }
@@ -102,7 +107,6 @@ class BillingCptCreateForm extends React.Component{
 
     render(){
 
-        //claim_id: "",
         // date_of_service: "",
         // cpt_id: "",
         // modifier1: "",
@@ -156,6 +160,18 @@ class BillingCptCreateForm extends React.Component{
                         {cptFilter}
                     </ul>
                 </div>
+                <br />
+
+                <div className="">
+                    <label className="">Date of Service: </label>
+                    <input 
+                        className=""
+                        type="date" 
+                        onChange={this.updateSearch("searchIcd")}
+                        value={this.state.searchIcd}                        
+                    />
+                </div>
+
 
 
                 <button>Submit</button>

@@ -47,7 +47,7 @@ class App extends React.Component{
                 <ProtRoute exact path="/icds" component={IcdIndex}/>
                 <ProtRoute exact path="/icds/new" component={CreateIcdForm}/>
 
-                <ProtRoute exact path="/billings/new" component={CreateBillingForm}/>
+                <ProtRoute exact path="/claims/:claimId" component={CreateBillingForm}/>
 
             </div>
         )

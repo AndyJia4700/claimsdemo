@@ -42,8 +42,7 @@ class PatientIndex extends React.Component{
         return localData ?
             this.setState({
                 search: localData
-            }) :
-        ""
+            }) : ""
     }
 
     searchMultiPatient(searchKey, patientsList){
@@ -60,6 +59,7 @@ class PatientIndex extends React.Component{
             possiblePatients[results[i]] = true
         }
 
+        // const dateFormat = require("dateformat");        
         return patientsList.map(patient => 
             (possiblePatients[patient.name]) ?
             <li key={patient.id} className="patient-index-ul-li" onClick={() => {window.location.replace(`#/patients/${patient.id}`)}}>

@@ -1,6 +1,6 @@
-export const fetchBillingCpts = () => {
+export const fetchBillingCpts = (claimId) => {
     return $.ajax({
-        url: "/api/billing_cpts",
+        url: `/api/billing_cpts?claim=${claimId}`,
     })
 }
 

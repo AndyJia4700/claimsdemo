@@ -4,7 +4,7 @@ import { createBillingCpt } from '../../actions/billing_cpt_actions';
 import { fetchCpts } from '../../actions/cpt_actions';
 import { fetchIcds } from '../../actions/icd_actions';
 
-const mSTP = (state, ownProps) => {
+const mSTP = (state) => {
     return {
         cpts: state.entities.cpt,
         icds: state.entities.icd,
@@ -22,16 +22,16 @@ class BillingCptCreateForm extends React.Component{
         super(props);
         this.state = {
             billingCpt: {
-                claim_id: "",
+                claim_id: this.props.match.params.claimId,
                 date_of_service: "",
-                cpt_id: "",
+                cpt_id: -1,
                 modifier1: "",
                 modifier2: "",
                 units: 1,
-                icd_id1: null,
-                icd_id2: null,
-                icd_id3: null,
-                icd_id4: null,
+                icd_id1: -1,
+                icd_id2: -1,
+                icd_id3: -1,
+                icd_id4: -1,
                 amount: 0,
                 approved: false,
                 denied: false,
@@ -40,24 +40,19 @@ class BillingCptCreateForm extends React.Component{
             searchCpt: "",
             searchIcd: "",
         };
-        this.changeDateFormat = this.changeDateFormat.bind(this);
+        // this.changeDateFormat = this.changeDateFormat.bind(this);
         this.findCode = this.findCode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateBilling = this.updateBilling.bind(this);
         this.updateSearch = this.updateSearch.bind(this);
     }
 
-    changeDateFormat(date){
-        const formatDate = date.split("-");
-        return formatDate[1]+ "/" + formatDate[2] + "/" + formatDate[0].slice(2)
-    }
+    // changeDateFormat(date){
+    //     const formatDate = date.split("-");
+    //     return formatDate[1]+ "/" + formatDate[2] + "/" + formatDate[0].slice(2)
+    // }
 
     componentDidMount(){
-        this.setState({
-            billingCpt: {
-                claim_id: this.props.match.params.claimId
-            }
-        });
         this.props.fetchCpts();
         this.props.fetchIcds();
     }
@@ -79,10 +74,10 @@ class BillingCptCreateForm extends React.Component{
 
         return codes.map(code => 
             codeFilter[code.cpt_code] ? 
-            <li key={code.id} className=""> 
+            <li key={code.id} className="" value={code.id} onClick={this.updateBilling("cpt_id")}> 
                 {code.cpt_code}
             </li> : codeFilter[code.icd_code] ?
-            <li key={code.id} className=""> 
+            <li key={code.id} className="" value={code.id} onClick={this.updateBilling("icd_id1")}> 
                 {code.icd_code}
             </li> : null
         )
@@ -90,12 +85,15 @@ class BillingCptCreateForm extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.createCpt(this.state);
+        
+        this.props.createBillingCpt(this.state.billingCpt);
     }
 
     updateBilling(field){
         return e => this.setState({
-            [field]: e.currentTarget.value
+            billingCpt:{
+                [field]: e.currentTarget.value
+            }
         });
     }
 
@@ -143,16 +141,10 @@ class BillingCptCreateForm extends React.Component{
         )
         const icdFilter = this.findCode(this.state.searchIcd, this.props.icds);
 
+
         return(
             <form onSubmit={this.handleSubmit} className="">
-                <div className="">
-                    <label className="">ICD Code: </label>
-                    {icdSearch}
-                    <ul className="">
-                        {icdFilter}
-                    </ul>
-                </div>
-                <br />
+
                 <div className="">
                     <label className="">CPT Code: </label>
                     {cptSearch}
@@ -163,16 +155,23 @@ class BillingCptCreateForm extends React.Component{
                 <br />
 
                 <div className="">
+                    <label className="">ICD Code: </label>
+                    {icdSearch}
+                    <ul className="">
+                        {icdFilter}
+                    </ul>
+                </div>
+                <br />
+            
+                <div className="">
                     <label className="">Date of Service: </label>
                     <input 
                         className=""
                         type="date" 
-                        onChange={this.updateSearch("searchIcd")}
-                        value={this.state.searchIcd}                        
+                        onChange={this.updateBilling("date_of_service")}
+                        value={this.state.billingCpt.date_of_service}                        
                     />
                 </div>
-
-
 
                 <button>Submit</button>
             </form>

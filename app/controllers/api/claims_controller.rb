@@ -4,9 +4,11 @@ class Api::ClaimsController < ApplicationController
 
 
     def index
-        @claims = Claim.all.select {|claim| claim.patient_id == params[:patient].to_i }
-        #@patient = Patient.all.select {|patient| patient.user_id == current_user.id}
-        #@claims = Claim.all.select {|claim| @patient.(claim.patient_id) && claim.message == "pending"}
+        claim_list = Patient.find(params[:patient].to_i).claim_list
+        @claims = claim_list.map do |claim_id|
+            Claim.find(claim_id)
+        end
+        # @claims = Claim.all.select {|claim| claim.patient_id == params[:patient].to_i }
         render :index
     end
 
@@ -22,6 +24,9 @@ class Api::ClaimsController < ApplicationController
     def create
         @claim = Claim.new(claim_params)
         if @claim.save
+            @patient = Patient.find(@claim.patient_id)
+            updated_claim_list = @patient.claim_list.push(@claim.id)
+            @patient.update(claim_list: updated_claim_list)
             render :show
         else
             render json: @claim.errors.full_messages, status: 422
@@ -36,6 +41,7 @@ class Api::ClaimsController < ApplicationController
             :claim_date_of_service,
             :claim_number,
             :message,
+            :billing_list,
         )
     end
 end

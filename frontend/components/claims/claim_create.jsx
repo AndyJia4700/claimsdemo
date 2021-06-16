@@ -68,6 +68,7 @@ class CreateClaim extends React.Component{
                 </div>
 
                 <button>Submit</button>
+
             </form>
         )
     }

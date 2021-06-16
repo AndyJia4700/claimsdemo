@@ -25,6 +25,9 @@ function Modal({modal, closeModal, patients}){
         case 'createNewClaim':
             component = <ClaimCreate patientId={patientId} closeModal={closeModal}/>
             break;
+        case 'claimDetails':
+            component = ""
+            break;
         default:
             return null;
     }

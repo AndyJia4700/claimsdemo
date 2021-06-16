@@ -19,8 +19,8 @@ const receiveBillingCptErrors = errors => ({
     errors
 })
 
-export const fetchBillingCpts = () => dispatch => {
-    return BillingCptUtil.fetchBillingCpts()
+export const fetchBillingCpts = (claimId) => dispatch => {
+    return BillingCptUtil.fetchBillingCpts(claimId)
         .then(billingCpts => dispatch(receiveAllBillingCpts(billingCpts)))
 };
 

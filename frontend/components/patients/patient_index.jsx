@@ -42,8 +42,7 @@ class PatientIndex extends React.Component{
         return localData ?
             this.setState({
                 search: localData
-            }) :
-        ""
+            }) : ""
     }
 
     searchMultiPatient(searchKey, patientsList){
@@ -68,7 +67,6 @@ class PatientIndex extends React.Component{
                     {patient.name}
                 </span>
                 <span className="patient-index-ul-li-span-2">
-                    {/* {dateFormat(patient.birthdate, 'mm/dd/yy')} */}
                     {this.changeDateFormat(patient.birthdate)}
                 </span>
             </li> : null 

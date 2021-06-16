@@ -57,6 +57,7 @@ class Api::PatientsController < ApplicationController
             :name,
             :birthdate,
             :insurance_id,
+            :claim_list,
         )
     end
 end

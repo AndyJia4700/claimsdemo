@@ -10,13 +10,14 @@ export const fetchBillingCpt = billingCptId => {
     })
 }
 
-export const createBillingCpt = billingCpt => {
+export const createBillingCpt = formData => {
     return $.ajax({
         method: 'POST',
         url: '/api/billing_cpts',
-        data: {
-            billingCpt
-        },
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: "json",
     })
 }
 

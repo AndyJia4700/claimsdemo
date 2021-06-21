@@ -93,13 +93,6 @@ class BillingCreateForm extends React.Component{
     calculateUpdateAmount(){
         const currentUnitAmount = this.state.unit_amount;
 
-        // console.log({
-        //     cpt: this.state.cpt_id, 
-        //     amounts: this.state.amount, 
-        //     unit_amount: this.state.unit_amount, 
-        //     units: this.state.units,
-        // });
-
         return e => this.setState({
             units: parseInt(e.currentTarget.value),
             amount: e.currentTarget.value ? currentUnitAmount * parseInt(e.currentTarget.value) : currentUnitAmount

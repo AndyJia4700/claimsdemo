@@ -3,12 +3,11 @@ class Api::BillingCptsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        # billing_list = Claim.find(params[:claim].to_i).billing_list
-        # @billing_cpts = billing_list.map do |billing_id|
-        #     BillingCpt.find(billing_id)
-        # end
-
-        @billing_cpts = BillingCpt.all
+        billing_list = Claim.find(params[:claim].to_i).billing_list
+        @billing_cpts = billing_list.map do |billing_id|
+            BillingCpt.find(billing_id)
+        end
+        # @billing_cpts = BillingCpt.all
         render :index
     end
 

@@ -5,6 +5,7 @@ import { fetchClaim } from '../../actions/claim_actions';
 import { fetchCpts } from '../../actions/cpt_actions';
 import { fetchIcds } from '../../actions/icd_actions';
 import { fetchBillingCpts } from '../../actions/billing_cpt_actions';
+import {FaBackspace} from 'react-icons/fa'
 
 const mSTP = (state, ownprops) => {
     const patientId = ownprops.match.params.patientId;
@@ -33,18 +34,29 @@ const mDTP = dispatch => ({
 class BillingIndexForm extends React.Component{
     constructor(props){
         super(props)
+        this.changeDateFormat = this.changeDateFormat.bind(this);
     }
 
     componentDidMount(){
         const patientId = this.props.match.params.patientId;
         this.props.fetchPatient(patientId);
-
         const claimId = this.props.match.params.claimId;
         this.props.fetchClaim(claimId);
-
         this.props.fetchCpts();
         this.props.fetchIcds();
         this.props.fetchBilling(claimId);
+    }
+
+    // componentDidUpdate(prevProps){
+    //     if (prevProps.billings !== this.props.billings){
+    //         const claimId = this.props.match.params.claimId;
+    //         this.props.fetchBilling(claimId);
+    //     }
+    // }
+
+    changeDateFormat(date){
+        const formatDate = date.split("-");
+        return formatDate[1]+ "/" + formatDate[2] + "/" + formatDate[0].slice(2)
     }
 
     render(){
@@ -70,42 +82,45 @@ class BillingIndexForm extends React.Component{
         )
 
         const categories = (
-            <table className="billing-categories-table" >
-                <tbody >            
-                    <tr> 
-                        <th className="billing-categories-table-th">DOS</th>
-                        <th className="billing-categories-table-th">CPT</th>
-                        <th className="billing-categories-table-th">M1</th>
-                        <th className="billing-categories-table-th">M2</th>
-                        <th className="billing-categories-table-th">Unit</th>
-                        <th className="billing-categories-table-th">ICD 1</th>
-                        <th className="billing-categories-table-th">ICD 2</th>
-                        <th className="billing-categories-table-th">ICD 3</th>
-                        <th className="billing-categories-table-th">ICD 4</th>
-                        <th className="billing-categories-table-th">Amount</th>
-                        <th className="billing-categories-table-th">Status</th>
-                    </tr>
-                </tbody>   
-            </table>
+            <tr className="billing-categories-table-tr-1"> 
+                <th className="billing-categories-table-th">DOS</th>
+                <th className="billing-categories-table-th">CPT</th>
+                <th className="billing-categories-table-th">M1</th>
+                <th className="billing-categories-table-th">M2</th>
+                <th className="billing-categories-table-th">Unit</th>
+                <th className="billing-categories-table-th">ICD 1</th>
+                <th className="billing-categories-table-th">ICD 2</th>
+                <th className="billing-categories-table-th">ICD 3</th>
+                <th className="billing-categories-table-th">ICD 4</th>
+                <th className="billing-categories-table-th">Amount</th>
+                <th className="billing-categories-table-th">Status</th>
+            </tr>
         )
 
         const billingList = Object.values(this.props.billings).map( billing =>
-            <li key={billing.id} className="">
-            
-                {billing.date_of_service}
-                {this.props.cpts[billing.cpt_id].cpt_code}
-                {billing.modifier1}
-                {billing.modifier2}
-                {billing.units}
-                {this.props.icds[billing.icd_id1].icd_code}
-                {billing.icd_id2 ? this.props.icds[billing.icd_id2].icd_code : ""}
-                {billing.icd_id3 ? this.props.icds[billing.icd_id3].icd_code : ""}
-                {billing.icd_id4 ? this.props.icds[billing.icd_id4].icd_code : ""}
-            </li>
+            billing.claim_id == this.props.match.params.claimId ?
+                <tr key={billing.id} className="billing-categories-table-tr-2">
+                    <td className="billing-categories-table-td">{this.changeDateFormat(billing.date_of_service)}</td>
+                    <td className="billing-categories-table-td">{this.props.cpts[billing.cpt_id].cpt_code}</td>
+                    <td className="billing-categories-table-td">{billing.modifier1}</td>
+                    <td className="billing-categories-table-td">{billing.modifier2}</td>
+                    <td className="billing-categories-table-td">{billing.units}</td>
+                    <td className="billing-categories-table-td">{this.props.icds[billing.icd_id1].icd_code}</td>
+                    <td className="billing-categories-table-td">{billing.icd_id2 ? this.props.icds[billing.icd_id2].icd_code : ""}</td>
+                    <td className="billing-categories-table-td">{billing.icd_id3 ? this.props.icds[billing.icd_id3].icd_code : ""}</td>
+                    <td className="billing-categories-table-td">{billing.icd_id4 ? this.props.icds[billing.icd_id4].icd_code : ""}</td>
+                    <td className="billing-categories-table-td">{billing.amount}</td>
+                </tr> 
+            : null
         )
         
         return(
-            <div className="">
+            <div className="billing-index-main-div">
+                <div className="">
+                    <FaBackspace onClick={() => {window.location.replace(`#/patients/${this.props.match.params.patientId}`)}}/>
+                    <h1>claim detail</h1>
+                </div>
+
                 <div className="">
                     {patientInfo}
                 </div>
@@ -114,13 +129,13 @@ class BillingIndexForm extends React.Component{
                     {claimInfo}
                 </div>
 
-                <div className="">
-                    {categories}
-                </div>
+                <table className="billing-categories-table" >
+                    <tbody>
+                        {categories}
+                        {billingList}
+                    </tbody>
+                </table>
 
-                <ul className="">
-                    {billingList}
-                </ul>
             </div>
         )
     }

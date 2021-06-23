@@ -40,10 +40,10 @@ class leftSideBar extends React.Component{
                 </div>
 
                 <ul className="left-side-bar-ul">
-                    <Link to="/patients" className=""><li className="left-side-bar-ul-li"><FaUserFriends className="left-side-bar-ul-li-icon"/>Patient</li></Link>
-                    <Link to="/claims" className=""><li className="left-side-bar-ul-li"><FaFileMedical className="left-side-bar-ul-li-icon"/>Claim</li></Link>
-                    <Link to="/cpts" className=""><li className="left-side-bar-ul-li"><FaBriefcaseMedical className="left-side-bar-ul-li-icon"/>CPT Code</li></Link>
-                    <Link to="/icds" className=""><li className="left-side-bar-ul-li"><FaStethoscope className="left-side-bar-ul-li-icon"/>ICD Code</li></Link>
+                    <Link to="/patients" className=""><li className="left-side-bar-ul-li" tabIndex="0"><FaUserFriends className="left-side-bar-ul-li-icon"/>Patient</li></Link>
+                    <Link to="/claims" className=""><li className="left-side-bar-ul-li" tabIndex="0"><FaFileMedical className="left-side-bar-ul-li-icon"/>Claim</li></Link>
+                    <Link to="/cpts" className=""><li className="left-side-bar-ul-li" tabIndex="0"><FaBriefcaseMedical className="left-side-bar-ul-li-icon"/>CPT Code</li></Link>
+                    <Link to="/icds" className=""><li className="left-side-bar-ul-li" tabIndex="0"><FaStethoscope className="left-side-bar-ul-li-icon"/>ICD Code</li></Link>
                 </ul>
 
                 <div className="">

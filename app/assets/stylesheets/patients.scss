@@ -29,7 +29,7 @@
 }
 
 .patient-claim-index-div{
-    background: #dadada;
+    background: #ffffff;
     height: 100%;
     padding: 20px;
     border-radius: 20px;
@@ -63,6 +63,12 @@
     flex-direction: row;
     width: 100%;
     margin-top: 20px;
+}
+
+.patient-claim-title-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .patient-index-div{
@@ -143,7 +149,7 @@
 .patient-info-div{
     display: flex;
     flex-direction: column;
-    background: #2397e4;
+    background: #efefef;
     width: 400px;
     padding: 30px;
     border-top-right-radius: 25px;
@@ -163,7 +169,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background: #dadada;
+    background: #ffff;
     font-size: 18px;
     padding: 20px;
     border-radius: 20px;
@@ -181,6 +187,20 @@
     padding-bottom: 5px;
 }
 
+.patient-show-element-edit{
+    color: #ac0aff;
+    font-size: 20px;
+}
+
+.patient-show-element-edit:hover{
+    color: #ff5c13;
+}
+
+
+
 .patient-show-element-title{
     width: 100px;
+    color: #757575;
+    font-weight: 200;
 }
+

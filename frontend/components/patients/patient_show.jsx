@@ -116,7 +116,10 @@ class PatientShow extends React.Component{
                         
                         <div className="patient-claim-title-div">
                             Claim List
-                            <FaPlus className="" onClick={()=> {this.props.openModal("createNewClaim"), console.log("open modal create claim")}}/>
+                            <FaPlus 
+                                className="patient-claim-title-div-icon" 
+                                onClick={()=> {this.props.openModal("createNewClaim"), console.log("open modal create claim")}}
+                            />
                         </div>
 
                         <ul className="patient-claim-index-ul-category">

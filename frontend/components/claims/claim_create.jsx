@@ -51,7 +51,7 @@ class CreateClaim extends React.Component{
     render(){
 
         return(
-            <form onSubmit={this.handleSubmit} className="">
+            <form onSubmit={this.handleSubmit} className="claim-create-form">
                 <div className="">
                     <div className="">
                         <h1>
@@ -68,7 +68,6 @@ class CreateClaim extends React.Component{
                 </div>
 
                 <button>Submit</button>
-
             </form>
         )
     }

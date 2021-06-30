@@ -22,6 +22,7 @@ import CreateIcdForm from './icds/icd_create_form';
 import IcdIndex from './icds/icd_index';
 
 import CreateBillingForm from './billingCpts/create_billing_cpts_form';
+import BillingIndex from './billingCpts/billing_index';
 
 class App extends React.Component{
     render(){
@@ -47,7 +48,8 @@ class App extends React.Component{
                 <ProtRoute exact path="/icds" component={IcdIndex}/>
                 <ProtRoute exact path="/icds/new" component={CreateIcdForm}/>
 
-                <ProtRoute exact path="/claims/:claimId" component={CreateBillingForm}/>
+                <ProtRoute exact path="/patients/:patientId/claims/:claimId/new" component={CreateBillingForm}/>
+                <ProtRoute exact path="/patients/:patientId/claims/:claimId" component={BillingIndex}/>
 
             </div>
         )

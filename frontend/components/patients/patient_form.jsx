@@ -7,7 +7,7 @@ class PatientForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         this.update = this.update.bind(this);
         this.renderErrors = this.renderErrors.bind(this);
-        this.redirect = this.redirect.bind(this);
+        // this.redirect = this.redirect.bind(this);
     }
 
     componentDidMount(){
@@ -39,20 +39,21 @@ class PatientForm extends React.Component{
             } else {
                 this.props.action(formData, this.state.id)
                 if (confirm("Changes has been saved!")){
-                    setInterval(window.location.replace('#/patients'), 3000);
+                    setInterval(window.location.replace(`#/patients/${this.props.patient.id}`), 3000);
                 }
             }
             
         }
     }
 
-    redirect(){
-        if (this.state) {
-            window.location.replace(`#/patients/${this.state.id}`);
-        } else {
-            window.location.replace(`#/patients`);
-        }
-    }
+    // redirect(){
+    //     if (this.props.patient.id) {
+    //         debugger
+    //         window.location.replace(`#/patients/${this.props.patient.id}`);
+    //     } else {
+    //         window.location.replace(`#/patients`);
+    //     }
+    // }
 
     renderErrors(){
         return(
@@ -127,7 +128,8 @@ class PatientForm extends React.Component{
                         </ul>
                     
 
-                        <button onClick={this.redirect}>submit</button>
+                        {/* <button onClick={this.redirect}>submit</button> */}
+                        <button >submit</button>
 
                         <div className="">
                             {this.renderErrors()}

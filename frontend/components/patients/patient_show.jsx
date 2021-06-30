@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient, deletePatient } from '../../actions/patient_actions';
 import { fetchClaims } from '../../actions/claim_actions';
-import {FaEdit, FaPlus} from 'react-icons/fa';
+import {FaEdit, FaPlus, FaQuestion} from 'react-icons/fa';
 import {FcProcess, FcApproval} from 'react-icons/fc';
 import PatientIndex from './patient_index';
 import { openModal, closeModal } from '../../actions/modal_actions';
@@ -60,7 +60,8 @@ class PatientShow extends React.Component{
 
         const claimList = Object.values(this.props.claims).map( claim => 
             claim.patient_id == this.props.patient.id ?
-            <li key={claim.id} className="patient-claim-index-ul-li" onClick={() => {window.location.replace(`#/claims/${claim.id}`)}}>
+            // <li key={claim.id} className="patient-claim-index-ul-li" onClick={() => {window.location.replace(`#/claims/${claim.id}`)}}>
+            <li key={claim.id} className="patient-claim-index-ul-li" onClick={() => {window.location.replace(`#/patients/${patient.id}/claims/${claim.id}`)}}>
                 <span className="patient-claim-index-ul-li-span1">
                     {this.changeDateFormat(claim.claim_date_of_service)}
                 </span>
@@ -70,7 +71,8 @@ class PatientShow extends React.Component{
                 </span>
 
                 <span className="patient-claim-index-ul-li-span3">
-                    {claim.message == "pending" ? <FcProcess/> : <FcApproval/>}
+                    {/* {claim.message == "pending" ? <FcProcess/> : <FcApproval/>} */}
+                    {!claim.billing_list[0] ? <FaQuestion/> : <FcProcess/>}
                 </span>
             </li> : null
         )
@@ -112,10 +114,12 @@ class PatientShow extends React.Component{
 
                     <div className="patient-claim-index-div">
                         
-                        <div className="">
+                        <div className="patient-claim-title-div">
                             Claim List
-                            {/* <FaPlus className="" onClick={()=>window.location.replace(`#/patients/${patient.id}/claims/new`)}/> */}
-                            <FaPlus className="" onClick={()=> {this.props.openModal("createNewClaim"), console.log("open modal create claim")}}/>
+                            <FaPlus 
+                                className="patient-claim-title-div-icon" 
+                                onClick={()=> {this.props.openModal("createNewClaim"), console.log("open modal create claim")}}
+                            />
                         </div>
 
                         <ul className="patient-claim-index-ul-category">

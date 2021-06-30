@@ -32,7 +32,7 @@ export const fetchBillingIcd = billingIcdId => dispatch => (
 );
 
 export const createBillingIcd = billingIcd => dispatch => (
-    BillingIcdUtil.createIcd(billingIcd)
+    BillingIcdUtil.createBillingIcd(billingIcd)
         .then(
             billingIcd => dispatch(receiveBillingIcd(billingIcd)),
             error => dispatch(receiveBillingIcdErrors(error.responseJSON))

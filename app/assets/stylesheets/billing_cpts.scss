@@ -1,3 +1,30 @@
 // Place all the styles related to the BillingCpts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.billing-categories-table{
+    background-color: aquamarine;
+}
+
+.billing-categories-table-th{
+    text-align: center;
+    padding: 5px 15px;
+}
+
+.billing-categories-table-td{
+    text-align: center;
+}
+
+.billing-categories-table-tr-2:nth-child(even){
+    background-color: rgb(103, 199, 223);
+}
+.billing-categories-table-tr-2:nth-child(odd){
+    background-color:rgb(154, 230, 107);
+}
+
+.billing-index-main-div{
+    background-color: white;
+    padding: 50px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createClaim } from '../../actions/claim_actions';
+import { closeModal } from '../../actions/modal_actions';
 
 const mSTP = (state, ownProps) => {
 
@@ -18,7 +19,8 @@ const mSTP = (state, ownProps) => {
 }
 
 const mDTP = dispatch => ({
-    createClaim: claim => dispatch(createClaim(claim))
+    createClaim: claim => dispatch(createClaim(claim)),
+    closeModal: () => dispatch(closeModal()),
 })
 
 class CreateClaim extends React.Component{
@@ -39,7 +41,7 @@ class CreateClaim extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.createClaim(this.state);
+        this.props.createClaim(this.state).then(()=>this.props.closeModal())
     }
 
     update(field){

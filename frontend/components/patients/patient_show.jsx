@@ -123,8 +123,8 @@ class PatientShow extends React.Component{
                         </div>
 
                         <ul className="patient-claim-index-ul-category">
-                            <li className="patient-claim-index-ul-li-span1">DOS</li>
-                            <li className="patient-claim-index-ul-li-span2">Claim</li>
+                            <li className="patient-claim-index-ul-li-span1">Create Date</li>
+                            <li className="patient-claim-index-ul-li-span2">Claim Number</li>
                             <li className="patient-claim-index-ul-li-span3">Status</li>
                         </ul>
 

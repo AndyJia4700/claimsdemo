@@ -33,8 +33,8 @@ function Modal({modal, closeModal, patients}){
     }
 
     return(
-        <div className="" onClick={closeModal}>
-            <div className="" onClick={e => e.stopPropagation()}>
+        <div className="modal-background" onClick={closeModal}>
+            <div className="modal-child" onClick={e => e.stopPropagation()}>
                 {component}
             </div>
         </div>

@@ -79,6 +79,7 @@ class PatientShow extends React.Component{
         
         return(
             <div className="patients-main-div">
+                
                 <PatientIndex/>
 
                 <div className="patient-info-div">

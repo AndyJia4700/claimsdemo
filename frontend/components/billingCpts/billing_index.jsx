@@ -231,27 +231,31 @@ class BillingIndexForm extends React.Component{
         const icdFilter = this.findCode(this.state.searchIcd, this.props.icds);
 
 
-        const tempIcd = (
+        const icd1 = (
             <div>
-                <div>
-                    <input type="text" id="icd1-input" placeholder="ICD 1" readOnly/>
-                    <span onClick={()=>{document.getElementById("icd1-input").value=null, this.deleteIcdValue(1)}}>&times;</span>
-                </div>
+                <input type="text" id="icd1-input" placeholder="ICD 1" readOnly/>
+                <span onClick={()=>{document.getElementById("icd1-input").value=null, this.deleteIcdValue(1)}}>&times;</span>
+            </div>
+        )
 
-                <div>
-                    <input type="text" id="icd2-input" placeholder="ICD 2" readOnly/>
-                    <span onClick={()=>{document.getElementById("icd2-input").value=null, this.deleteIcdValue(2)}}>&times;</span>
-                </div>
+        const icd2 = (
+            <div>
+                <input type="text" id="icd2-input" placeholder="ICD 2" readOnly/>
+                <span onClick={()=>{document.getElementById("icd2-input").value=null, this.deleteIcdValue(2)}}>&times;</span>
+            </div>
+        )
 
-                <div>
-                    <input type="text" id="icd3-input" placeholder="ICD 3" readOnly/>
-                    <span onClick={()=>{document.getElementById("icd3-input").value=null, this.deleteIcdValue(3)}}>&times;</span>
-                </div>
+        const icd3 = (
+            <div>
+                <input type="text" id="icd3-input" placeholder="ICD 3" readOnly/>
+                <span onClick={()=>{document.getElementById("icd3-input").value=null, this.deleteIcdValue(3)}}>&times;</span>
+            </div>
+        )
 
-                <div>
-                    <input type="text" id="icd4-input" placeholder="ICD 4" readOnly/>
-                    <span onClick={()=>{document.getElementById("icd4-input").value=null, this.deleteIcdValue(4)}}>&times;</span>
-                </div>
+        const icd4 = (
+            <div>
+                <input type="text" id="icd4-input" placeholder="ICD 4" readOnly/>
+                <span onClick={()=>{document.getElementById("icd4-input").value=null, this.deleteIcdValue(4)}}>&times;</span>
             </div>
         )
 
@@ -315,41 +319,27 @@ class BillingIndexForm extends React.Component{
                     <td className="billing-categories-table-td">{billing.icd_id3 ? this.props.icds[billing.icd_id3].icd_code : ""}</td>
                     <td className="billing-categories-table-td">{billing.icd_id4 ? this.props.icds[billing.icd_id4].icd_code : ""}</td>
                     <td className="billing-categories-table-td">{billing.amount}</td>
+                    <td className="billing-categories-table-td">{billing.approved ? "approved" : "processing"}</td>
                 </tr> 
             : null
         )
 
         const createBillingForm = (
-            <form onSubmit={this.handleSubmit} className="">
-                <div className="">
-                    <label className="">Date of Service: </label>
+            <tr className="billing-categories-table-tr-3">
+                <td className="billing-categories-table-td">
                     <input 
-                        className=""
+                        className="billing-create-input"
                         type="date" 
                         onChange={this.updateBilling("date_of_service")}
                         value={this.state.date_of_service}                        
                     />
-                </div>
+                </td>
 
-                <div className="">
-                    <label className="">ICD Code: </label>
-                    {tempIcd}
-                    {icdSearch}
-                    <ul className="">
-                        {icdFilter}
-                    </ul>
-                </div>
-
-                <div className="">
-                    <label className="">CPT Code: </label>
+                <td className="billing-categories-table-td">
                     {cpt}
-                    {cptSearch}
-                    <ul className="">
-                        {cptFilter}
-                    </ul>
-                </div>
-
-                <div>
+                </td>
+                        
+                <td className="billing-categories-table-td">
                     <input 
                         type="text"
                         className=""
@@ -357,6 +347,9 @@ class BillingIndexForm extends React.Component{
                         onChange={this.updateBilling("modifier1")}
                         value={this.state.modifier1}
                     />
+                </td>
+
+                <td className="billing-categories-table-td">
                     <input 
                         type="text"
                         className=""
@@ -364,7 +357,9 @@ class BillingIndexForm extends React.Component{
                         onChange={this.updateBilling("modifier2")}
                         value={this.state.modifier2}
                     />
+                </td>
 
+                <td className="billing-categories-table-td">
                     <input 
                         type="number"
                         className=""
@@ -372,11 +367,33 @@ class BillingIndexForm extends React.Component{
                         onChange={this.calculateUpdateAmount()}
                         value={this.state.units}
                     />
+                </td>
+
+                <td className="billing-categories-table-td">{icd1}</td>
+                <td className="billing-categories-table-td">{icd2}</td>
+                <td className="billing-categories-table-td">{icd3}</td>
+                <td className="billing-categories-table-td">{icd4}</td>
+
+            </tr>
+
+        )
+
+        const search = (
+            <div>
+                <div className="">
+                    {icdSearch}
+                    <ul className="">
+                        {icdFilter}
+                    </ul>
                 </div>
 
-                <button>Submit</button>
-
-            </form>
+                <div className="">
+                    {cptSearch}
+                    <ul className="">
+                        {cptFilter}
+                    </ul>
+                </div>
+            </div>
         )
         
         return(
@@ -398,11 +415,13 @@ class BillingIndexForm extends React.Component{
                     <tbody>
                         {categories}
                         {billingList}
+                        {createBillingForm}
                     </tbody>
                 </table>
 
                 <div className="">
-                    {createBillingForm}
+                    {search}
+                    <button onClick={this.handleSubmit}>Submit</button>
                 </div>
             </div>
         )

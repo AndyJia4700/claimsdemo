@@ -42,6 +42,8 @@ class Api::ClaimsController < ApplicationController
             :claim_number,
             :message,
             :billing_list,
+            :provider_id,
+            :total_amount,
         )
     end
 end

@@ -9,6 +9,7 @@
 #  user_id      :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  claim_list   :integer          default([]), is an Array
 #
 class Patient < ApplicationRecord
     validates :name, :birthdate, :insurance_id, presence: true

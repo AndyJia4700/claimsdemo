@@ -21,14 +21,9 @@
 #  amount          :integer
 #
 class BillingCpt < ApplicationRecord
-
     validates :claim_id, :cpt_id, :icd_id1, :date_of_service, presence: true
 
     belongs_to :claim,
     foreign_key: :claim_id,
     class_name: "Claim"
-
-    # has_many :billing_icds,
-    # foreign_key: :billing_cpt_id,
-    # class_name: "BillingIcd"
 end

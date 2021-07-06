@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_14_141459) do
+ActiveRecord::Schema.define(version: 2021_07_06_213012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 2021_06_14_141459) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "billing_list", default: [], array: true
+    t.integer "provider_id"
+    t.integer "total_amount"
     t.index ["patient_id"], name: "index_claims_on_patient_id"
   end
 

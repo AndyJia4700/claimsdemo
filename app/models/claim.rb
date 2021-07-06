@@ -9,9 +9,12 @@
 #  patient_id            :integer          not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  billing_list          :integer          default([]), is an Array
+#  provider_id           :integer
+#  total_amount          :integer
 #
 class Claim < ApplicationRecord
-    validates :claim_number, :claim_date_of_service, presence: true
+    validates :claim_number, :claim_date_of_service, :provider_id, presence: true
     validates :claim_number, uniqueness: true
     
     belongs_to :patient,
@@ -21,6 +24,5 @@ class Claim < ApplicationRecord
     has_many :billing_cpts,
     foreign_key: :claim_id,
     class_name: "BillingCpt"
-
 
 end

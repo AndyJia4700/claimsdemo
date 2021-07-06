@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient, deletePatient } from '../../actions/patient_actions';
 import { fetchClaims } from '../../actions/claim_actions';
-import {FaEdit, FaPlus, FaQuestion} from 'react-icons/fa';
-import {FcProcess, FcApproval} from 'react-icons/fc';
-import PatientIndex from './patient_index';
+import { FaEdit, FaPlus, FaQuestion} from 'react-icons/fa';
+import { FcProcess, FcApproval } from 'react-icons/fc';
 import { openModal, closeModal } from '../../actions/modal_actions';
+import PatientIndex from './patient_index';
 
 const mSTP = (state, ownProps) => {
     const patientId = ownProps.match.params.patientId;

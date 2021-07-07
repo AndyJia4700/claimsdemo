@@ -9,12 +9,14 @@ const mSTP = (state, ownProps) => {
     const patient = state.entities.patient[patientId];
     return {
         claim: {
+            provider_id: state.session.currentUser.id,
             patient_id: "",
             claim_date_of_service: "",
             claim_number: "",
             message: "",
+            total_amount: ""
         },
-        patient
+        patient,
     }
 }
 

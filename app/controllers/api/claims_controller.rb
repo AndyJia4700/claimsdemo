@@ -5,10 +5,10 @@ class Api::ClaimsController < ApplicationController
 
     def index
         claim_list = Patient.find(params[:patient].to_i).claim_list
+        
         @claims = claim_list.map do |claim_id|
             Claim.find(claim_id)
         end
-        # @claims = Claim.all.select {|claim| claim.patient_id == params[:patient].to_i }
         render :index
     end
 

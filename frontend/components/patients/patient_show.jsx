@@ -21,7 +21,7 @@ const mDTP = dispatch => {
     return {
         openModal: modal => dispatch(openModal(modal)),
         closeModal: () => dispatch(closeModal()),
-        fetchClaims: (patientId) => dispatch(fetchClaims(patientId)),
+        fetchClaims: (providerId, patientId) => dispatch(fetchClaims(providerId = null, patientId)),
         fetchPatient: (patientId) => dispatch(fetchPatient(patientId)),
         deletePatient: (patientId) => dispatch(deletePatient(patientId))
     }
@@ -42,7 +42,7 @@ class PatientShow extends React.Component{
         if (prevProps.patient !== this.props.patient){
             if (!this.props.patient) return null;
             const updatePatientId = this.props.patient.id;
-            this.props.fetchClaims(updatePatientId);
+            this.props.fetchClaims(null, updatePatientId);
         }
     }
 

@@ -1,7 +1,13 @@
-export const fetchClaims = (patientId) => {
-    return $.ajax({
-        url: `/api/claims?patient=${patientId}`
-    })
+export const fetchClaims = (providerId, patientId) => {
+    if (providerId){
+        return $.ajax({
+            url: `/api/claims?provider=${providerId}`
+        })
+    } else {
+        return $.ajax({
+            url: `/api/claims?patient=${patientId}`
+        })
+    }
 }
 
 export const fetchClaim = claimId => {    

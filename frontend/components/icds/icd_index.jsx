@@ -33,7 +33,7 @@ class IcdIndex extends React.Component{
     }
 
     getLocalStorage(){
-        const localData = localStorage.getItem("search")
+        const localData = localStorage.getItem("searchIcd")
         return localData ?
             this.setState({
                 search: localData
@@ -75,7 +75,7 @@ class IcdIndex extends React.Component{
                 search: e.currentTarget.value
             }),
             localStorage.setItem(
-                "search", e.currentTarget.value
+                "searchIcd", e.currentTarget.value
             )
         }
     }

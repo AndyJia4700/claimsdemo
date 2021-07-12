@@ -31,7 +31,7 @@ class CptIndex extends React.Component{
     }
 
     getLocalStorage(){
-        const localData = localStorage.getItem("search")
+        const localData = localStorage.getItem("searchCpt")
         return localData ?
             this.setState({
                 search: localData
@@ -77,7 +77,7 @@ class CptIndex extends React.Component{
                 search: e.currentTarget.value
             }),
             localStorage.setItem(
-                "search", e.currentTarget.value
+                "searchCpt", e.currentTarget.value
             )
         }
     }

@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient, deletePatient } from '../../actions/patient_actions';
 import { fetchClaims } from '../../actions/claim_actions';
-import {FaEdit, FaPlus, FaQuestion} from 'react-icons/fa';
-import {FcProcess, FcApproval} from 'react-icons/fc';
-import PatientIndex from './patient_index';
+import { FaEdit, FaPlus, FaQuestion} from 'react-icons/fa';
+import { FcProcess, FcApproval } from 'react-icons/fc';
 import { openModal, closeModal } from '../../actions/modal_actions';
+import PatientIndex from './patient_index';
 
 const mSTP = (state, ownProps) => {
     const patientId = ownProps.match.params.patientId;
@@ -21,7 +21,7 @@ const mDTP = dispatch => {
     return {
         openModal: modal => dispatch(openModal(modal)),
         closeModal: () => dispatch(closeModal()),
-        fetchClaims: (patientId) => dispatch(fetchClaims(patientId)),
+        fetchClaims: (providerId, patientId) => dispatch(fetchClaims(providerId = null, patientId)),
         fetchPatient: (patientId) => dispatch(fetchPatient(patientId)),
         deletePatient: (patientId) => dispatch(deletePatient(patientId))
     }
@@ -42,7 +42,7 @@ class PatientShow extends React.Component{
         if (prevProps.patient !== this.props.patient){
             if (!this.props.patient) return null;
             const updatePatientId = this.props.patient.id;
-            this.props.fetchClaims(updatePatientId);
+            this.props.fetchClaims(null, updatePatientId);
         }
     }
 
@@ -79,6 +79,7 @@ class PatientShow extends React.Component{
         
         return(
             <div className="patients-main-div">
+                
                 <PatientIndex/>
 
                 <div className="patient-info-div">
@@ -123,8 +124,8 @@ class PatientShow extends React.Component{
                         </div>
 
                         <ul className="patient-claim-index-ul-category">
-                            <li className="patient-claim-index-ul-li-span1">DOS</li>
-                            <li className="patient-claim-index-ul-li-span2">Claim</li>
+                            <li className="patient-claim-index-ul-li-span1">Create Date</li>
+                            <li className="patient-claim-index-ul-li-span2">Claim Number</li>
                             <li className="patient-claim-index-ul-li-span3">Status</li>
                         </ul>
 

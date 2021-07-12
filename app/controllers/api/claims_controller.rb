@@ -2,13 +2,20 @@ class Api::ClaimsController < ApplicationController
     before_action :ensure_logged_in, only:[:create]
     skip_before_action :verify_authenticity_token
 
-
     def index
-        claim_list = Patient.find(params[:patient].to_i).claim_list
-        @claims = claim_list.map do |claim_id|
-            Claim.find(claim_id)
+        if params[:provider].to_i == current_user.id
+            @claims = Claim.select do |claim|
+                claim.provider_id == current_user.id
+            end
+        else 
+            claim_list = Patient.find(params[:patient].to_i).claim_list
+            provider_id = Patient.find(params[:patient].to_i).user_id
+                if provider_id == current_user.id
+                    @claims = claim_list.map do |claim_id|
+                    Claim.find(claim_id)
+                end
+            end
         end
-        # @claims = Claim.all.select {|claim| claim.patient_id == params[:patient].to_i }
         render :index
     end
 
@@ -42,6 +49,8 @@ class Api::ClaimsController < ApplicationController
             :claim_number,
             :message,
             :billing_list,
+            :provider_id,
+            :total_amount,
         )
     end
 end

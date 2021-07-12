@@ -2,6 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.modal-background{
+    position: fixed;
+    // position: relative;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: transparent;
+    justify-content: center;
+    // align-items: center;
+}
+
+.modal-child{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    padding: 20px;
+    background: chocolate;
+}
+
 .claim-create-form{
+    padding: 50px;
+    border-radius: 20px;
     background: yellowgreen;
 }
+
+

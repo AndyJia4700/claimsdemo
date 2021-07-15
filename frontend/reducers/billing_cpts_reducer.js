@@ -1,6 +1,7 @@
 import {
     RECEIVE_ALL_BILLING_CPTS,
-    RECEIVE_BILLING_CPT
+    RECEIVE_BILLING_CPT,
+    REMOVE_BILLING
 } from '../actions/billing_cpt_actions';
 import { merge } from 'lodash';
 
@@ -15,6 +16,10 @@ const BillingCptReducer = (oldState = {}, action) => {
                     [action.billingCpt.id]: action.billingCpt
                 })
             }
+        case REMOVE_BILLING:
+            let nextState = Object.assign({}, oldState);
+            delete nextState[action.billingCptId];
+            return nextState;
         default:
             return oldState;
     }

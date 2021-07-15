@@ -44,7 +44,7 @@ class Api::PatientsController < ApplicationController
     end
 
     def destroy
-        @patient = patient.find(params[:id])
+        @patient = Patient.find(params[:id])
         if @patient && @patient.user_id == current_user.id
             @patient.destroy
         end

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient } from '../../actions/patient_actions';
-import { fetchClaim } from '../../actions/claim_actions';
+import { fetchClaim,  } from '../../actions/claim_actions';
 import { fetchCpts } from '../../actions/cpt_actions';
 import { fetchIcds } from '../../actions/icd_actions';
-import { fetchBillingCpts, createBillingCpt } from '../../actions/billing_cpt_actions';
+import { fetchBillingCpts, createBillingCpt, deleteBillingCpt } from '../../actions/billing_cpt_actions';
 import {FaBackspace} from 'react-icons/fa';
 
 const mSTP = (state, ownprops) => {
@@ -30,6 +30,7 @@ const mDTP = dispatch => ({
     fetchIcds: () => dispatch(fetchIcds()),
     fetchBilling: claimId => dispatch(fetchBillingCpts(claimId)),
     createBilling: billingCpt => dispatch(createBillingCpt(billingCpt)),
+    deleteBilling: billingCptId => dispatch(deleteBillingCpt(billingCptId)),
 })
 
 class BillingIndexForm extends React.Component{
@@ -96,7 +97,6 @@ class BillingIndexForm extends React.Component{
                 return icdList[i].value = code 
             }
         }
-
     }
 
     // convertIcdId(code){
@@ -283,6 +283,7 @@ class BillingIndexForm extends React.Component{
                     <td className="billing-categories-table-td">{billing.icd_id4 ? this.props.icds[billing.icd_id4].icd_code : ""}</td>
                     <td className="billing-categories-table-td">{billing.amount}</td>
                     <td className="billing-categories-table-td">{billing.approved ? "approved" : "processing"}</td>
+                    <td onClick={() => this.props.deleteBilling(billing.id)}>Delete</td>
                 </tr> 
             : null
         )
@@ -431,9 +432,7 @@ class BillingIndexForm extends React.Component{
                 <td className="billing-categories-table-td" onClick={this.handleSubmit}>click Submit</td>
             </tr>
 
-        )
-
-        
+        )  
 
         const icdFilter = this.findCode(this.state.searchIcd, this.props.icds);
         

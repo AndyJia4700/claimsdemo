@@ -40,6 +40,17 @@ class Api::ClaimsController < ApplicationController
         end
     end
 
+    def destroy
+        @claim = Claim.find(params[:id])
+        @patient = Patient.find(@claim.patient_id)
+        claim_list = @patient.claim_list
+        claim_list.delete(@claim.id)
+        if @claim && @claim.provider_id == current_user.id
+            @patient.update(claim_list: claim_list)
+            @claim.destroy
+        end
+    end
+
     private
 
     def claim_params

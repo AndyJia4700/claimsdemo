@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient, deletePatient } from '../../actions/patient_actions';
-import { fetchClaims } from '../../actions/claim_actions';
-import { FaEdit, FaPlus, FaQuestion} from 'react-icons/fa';
+import { fetchClaims, deleteClaim } from '../../actions/claim_actions';
+import { FaEdit, FaPlus, FaQuestion, FaTrash} from 'react-icons/fa';
 import { FcProcess, FcApproval } from 'react-icons/fc';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import PatientIndex from './patient_index';
@@ -22,6 +22,7 @@ const mDTP = dispatch => {
         openModal: modal => dispatch(openModal(modal)),
         closeModal: () => dispatch(closeModal()),
         fetchClaims: (providerId, patientId) => dispatch(fetchClaims(providerId = null, patientId)),
+        deleteClaim: (claimId) => dispatch(deleteClaim(claimId)),
         fetchPatient: (patientId) => dispatch(fetchPatient(patientId)),
         deletePatient: (patientId) => dispatch(deletePatient(patientId))
     }
@@ -61,18 +62,26 @@ class PatientShow extends React.Component{
         const claimList = Object.values(this.props.claims).map( claim => 
             claim.patient_id == this.props.patient.id ?
             // <li key={claim.id} className="patient-claim-index-ul-li" onClick={() => {window.location.replace(`#/claims/${claim.id}`)}}>
-            <li key={claim.id} className="patient-claim-index-ul-li" onClick={() => {window.location.replace(`#/patients/${patient.id}/claims/${claim.id}`)}}>
+            <li key={claim.id} className="patient-claim-index-ul-li" >
                 <span className="patient-claim-index-ul-li-span1">
                     {this.changeDateFormat(claim.claim_date_of_service)}
                 </span>
 
-                <span className="patient-claim-index-ul-li-span2">
+                <span className="patient-claim-index-ul-li-span2" onClick={() => {window.location.replace(`#/patients/${patient.id}/claims/${claim.id}`)}}>
                     {claim.claim_number}
+                </span>
+
+                <span className="patient-claim-index-ul-li-span3">
+                    {claim.total_amount}
                 </span>
 
                 <span className="patient-claim-index-ul-li-span3">
                     {/* {claim.message == "pending" ? <FcProcess/> : <FcApproval/>} */}
                     {!claim.billing_list[0] ? <FaQuestion/> : <FcProcess/>}
+                </span>
+
+                <span className="patient-claim-index-ul-li-span3" onClick={() => {!claim.billing_list[0] ? this.props.deleteClaim(claim.id) : null}}>
+                    {!claim.billing_list[0] ? <FaTrash/> : null}
                 </span>
             </li> : null
         )
@@ -126,7 +135,9 @@ class PatientShow extends React.Component{
                         <ul className="patient-claim-index-ul-category">
                             <li className="patient-claim-index-ul-li-span1">Create Date</li>
                             <li className="patient-claim-index-ul-li-span2">Claim Number</li>
+                            <li className="patient-claim-index-ul-li-span3">Amount</li>
                             <li className="patient-claim-index-ul-li-span3">Status</li>
+                            <li className="patient-claim-index-ul-li-span3">Edit</li>
                         </ul>
 
                         <ul className="patient-claim-index-ul">

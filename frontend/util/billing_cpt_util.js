@@ -21,3 +21,11 @@ export const createBillingCpt = formData => {
     })
 }
 
+export const deleteBillingCpt = billingCptId => {
+    // debugger
+    return $.ajax({
+        method: 'DELETE',
+        url: `/api/billing_cpts/${billingCptId}`
+    })
+}
+

@@ -1,8 +1,9 @@
-import * as BillingCptUtil from '../util/billing_cpt_util'
+import * as BillingCptUtil from '../util/billing_cpt_util';
 
 export const RECEIVE_ALL_BILLING_CPTS = 'RECEIVE_ALL_BILLING_CPTS';
 export const RECEIVE_BILLING_CPT = 'RECEIVE_BILLING_CPT';
-export const RECEIVE_BILLING_CPT_ERRORS = 'RECEIVE_BILLING_CPT_ERRORS'
+export const RECEIVE_BILLING_CPT_ERRORS = 'RECEIVE_BILLING_CPT_ERRORS';
+export const REMOVE_BILLING = 'REMOVE_BILLING';
 
 const receiveAllBillingCpts = billingCpts => ({
     type: RECEIVE_ALL_BILLING_CPTS,
@@ -17,7 +18,12 @@ const receiveBillingCpt = billingCpt => ({
 const receiveBillingCptErrors = errors => ({
     type: RECEIVE_BILLING_CPT_ERRORS,
     errors
-})
+});
+
+const removeBilling = billingCptId => ({
+    type: REMOVE_BILLING,
+    billingCptId
+});
 
 export const fetchBillingCpts = (claimId) => dispatch => {
     return BillingCptUtil.fetchBillingCpts(claimId)
@@ -38,3 +44,9 @@ export const createBillingCpt = billingCpt => dispatch => (
             error => dispatch(receiveBillingCptErrors(error.responseJSON))
         )
 );
+
+export const deleteBillingCpt = billingCptId => dispatch => (
+    BillingCptUtil.deleteBillingCpt(billingCptId)
+        .then(()=>dispatch(removeBilling(billingCptId)))
+)
+

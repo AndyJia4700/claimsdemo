@@ -26,3 +26,20 @@ export const createClaim = claim => {
     })
 }
 
+export const updateClaim = (claim)=> {
+    return $.ajax({
+        method: 'PATCH',
+        url: `/api/claims/${claim.id}`,
+        data: {
+            claim
+        }
+    })
+}
+
+export const deleteClaim = (claimId) => {
+    return $.ajax({
+        method: 'DELETE',
+        url: `/api/claims/${claimId}`
+    })
+}
+

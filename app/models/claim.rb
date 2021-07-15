@@ -25,4 +25,5 @@ class Claim < ApplicationRecord
     foreign_key: :claim_id,
     class_name: "BillingCpt"
 
+
 end

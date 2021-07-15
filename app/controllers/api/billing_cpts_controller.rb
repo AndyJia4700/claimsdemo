@@ -46,8 +46,12 @@ class Api::BillingCptsController < ApplicationController
     end
 
     def destroy
-        @billing_cpt = billing_cpt.find(params[:id])
+        @billing_cpt = BillingCpt.find(params[:id])
+        @claim = Claim.find(@billing_cpt.claim_id)
+        billing_list = @claim.billing_list
+        billing_list.delete(@billing_cpt.id)
         if @billing_cpt
+            @claim.update(billing_list: billing_list)
             @billing_cpt.destroy
         end
     end

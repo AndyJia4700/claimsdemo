@@ -45,6 +45,14 @@ export const createBillingCpt = billingCpt => dispatch => (
         )
 );
 
+export const updateBillingCpt = billingCpt => dispatch => (
+    BillingCptUtil.updateBillingCpt(billingCpt)
+        .then(
+            billingCpt => dispatch(receiveBillingCpt(billingCpt)),
+            error => dispatch(receiveBillingCptErrors(error.responseJSON))
+        )
+);
+
 export const deleteBillingCpt = billingCptId => dispatch => (
     BillingCptUtil.deleteBillingCpt(billingCptId)
         .then(()=>dispatch(removeBilling(billingCptId)))

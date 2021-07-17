@@ -26,13 +26,15 @@ export const createClaim = claim => {
     })
 }
 
-export const updateClaim = (claim)=> {
+export const updateClaim = (claimId, formData)=> {
+    // debugger
     return $.ajax({
         method: 'PATCH',
-        url: `/api/claims/${claim.id}`,
-        data: {
-            claim
-        }
+        url: `/api/claims/${claimId}`,
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: "json",
     })
 }
 

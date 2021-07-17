@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient } from '../../actions/patient_actions';
-import { fetchClaim,  } from '../../actions/claim_actions';
+import { fetchClaim, updateClaim } from '../../actions/claim_actions';
 import { fetchCpts } from '../../actions/cpt_actions';
 import { fetchIcds } from '../../actions/icd_actions';
 import { fetchBillingCpts, createBillingCpt, deleteBillingCpt } from '../../actions/billing_cpt_actions';
@@ -26,6 +26,7 @@ const mSTP = (state, ownprops) => {
 const mDTP = dispatch => ({
     fetchPatient: (patientId) => dispatch(fetchPatient(patientId)),
     fetchClaim: claimId => dispatch(fetchClaim(claimId)),
+    updateClaim: (id, formData) => dispatch(updateClaim(id, formData)),
     fetchCpts: () => dispatch(fetchCpts()),
     fetchIcds: () => dispatch(fetchIcds()),
     fetchBilling: claimId => dispatch(fetchBillingCpts(claimId)),
@@ -70,8 +71,10 @@ class BillingIndexForm extends React.Component{
         this.addToIcdList = this.addToIcdList.bind(this);
         this.calculateAmount = this.calculateAmount.bind(this);
         this.changeDateFormat = this.changeDateFormat.bind(this);
+        this.checkClaimAmount = this.checkClaimAmount.bind(this);
         this.deleteIcdValue = this.deleteIcdValue.bind(this);
         this.findCode = this.findCode.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateBilling = this.updateBilling.bind(this);
         this.updateBillingCptId = this.updateBillingCptId.bind(this);
@@ -99,16 +102,6 @@ class BillingIndexForm extends React.Component{
         }
     }
 
-    // convertIcdId(code){
-    //     const icdList = Object.values(this.props.icds);
-    //     for (let i = 0; i < icdList.length; i++){
-    //         const icd = icdList[i];
-    //         if (icd.icd_code == this.state.Icd1){
-    //             this.state.icd_id1 = icd.id
-    //         }
-    //     }
-    // }
-
     calculateAmount(cptId){
         const cptAmount = this.props.cpts[cptId].billed_amount;
         this.setState({
@@ -119,7 +112,6 @@ class BillingIndexForm extends React.Component{
 
     calculateUpdateAmount(){
         const currentUnitAmount = this.state.unit_amount;
-
         return e => this.setState({
             units: parseInt(e.currentTarget.value),
             amount: e.currentTarget.value ? currentUnitAmount * parseInt(e.currentTarget.value) : currentUnitAmount
@@ -131,14 +123,26 @@ class BillingIndexForm extends React.Component{
         return formatDate[1]+ "/" + formatDate[2] + "/" + formatDate[0].slice(2)
     }
 
+    checkClaimAmount(billingId, billingList){
+        const claimId = this.props.match.params.claimId;
+        let totalAmount = 0
+        for (let i = 0; i < billingId.length; i++){
+            const cpt = billingList[billingId[i]];
+            if (cpt) totalAmount += billingList[billingId[i]].amount;
+        }
+        const formData = new FormData();
+        formData.append("claim[total_amount]", totalAmount)
+        this.props.updateClaim(claimId, formData);
+    }
+
     componentDidMount(){
         const patientId = this.props.match.params.patientId;
         this.props.fetchPatient(patientId);
         const claimId = this.props.match.params.claimId;
         this.props.fetchClaim(claimId);
+        this.props.fetchBilling(claimId);
         this.props.fetchCpts();
         this.props.fetchIcds();
-        this.props.fetchBilling(claimId);
     }
 
     deleteIcdValue(i){
@@ -188,6 +192,12 @@ class BillingIndexForm extends React.Component{
                 {code.icd_description}
             </li> : null
         )
+    }
+
+    handleClick(id){
+        this.props.deleteBilling(id);
+
+        
     }
 
 
@@ -240,7 +250,6 @@ class BillingIndexForm extends React.Component{
         formData.append("billing_cpt[approved]", this.state.approved);
         formData.append("billing_cpt[claim_id]", this.state.claim_id);
         
-        console.log(this.state);
         this.props.createBilling(formData);
     }
 
@@ -268,6 +277,14 @@ class BillingIndexForm extends React.Component{
         if (!Object.values(this.props.cpts)[0]) return null;
         if (!Object.values(this.props.icds)[0]) return null;
         if (!this.props.patient) return null;
+        if (!this.props.claim) return null;
+        if (!this.props.billings) return null;
+        
+        const currentBillingId = this.props.claim.billing_list;
+        const currentBillingList = this.props.billings;
+        const updateAmount = (
+            <button id="update-claim-amount" onClick={() => this.checkClaimAmount(currentBillingId, currentBillingList)}> update claim amount</button>
+        )
 
         const billingList = Object.values(this.props.billings).map( billing =>
             billing.claim_id == this.props.match.params.claimId ?
@@ -309,6 +326,7 @@ class BillingIndexForm extends React.Component{
             <div>
                 Date of Create: {claim.claim_date_of_service}
                 Claim Number: {claim.claim_number}
+                Total Amount: {"$"+ claim.total_amount}
             </div>
         )
 
@@ -507,6 +525,8 @@ class BillingIndexForm extends React.Component{
                         {createBillingForm}
                     </tbody>
                 </table>
+
+                {updateAmount}
 
             </div>
         )

@@ -40,6 +40,16 @@ class Api::ClaimsController < ApplicationController
         end
     end
 
+    def update
+        @claim = Claim.find(params[:id])
+        total_amount = claim_params[:total_amount]
+        if @claim.update(total_amount: total_amount)
+            render :show
+        else
+            render json: @claim.errors.full_messages, status: 422
+        end
+    end
+
     def destroy
         @claim = Claim.find(params[:id])
         @patient = Patient.find(@claim.patient_id)

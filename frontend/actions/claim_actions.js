@@ -45,8 +45,8 @@ export const createClaim = claim => dispatch => (
         )
 );
 
-export const updateClaim = claim => dispatch => (
-    ClaimUtil.updateClaim(claim)
+export const updateClaim = (claimId, claim) => dispatch => (
+    ClaimUtil.updateClaim(claimId, claim)
         .then(
             claim => dispatch(receiveClaim(claim)),
             error => dispatch(receiveClaimErrors(error.responseJSON))

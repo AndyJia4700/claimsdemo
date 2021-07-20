@@ -5,7 +5,7 @@ import { fetchClaim, updateClaim } from '../../actions/claim_actions';
 import { fetchCpts } from '../../actions/cpt_actions';
 import { fetchIcds } from '../../actions/icd_actions';
 import { fetchBillingCpts, createBillingCpt, deleteBillingCpt } from '../../actions/billing_cpt_actions';
-import {FaBackspace} from 'react-icons/fa';
+import { FaBackspace } from 'react-icons/fa';
 
 const mSTP = (state, ownprops) => {
     const patientId = ownprops.match.params.patientId;
@@ -196,8 +196,6 @@ class BillingIndexForm extends React.Component{
 
     handleClick(id){
         this.props.deleteBilling(id);
-
-        
     }
 
 
